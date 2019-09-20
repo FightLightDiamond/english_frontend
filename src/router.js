@@ -92,6 +92,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "english" */ './views/english'),
     redirect: '/english',
     children: [
+      { path: 'courses', component: () => import(/* webpackChunkName: "english" */ './views/english/course/List') },
       { path: 'course/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/course/Detail') },
       { path: 'listen/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Listen') },
       { path: 'read/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Read') },

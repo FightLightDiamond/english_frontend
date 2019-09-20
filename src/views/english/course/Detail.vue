@@ -1,29 +1,43 @@
 <template>
   <div>
-    <!--    <b-card class="mb-4" :title="$t('table.bootstrap-hoverable')">-->
-    <b-card class="mb-4" :title="$t(`${course.name}`)">
-      <p>{{course.description}}</p>
-      <vuetable ref="vuetable"
-                :api-url="url"
-                :fields="fields"
-                @vuetable:loading="onLoading"
-                @vuetable:loaded="onLoaded"
-      >
-        <template slot="actions" scope="props">
-          <div class="table-button-container text-right">
-            <router-link :to="`/english/listen/${props.rowData.id}`" class="btn btn-xs btn-primary">
-              Listen
-            </router-link>
-            <router-link :to="`/english/read/${props.rowData.id}`" class="btn btn-xs btn-primary">
-              Read
-            </router-link>
-            <router-link :to="`/english/write/${props.rowData.id}`" class="btn btn-xs btn-primary">
-              Write
-            </router-link>
-          </div>
-        </template>
-      </vuetable>
-    </b-card>
+    <b-row>
+      <b-colxx xxs="12">
+       <span>
+        <h1>Lessons</h1>
+        <b-nav class="pt-0 breadcrumb-container d-none d-sm-block d-lg-inline-block">
+            <b-breadcrumb :items="items"/>
+        </b-nav>
+      </span>
+        <div class="separator mb-5"></div>
+      </b-colxx>
+    </b-row>
+    <b-row>
+      <b-colxx xxs="12">
+        <b-card class="mb-4" :title="$t(`${course.name}`)">
+          <p>{{course.description}}</p>
+
+          <vuetable ref="vuetable"
+                    :api-mode="false"
+                    :data="lessons"
+                    :fields="fields"
+          >
+            <template slot="actions" scope="props">
+              <div class="table-button-container text-right">
+                <router-link :to="`/english/listen/${props.rowData.id}`" class="btn btn-xs btn-primary">
+                  Listen
+                </router-link>
+                <router-link :to="`/english/read/${props.rowData.id}`" class="btn btn-xs btn-primary">
+                  Read
+                </router-link>
+                <router-link :to="`/english/write/${props.rowData.id}`" class="btn btn-xs btn-primary">
+                  Write
+                </router-link>
+              </div>
+            </template>
+          </vuetable>
+        </b-card>
+      </b-colxx>
+    </b-row>
   </div>
 </template>
 
@@ -40,8 +54,19 @@
     },
     data () {
       return {
-        url: `${API}/api/crazy-course/${this.$route.params.id}`,
-        items: [],
+        items: [{
+          text: 'Home',
+          link: '/',
+        }, {
+          text: 'Sessions',
+          link: '/english/courses',
+        }, {
+          text: 'Lessons',
+          active: true
+        },
+        ],
+        url: `${API}/api/crazy-courses/${this.$route.params.id}`,
+        lessons: [],
         course: {
           name: '',
           description: '',
@@ -49,19 +74,17 @@
         fields: [
           {
             name: 'name',
-            title: '<span class="orange glyphicon glyphicon-user"></span> Lession',
+            title: '<span class="orange glyphicon glyphicon-user"></span> Lesson',
           },
           '__slot:actions'
         ],
       }
     },
     created () {
-      // axios.get('http://localhost:8005/api/crazy-course/1').then((res) => {
-      //   this.items = res.data.data
-      //   this.course = res.data.data.course
-      //   console.log(res.data)
-      //   console.log(items)
-      // })
+      axios.get('http://localhost:8005/api/crazy-courses/1').then((res) => {
+        this.lessons = res.data.data.crazies
+        this.course = res.data.data
+      })
     },
     methods: {
       onPaginationData (paginationData) {
@@ -70,18 +93,6 @@
       onChangePage (page) {
         this.$refs.vuetable.changePage(page)
       },
-      editRow (rowData) {
-        alert('You clicked edit on' + JSON.stringify(rowData))
-      },
-      deleteRow (rowData) {
-        alert('You clicked delete on' + JSON.stringify(rowData))
-      },
-      onLoading () {
-        console.log('loading... show your spinner here')
-      },
-      onLoaded () {
-        console.log('loaded! .. hide your spinner here')
-      }
     }
   }
 </script>
