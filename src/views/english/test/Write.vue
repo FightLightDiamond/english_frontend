@@ -1,10 +1,86 @@
 <template>
+  <div>
+    <b-row>
+      <b-colxx xxs="12">
+       <span>
+        <h1>Sections</h1>
+        <b-nav class="pt-0 breadcrumb-container d-none d-sm-block d-lg-inline-block">
+            <b-breadcrumb :items="items"/>
+        </b-nav>
+      </span>
+        <div class="separator mb-5"></div>
+      </b-colxx>
+    </b-row>
 
+    <b-card class="form-group" :title="$t(crazy.name)">
+      <b-row class="form-group">
+        <b-colxx xxs="12">
+          <audio :src="crazy.audio" autoplay controls></audio>
+        </b-colxx>
+      </b-row>
+    </b-card>
+
+    <b-card class="mb-12" :title="$t('Listen and write')">
+      <b-row>
+        <b-colxx xxs="12">
+            <div class="input-group input-group-sm mb-3" v-for="(en, key) in ens">
+              <div class="input-group-prepend" data-toggle="tooltip" data-placement="top" :title="randEns[key].sentence">
+                <span  style="width: 40px" class="input-group-text" id="inputGroup-sizing-sm">{{key + 1}}</span>
+              </div>
+              <input :value="en.sentence" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+            </div>
+        </b-colxx>
+      </b-row>
+      <b-row>
+        <b-colxx xxs="12">
+          <button class="btn btn-primary btn-sm">Submit</button>
+        </b-colxx>
+      </b-row>
+    </b-card>
+  </div>
 </template>
 
 <script>
+  import axios from 'axios'
+  import Vuetable from 'vuetable-2/src/components/Vuetable'
+  import draggable from 'vuedraggable'
+
   export default {
-    name: 'Write'
+    components: {
+      Vuetable,
+      draggable,
+    },
+    data () {
+      return {
+        crazy: {'name': '', audio: ''},
+        ens: [],
+        randEns: [],
+        items: [{
+          text: 'Home',
+          link: '#ee',
+        }, {
+          text: 'Sessions',
+          link: '/english/lesson',
+        }, {
+          text: 'Exercise',
+          active: true
+        },{
+          text: 'Write',
+          active: true
+        },
+        ],
+      }
+    },
+    created () {
+      axios.get(`http://cuongpm.viralsoft.vn/api/test/crazy-write/${this.$route.params.id}`).then((res) => {
+        this.lesson = res.data.data
+        this.crazy = res.data.data.crazy
+        this.ens = res.data.data.ens
+        this.randEns = res.data.data.randEns
+        // this.vis = res.data.data.vis
+        console.log(this.lesson)
+      })
+    },
   }
 </script>
 

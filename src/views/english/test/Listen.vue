@@ -13,26 +13,24 @@
       </b-colxx>
     </b-row>
 
-    <b-row>
-      <b-colxx xxs="12">
-        <h1>{{lesson.name}}</h1>
-      </b-colxx>
-    </b-row>
-
-    <b-row>
-      <b-colxx xxs="12">
-        <audio :src="lesson.audio" autoplay controls></audio>
-      </b-colxx>
-    </b-row>
+    <b-card class="form-group" :title="$t(lesson.name)">
+      <b-row class="form-group">
+        <b-colxx xxs="12">
+          <audio :src="lesson.audio" autoplay controls></audio>
+        </b-colxx>
+      </b-row>
+    </b-card>
 
     <b-row>
       <b-colxx xxs="12" >
+        <b-card class="mb-4">
         <vuetable ref="vuetable" class="table-bordered table-hover"
                   :api-mode="false"
                   :data="sentences"
                   :fields="fields"
         >
         </vuetable>
+        </b-card>
       </b-colxx>
     </b-row>
   </div>
@@ -41,6 +39,7 @@
 <script>
   import axios from 'axios'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
+
   export default {
     components: {
       Vuetable
@@ -73,7 +72,7 @@
       }
     },
     created () {
-      axios.get(`http://cuongpm.viralsoft.vn/api/test/crazy-listening/${this.$route.params.id}`).then((res) => {
+      axios.get(`http://cuongpm.viralsoft.vn/api/test/crazy-listen/${this.$route.params.id}`).then((res) => {
         this.lesson = res.data.data
         this.sentences = res.data.data.details
         console.log(this.lesson)

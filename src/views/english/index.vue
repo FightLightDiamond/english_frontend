@@ -1,6 +1,6 @@
 <template>
   <div id="app-container" :class="getMenuType">
-    <top-nav/>
+    <english-nav/>
 <!--    <sidebar/>-->
 <!--    <main>-->
       <div class="container" style="padding-top: 155px">
@@ -11,7 +11,7 @@
 </template>
 <script>
 // import Sidebar from '@/containers/Sidebar'
-import TopNav from '@/containers/TopNav'
+import EnglishNav from '@/containers/EnglishNav'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -19,7 +19,7 @@ export default {
     return { show: false }
   },
   components: {
-    TopNav
+    EnglishNav
     // Sidebar
   },
   computed: {

@@ -45,8 +45,8 @@
   import axios from 'axios'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
   import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
+  import courseService from '../../../services/CourseService'
 
-  const API = 'http://localhost:8005'
   export default {
     components: {
       Vuetable,
@@ -65,7 +65,7 @@
           active: true
         },
         ],
-        url: `${API}/api/crazy-courses/${this.$route.params.id}`,
+        id: this.$route.params.id,
         lessons: [],
         course: {
           name: '',
@@ -80,11 +80,9 @@
         ],
       }
     },
-    created () {
-      axios.get('http://localhost:8005/api/crazy-courses/1').then((res) => {
-        this.lessons = res.data.data.crazies
-        this.course = res.data.data
-      })
+    async mounted () {
+      this.course = await courseService.show(this.id, {})
+      this.lessons = this.course.crazies
     },
     methods: {
       onPaginationData (paginationData) {
