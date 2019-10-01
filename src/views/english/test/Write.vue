@@ -71,15 +71,13 @@
         ],
       }
     },
-    created () {
-      axios.get(`http://cuongpm.viralsoft.vn/api/test/crazy-write/${this.$route.params.id}`).then((res) => {
-        this.lesson = res.data
-        this.crazy = res.data.crazy
-        this.ens = res.data.ens
-        this.randEns = res.data.randEns
-        // this.vis = res.data.vis
-        console.log(this.lesson)
-      })
+    async created () {
+      const res = await testService.reading(this.$route.params.id);
+      this.lesson = res
+      this.crazy = res.crazy
+      this.ens = res.ens
+      this.randEns = res.randEns
+      console.log(this.lesson)
     },
   }
 </script>

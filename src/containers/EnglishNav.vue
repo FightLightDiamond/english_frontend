@@ -80,10 +80,10 @@
           no-caret
         >
           <template slot="button-content">
-<!--            <span class="name mr-1">{{currentUser.title}}</span>-->
-<!--            <span>-->
-<!--              <img :alt="currentUser.title" :src="currentUser.img" />-->
-<!--            </span>-->
+            <span class="name mr-1">Phương</span>
+            <span>
+              <img src="https://www.google.com/search?q=zoro&sxsrf=ACYBGNS0e8y2ITNp3s9aWO8-3Xjb1lPpZw:1569911705001&tbm=isch&source=iu&ictx=1&fir=oM-dkvJMjLFCoM%253A%252CdItxiZ6FSLHSNM%252C%252Fm%252F02jzqh&vet=1&usg=AI4_-kRDkNoL_1WCgMCX6N4dNd53P6HoUg&sa=X&ved=2ahUKEwiPlIXsuPrkAhVSeXAKHX9EDnUQ_B0wG3oECAkQAw#imgrc=oM-dkvJMjLFCoM:" />
+            </span>
           </template>
           <b-dropdown-item>Account</b-dropdown-item>
           <b-dropdown-item>History</b-dropdown-item>

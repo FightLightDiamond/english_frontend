@@ -7,7 +7,7 @@ axios.interceptors.request.use(function (config) {
 
   if(user) {
     console.log(user.access_token);
-    config.headers.Authorization = user.access_token;
+    config.headers.Authorization = `Bearer ${user.access_token}`;
   }
 
   return config;

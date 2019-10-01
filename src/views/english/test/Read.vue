@@ -75,7 +75,7 @@
       }
     },
     async mounted () {
-      const res = await testService.read(this.$route.params.id);
+      const res = await testService.reading(this.$route.params.id);
       this.lesson = res
       this.crazy = res.crazy
       this.ens = res.ens
