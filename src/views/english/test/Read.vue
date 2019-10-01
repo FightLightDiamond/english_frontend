@@ -25,14 +25,17 @@
         <b-colxx xxs="6">
           <h4>English</h4>
           <draggable type="ul" class="list-unstyled" v-model="ens">
-            <li :class="en.color" v-for="(en, key) in ens"><p>{{key + 1}}, {{en.sentence}}</p></li>
+            <li v-bind:class="{ 'text-danger': result[key] && !result[key].is_correct, 'text-success': result[key] && result[key].is_correct }"
+                v-for="(en, key) in ens"><p>{{key + 1}}, {{en.sentence}}</p>
+            </li>
           </draggable>
         </b-colxx>
 
         <b-colxx xxs="6">
           <h4>Vietnamese</h4>
           <draggable type="ul" class="list-unstyled" v-model="vis">
-            <li :class="vi.color" v-for="(vi, key) in vis"><p>{{key + 1}}, {{vi.meaning}}</p></li>
+            <li  v-bind:class="{ 'text-danger': result[key] && !result[key].is_correct, 'text-success': result[key] && result[key].is_correct }"
+                 v-for="(vi, key) in vis"><p>{{key + 1}}, {{vi.meaning}}</p></li>
           </draggable>
         </b-colxx>
 
@@ -62,6 +65,8 @@
         crazy: [],
         ens: [],
         vis: [],
+        colors: {},
+        result: {},
         items: [{
           text: 'Home',
           link: '#',
@@ -75,24 +80,23 @@
       }
     },
     async mounted () {
-      const res = await testService.reading(this.$route.params.id);
+      const res = await testService.reading(this.$route.params.id)
       this.lesson = res
       this.crazy = res.crazy
       this.ens = res.ens
       this.vis = res.vis
     },
     methods: {
-      submit () {
-        alert(123)
-        console.log(this.ens,)
-        console.log(this.vis)
-      },
-      changeColorText (res, sentens) {
-        for (let item in res) {
-          sentens[item].color = 'text-success'
-          if (item.res === false) sentens[item].color = 'text-danger'
+      async submit () {
+        const params = {
+          sentences: this.ens,
+          meanings: this.vis,
         }
-      }
+
+        const res = await testService.read(this.$route.params.id, params)
+        this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, { duration: 13000, permanent: false })
+        this.result = res.result;
+      },
     }
   }
 </script>

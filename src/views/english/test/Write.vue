@@ -15,7 +15,7 @@
     <b-card class="form-group" :title="$t(crazy.name)">
       <b-row class="form-group">
         <b-colxx xxs="12">
-          <audio :src="crazy.audio"  controls></audio>
+          <audio :src="crazy.audio" controls></audio>
         </b-colxx>
       </b-row>
     </b-card>
@@ -23,17 +23,30 @@
     <b-card class="mb-12" :title="$t('Listen and write')">
       <b-row>
         <b-colxx xxs="12">
-            <div class="input-group input-group-sm mb-3" v-for="(en, key) in ens">
-              <div class="input-group-prepend" data-toggle="tooltip" data-placement="top" :title="randEns[key].sentence">
-                <span  style="width: 40px" class="input-group-text" id="inputGroup-sizing-sm">{{key + 1}}</span>
-              </div>
-              <input :value="en.sentence" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          <div class="input-group input-group-sm mb-3" v-for="(en, key) in ens">
+            <div class="input-group-prepend" data-toggle="tooltip" data-placement="top" :title="randEns[key].sentence">
+                <span style="width: 40px"
+                      v-bind:class="{
+                        'text-danger': result[key] && !result[key].is_correct,
+                        'text-success': result[key] && result[key].is_correct,
+                        'input-group-text' : true
+                        }"
+                      id="inputGroup-sizing-sm">{{key + 1}}</span>
             </div>
+            <input v-model="en.sentence"
+                   v-bind:class="{
+                        'text-danger': result[key] && !result[key].is_correct,
+                        'text-success': result[key] && result[key].is_correct,
+                        'form-control' : true
+                        }"
+                   aria-label="Small"
+                   aria-describedby="inputGroup-sizing-sm">
+          </div>
         </b-colxx>
       </b-row>
       <b-row>
         <b-colxx xxs="12">
-          <button class="btn btn-primary btn-sm">Submit</button>
+          <button class="btn btn-primary btn-sm" @click="submit()">Submit</button>
         </b-colxx>
       </b-row>
     </b-card>
@@ -52,9 +65,11 @@
     },
     data () {
       return {
-        crazy: {'name': '', audio: ''},
+        crazy: { 'name': '', audio: '' },
         ens: [],
         randEns: [],
+        result: {},
+        colors: {},
         items: [{
           text: 'Home',
           link: '#ee',
@@ -64,7 +79,7 @@
         }, {
           text: 'Exercise',
           active: true
-        },{
+        }, {
           text: 'Write',
           active: true
         },
@@ -72,13 +87,32 @@
       }
     },
     async created () {
-      const res = await testService.reading(this.$route.params.id);
+      const res = await testService.write(this.$route.params.id)
       this.lesson = res
       this.crazy = res.crazy
       this.ens = res.ens
       this.randEns = res.randEns
       console.log(this.lesson)
     },
+    methods: {
+      async submit () {
+        const params = {
+          sentences: {},
+        }
+
+        for (let en of this.ens) {
+          console.log(en)
+          params.sentences[en.id] = en.sentence
+        }
+        console.log(params)
+        const res = await testService.written(this.$route.params.id, params)
+        this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, {
+          duration: 13000,
+          permanent: false
+        })
+        this.result = res.result
+      },
+    }
   }
 </script>
 

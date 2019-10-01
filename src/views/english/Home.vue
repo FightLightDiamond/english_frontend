@@ -1,5 +1,36 @@
 <template>
   <div>
+<!--    <b-row>-->
+<!--      <b-colxx xxs="12" class="form-group">-->
+<!--        <md-card>-->
+<!--          <md-card-actions >-->
+
+<!--&lt;!&ndash;            <div class="md-subhead">&ndash;&gt;-->
+<!--&lt;!&ndash;              <span> </span>&ndash;&gt;-->
+<!--&lt;!&ndash;              <span>（</span>&ndash;&gt;-->
+<!--&lt;!&ndash;              <span>键盘控制 / 聚焦后左右键</span>&ndash;&gt;-->
+<!--&lt;!&ndash;              <span>）</span>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <md-button class="md-icon-button"&ndash;&gt;-->
+<!--&lt;!&ndash;                       target="_blank"&ndash;&gt;-->
+<!--&lt;!&ndash;                       href="https://github.com/surmon-china/vue-awesome-swiper/blob/master/examples/26-keyboard-control.vue">&ndash;&gt;-->
+<!--&lt;!&ndash;              <md-icon>code</md-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;            </md-button>&ndash;&gt;-->
+<!--          </md-card-actions>-->
+<!--          <md-card-media>-->
+<!--            &lt;!&ndash; swiper &ndash;&gt;-->
+<!--            <swiper :options="swiperOption">-->
+<!--              <swiper-slide> <img  src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg" class="img-responsive"/></swiper-slide>-->
+
+<!--              <div class="swiper-pagination" slot="pagination"></div>-->
+<!--              <div class="swiper-button-prev" slot="button-prev"></div>-->
+<!--              <div class="swiper-button-next" slot="button-next"></div>-->
+<!--            </swiper>-->
+<!--          </md-card-media>-->
+<!--        </md-card>-->
+<!--      </b-colxx>-->
+<!--    </b-row>-->
+
     <b-row>
       <b-colxx xxs="12">
         <b-card class="mb-4" >
@@ -13,37 +44,6 @@
             </p>
           </b-jumbotron>
         </b-card>
-      </b-colxx>
-    </b-row>
-
-    <b-row>
-      <b-colxx xxs="12">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img class="d-block w-100" src="/https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjwtr6eovrkAhURH3AKHSDKCXkQjRx6BAgBEAQ&url=https%3A%2F%2Fawesome.edu.my%2Fbanner-main-page-07-2%2F&psig=AOvVaw2znlFUJK_-aIzu9jFU5Nib&ust=1569992015723437" alt="First slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="/https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjwtr6eovrkAhURH3AKHSDKCXkQjRx6BAgBEAQ&url=https%3A%2F%2Fawesome.edu.my%2Fbanner-main-page-07-2%2F&psig=AOvVaw2znlFUJK_-aIzu9jFU5Nib&ust=1569992015723437" alt="Second slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="/https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjwtr6eovrkAhURH3AKHSDKCXkQjRx6BAgBEAQ&url=https%3A%2F%2Fawesome.edu.my%2Fbanner-main-page-07-2%2F&psig=AOvVaw2znlFUJK_-aIzu9jFU5Nib&ust=1569992015723437 alt="Third slide">
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
       </b-colxx>
     </b-row>
 
@@ -78,7 +78,7 @@
       </swiper>
     </b-row>
 
-<!--    <b-row>-->
+    <b-row>
 <!--      <b-colxx xs="12">-->
 <!--        <h3>Các loại bài tập</h3>-->
 <!--      </b-colxx>-->
@@ -94,10 +94,10 @@
 <!--        <b-colxx xxs="6" sm="4" md="3" lg="3">-->
 <!--          <icon-card :title="$t('dashboards.new-comments')" icon="iconsminds-mail-read" :value=25 />-->
 <!--        </b-colxx>-->
-<!--    </b-row>-->
+    </b-row>
 
 
-<!--    <b-row>-->
+    <b-row>
 
 <!--      <b-colxx xxs="12">-->
 <!--        <h3 class="mb-4 card-title">Blog</h3>-->
@@ -194,7 +194,7 @@
 <!--          <b-button size="sm" variant="outline-primary">Edit</b-button>-->
 <!--        </b-card>-->
 <!--      </b-colxx>-->
-<!--    </b-row>-->
+    </b-row>
   </div>
 
 </template>
@@ -209,7 +209,7 @@
     components: {
       swiper,
       swiperSlide,
-      ResizeObserver,
+      // ResizeObserver,
       IconCard,
     },
     data() {
@@ -219,6 +219,21 @@
           slidesPerView: 4,
           loop: true,
         },
+        swiperOption: {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          keyboard: {
+            enabled: true,
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          }
+        }
       }
     },
     async mounted () {

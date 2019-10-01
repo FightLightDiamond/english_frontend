@@ -60,7 +60,7 @@ export default {
         localStorage.setItem('user', JSON.stringify(res))
         console.log(res);
 
-        this.$notify('success', 'Login Error', 'Login Success', { duration: 13000, permanent: false })
+        this.$notify('success', 'Login Success', `Hi, ${this.email} `, { duration: 13000, permanent: false })
         this.$router.push('/english')
       } catch (e) {
         this.$router.push('/english')
