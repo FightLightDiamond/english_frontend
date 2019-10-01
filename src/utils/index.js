@@ -87,8 +87,8 @@ export const centerTextPlugin = {
     ctx.restore()
 
     var activeLabel = chart.data.labels[0]
-    var activeValue = chart.data.datasets[0].data[0]
-    var dataset = chart.data.datasets[0]
+    var activeValue = chart.datasets[0].data[0]
+    var dataset = chart.datasets[0]
     var meta = dataset._meta[Object.keys(dataset._meta)[0]]
     var total = meta.total
 
@@ -100,9 +100,9 @@ export const centerTextPlugin = {
     if (chart.pointAvailable) {
       activeLabel = chart.data.labels[chart.pointIndex]
       activeValue =
-        chart.data.datasets[chart.pointDataIndex].data[chart.pointIndex]
+        chart.datasets[chart.pointDataIndex].data[chart.pointIndex]
 
-      dataset = chart.data.datasets[chart.pointDataIndex]
+      dataset = chart.datasets[chart.pointDataIndex]
       meta = dataset._meta[Object.keys(dataset._meta)[0]]
       total = meta.total
       activePercentage = parseFloat(((activeValue / total) * 100).toFixed(1))

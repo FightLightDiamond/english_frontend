@@ -11,7 +11,7 @@
                           <p class="white mb-0">Yes, it is indeed!</p>
                       </div>
                       <div class="form-side">
-                        <router-link tag="a" to="/"><span class="logo-single"/></router-link>
+
                         <h6 class="mb-4">{{ $t('pages.error-title')}}</h6>
                         <p class="mb-0 text-muted text-small mb-0">{{ $t('pages.error-code')}}</p>
                         <p class="display-1 font-weight-bold mb-5">404</p>

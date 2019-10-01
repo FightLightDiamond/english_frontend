@@ -2,60 +2,56 @@
   <nav class="navbar fixed-top">
     <div class="d-flex align-items-center navbar-left">
       <a
-        href="#"
         class="menu-button d-none d-md-block"
-        @click.prevent="changeSideMenuStatus({step :menuClickCount+1,classNames:menuType})"
       >
-        <menu-icon />
+
       </a>
       <a
-        href="#"
         class="menu-button-mobile d-xs-block d-sm-block d-md-none"
-        @click.prevent="changeSideMenuForMobile(menuType)"
       >
-        <mobile-menu-icon />
+<!--        <mobile-menu-icon />-->
       </a>
 
       <div class="d-inline-block">
 
     </div>
-      <div class="position-relative d-none d-none d-lg-inline-block">
+      <div class="d-inline-block">
         <a
           class=" btn-sm ml-2"
           target="_top"
-          :href="buyUrl"
+          href="/english"
         >{{$t('Home')}}</a>
       </div>
-      <div class="position-relative d-none d-none d-lg-inline-block">
+      <div class="d-inline-block">
         <a
           class=" btn-sm ml-2"
           target="_top"
-          :href="buyUrl"
+          href="/courses"
         >{{$t('Courses')}}</a>
       </div>
-      <div class="position-relative d-none d-none d-lg-inline-block">
+      <div class="d-inline-block">
         <a
           class=" btn-sm ml-2"
           target="_top"
-          :href="buyUrl"
+          href="/english"
         >{{$t('Blog')}}</a>
       </div>
-      <div class="position-relative d-none d-none d-lg-inline-block">
+      <div class="d-inline-block">
         <a
           class=" btn-sm ml-2"
           target="_top"
-          :href="buyUrl"
+          href="/english"
         >{{$t('Contact')}}</a>
       </div>
-      <div class="position-relative d-none d-none d-lg-inline-block">
+      <div class="d-inline-block">
         <a
           class=" btn-sm ml-2"
           target="_top"
-          :href="buyUrl"
+          href="/english"
         >{{$t('About')}}</a>
       </div>
     </div>
-    <router-link class="navbar-logo" tag="a" to="/app">
+    <router-link class="navbar-logo" tag="a" to="/">
       <h1>Crazy</h1>
 <!--      <span class="logo d-none d-xs-block"></span>-->
 <!--      <span class="logo-mobile d-block d-xs-none"></span>-->
@@ -84,10 +80,10 @@
           no-caret
         >
           <template slot="button-content">
-            <span class="name mr-1">{{currentUser.title}}</span>
-            <span>
-              <img :alt="currentUser.title" :src="currentUser.img" />
-            </span>
+<!--            <span class="name mr-1">{{currentUser.title}}</span>-->
+<!--            <span>-->
+<!--              <img :alt="currentUser.title" :src="currentUser.img" />-->
+<!--            </span>-->
           </template>
           <b-dropdown-item>Account</b-dropdown-item>
           <b-dropdown-item>History</b-dropdown-item>

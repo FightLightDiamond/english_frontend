@@ -1,5 +1,5 @@
 export default {
   domain() {
-    return 'http://cuongpm.viralsoft.vn';
+    return 'http://localhost:8005';
   }
 }

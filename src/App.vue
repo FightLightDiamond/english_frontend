@@ -1,16 +1,16 @@
 <template>
   <div class="h-100">
     <router-view/>
-    <color-switcher/>
+<!--    <color-switcher/>-->
   </div>
 </template>
 <script>
-import ColorSwitcher from '@/components/Common/ColorSwitcher'
+// import ColorSwitcher from '@/components/Common/ColorSwitcher'
 import { getDirection } from '@/utils'
 
 export default {
   components: {
-    ColorSwitcher
+    // ColorSwitcher
   },
   beforeMount () {
     const direction = getDirection()

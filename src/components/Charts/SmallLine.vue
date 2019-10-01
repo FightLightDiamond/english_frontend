@@ -57,9 +57,9 @@ export default {
 
     this.addPlugin({
       afterInit: function (chart, options) {
-        var yLabel = chart.data.datasets[0].data[0]
+        var yLabel = chart.datasets[0].data[0]
         var xLabel = chart.data.labels[0]
-        var label = chart.data.datasets[0].label
+        var label = chart.datasets[0].label
         $that.$emit('on-chart-mouse-over', { labelx: label + '-' + xLabel, labely: addCommas(yLabel) })
       }
     })

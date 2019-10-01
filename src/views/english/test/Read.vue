@@ -15,31 +15,31 @@
     <b-card class="form-group" :title="$t(crazy.name)">
       <b-row class="form-group">
         <b-colxx xxs="12">
-          <audio :src="crazy.audio" autoplay controls></audio>
+          <audio :src="crazy.audio" controls></audio>
         </b-colxx>
       </b-row>
     </b-card>
 
-    <b-card class="mb-12" >
+    <b-card class="mb-12">
       <b-row>
         <b-colxx xxs="6">
           <h4>English</h4>
           <draggable type="ul" class="list-unstyled" v-model="ens">
-            <li v-for="(en, key) in ens"><p>{{key + 1}}, {{en.sentence}}</p></li>
+            <li :class="en.color" v-for="(en, key) in ens"><p>{{key + 1}}, {{en.sentence}}</p></li>
           </draggable>
         </b-colxx>
 
         <b-colxx xxs="6">
           <h4>Vietnamese</h4>
-          <draggable type="ul" class="list-unstyled">
-            <li v-for="(vi, key) in vis"><p>{{key + 1}}, {{vi.meaning}}</p></li>
+          <draggable type="ul" class="list-unstyled" v-model="vis">
+            <li :class="vi.color" v-for="(vi, key) in vis"><p>{{key + 1}}, {{vi.meaning}}</p></li>
           </draggable>
         </b-colxx>
 
       </b-row>
       <b-row>
         <b-colxx xxs="12">
-          <button class="btn btn-primary btn-sm">Submit</button>
+          <button @click="submit()" class="btn btn-primary btn-sm">Submit</button>
         </b-colxx>
       </b-row>
     </b-card>
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import testService from '../../../services/TestService'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
   import draggable from 'vuedraggable'
 
@@ -74,15 +74,26 @@
         }],
       }
     },
-    created () {
-      axios.get(`http://cuongpm.viralsoft.vn/api/test/crazy-read/${this.$route.params.id}`).then((res) => {
-        this.lesson = res.data.data
-        this.crazy = res.data.data.crazy
-        this.ens = res.data.data.ens
-        this.vis = res.data.data.vis
-        console.log(this.lesson)
-      })
+    async mounted () {
+      const res = await testService.read(this.$route.params.id);
+      this.lesson = res
+      this.crazy = res.crazy
+      this.ens = res.ens
+      this.vis = res.vis
     },
+    methods: {
+      submit () {
+        alert(123)
+        console.log(this.ens,)
+        console.log(this.vis)
+      },
+      changeColorText (res, sentens) {
+        for (let item in res) {
+          sentens[item].color = 'text-success'
+          if (item.res === false) sentens[item].color = 'text-danger'
+        }
+      }
+    }
   }
 </script>
 

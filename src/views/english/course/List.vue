@@ -15,16 +15,14 @@
       <b-colxx xxs="12">
         <b-card title="Crazy sections">
           <div class="d-flex flex-row mb-3" v-for="item in courses">
-            <router-link tag="a" :to="`/english/courses/${item.id}`" class="d-block position-relative">
+            <router-link tag="a" :to="`/courses/${item.id}`" class="d-block position-relative">
               <img :src="item.img" :alt="item.name" class="list-thumbnail border-0"/>
             </router-link>
             <div class="pl-3 pt-2 pr-2 pb-2">
-              <router-link tag="a" :to="`/english/courses/${item.id}`">
+              <router-link tag="a" :to="`/courses/${item.id}`">
                 <p class="list-item-heading">{{ item.name }}</p>
                 <div class="pr-4">
-                  <p class="text-muted mb-1 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Aliquam amet cum delectus deserunt doloremque eius id illo illum incidunt ipsam, mollitia odio quo
-                    rerum sequi soluta, tenetur, ullam veniam voluptate.{{ item.description }}</p>
+                  <p class="text-muted mb-1 text-small">{{ item.description }}</p>
                 </div>
               </router-link>
             </div>

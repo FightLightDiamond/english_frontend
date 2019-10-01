@@ -16,7 +16,7 @@
     <b-card class="form-group" :title="$t(lesson.name)">
       <b-row class="form-group">
         <b-colxx xxs="12">
-          <audio :src="lesson.audio" autoplay controls></audio>
+          <audio :src="lesson.audio"  controls></audio>
         </b-colxx>
       </b-row>
     </b-card>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import testService from '../../../services/TestService'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
 
   export default {
@@ -71,12 +71,10 @@
         ],
       }
     },
-    created () {
-      axios.get(`http://cuongpm.viralsoft.vn/api/test/crazy-listen/${this.$route.params.id}`).then((res) => {
-        this.lesson = res.data.data
-        this.sentences = res.data.data.details
-        console.log(this.lesson)
-      })
+    async mounted () {
+      const res = await testService.listen(this.$route.params.id);
+      this.lesson = res
+      this.sentences = res.details
     },
   }
 </script>

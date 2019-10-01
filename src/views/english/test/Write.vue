@@ -15,7 +15,7 @@
     <b-card class="form-group" :title="$t(crazy.name)">
       <b-row class="form-group">
         <b-colxx xxs="12">
-          <audio :src="crazy.audio" autoplay controls></audio>
+          <audio :src="crazy.audio"  controls></audio>
         </b-colxx>
       </b-row>
     </b-card>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import testService from '../../../services/TestService'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
   import draggable from 'vuedraggable'
 
@@ -73,11 +73,11 @@
     },
     created () {
       axios.get(`http://cuongpm.viralsoft.vn/api/test/crazy-write/${this.$route.params.id}`).then((res) => {
-        this.lesson = res.data.data
-        this.crazy = res.data.data.crazy
-        this.ens = res.data.data.ens
-        this.randEns = res.data.data.randEns
-        // this.vis = res.data.data.vis
+        this.lesson = res.data
+        this.crazy = res.data.crazy
+        this.ens = res.data.ens
+        this.randEns = res.data.randEns
+        // this.vis = res.data.vis
         console.log(this.lesson)
       })
     },

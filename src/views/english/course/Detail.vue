@@ -23,13 +23,13 @@
           >
             <template slot="actions" scope="props">
               <div class="table-button-container text-right">
-                <router-link :to="`/english/listen/${props.rowData.id}`" class="btn btn-xs btn-primary">
+                <router-link :to="`/listen/${props.rowData.id}`" class="btn btn-xs btn-primary">
                   Listen
                 </router-link>
-                <router-link :to="`/english/read/${props.rowData.id}`" class="btn btn-xs btn-primary">
+                <router-link :to="`/read/${props.rowData.id}`" class="btn btn-xs btn-primary">
                   Read
                 </router-link>
-                <router-link :to="`/english/write/${props.rowData.id}`" class="btn btn-xs btn-primary">
+                <router-link :to="`/write/${props.rowData.id}`" class="btn btn-xs btn-primary">
                   Write
                 </router-link>
               </div>
@@ -59,7 +59,7 @@
           link: '/',
         }, {
           text: 'Sessions',
-          link: '/english/courses',
+          link: '/courses',
         }, {
           text: 'Lessons',
           active: true
