@@ -27,7 +27,8 @@ const routes = [
       { path: 'courses/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/course/Detail') },
       { path: 'listen/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Listen') },
       { path: 'read/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Read') },
-      { path: 'write/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Write') }
+      { path: 'write/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Write') },
+      { path: 'speak/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Speak') }
     ]
   },
   { path: '*', component: () => import(/* webpackChunkName: "error" */ './views/Error') }

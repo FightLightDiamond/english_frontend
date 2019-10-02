@@ -12,18 +12,31 @@
       </b-colxx>
     </b-row>
 
-    <b-card class="form-group" :title="$t(crazy.name)">
+    <b-card class="mb-4" :title="lesson.name">
+      <div class="d-flex flex-row mb-0">
+        <img :src="lesson.img" :alt="lesson.name" class="list-thumbnail border-0"/>
+        <b-badge variant="" pill class="position-absolute badge-top-right">Hot</b-badge>
+        <div class="pl-3 pt-2 pr-2 pb-2">
+          <div class="pr-4">
+            <h3></h3>
+            <p class="text-muted mb-1 text-small">{{ lesson.description }}</p>
+          </div>
+        </div>
+      </div>
+    </b-card>
+
+    <b-card class="mb-3" title="Play & listen">
       <b-row class="form-group">
         <b-colxx xxs="12">
-          <audio :src="crazy.audio" controls></audio>
+          <audio :src="lesson.audio"  controls></audio>
         </b-colxx>
       </b-row>
     </b-card>
 
-    <b-card class="mb-12">
+    <b-card class="mb-4" title="Sort sentence">
       <b-row>
         <b-colxx xxs="6">
-          <h4>English</h4>
+          <h4 class="form-group">English</h4>
           <draggable type="ul" class="list-unstyled" v-model="ens">
             <li v-bind:class="{ 'text-danger': result[key] && !result[key].is_correct, 'text-success': result[key] && result[key].is_correct }"
                 v-for="(en, key) in ens"><p>{{key + 1}}, {{en.sentence}}</p>
@@ -32,7 +45,7 @@
         </b-colxx>
 
         <b-colxx xxs="6">
-          <h4>Vietnamese</h4>
+          <h4 class="form-group">Vietnamese</h4>
           <draggable type="ul" class="list-unstyled" v-model="vis">
             <li  v-bind:class="{ 'text-danger': result[key] && !result[key].is_correct, 'text-success': result[key] && result[key].is_correct }"
                  v-for="(vi, key) in vis"><p>{{key + 1}}, {{vi.meaning}}</p></li>
@@ -62,9 +75,9 @@
     },
     data () {
       return {
-        crazy: [],
         ens: [],
         vis: [],
+        lesson: {},
         colors: {},
         result: {},
         items: [{
@@ -81,8 +94,7 @@
     },
     async mounted () {
       const res = await testService.reading(this.$route.params.id)
-      this.lesson = res
-      this.crazy = res.crazy
+      this.lesson = res.crazy
       this.ens = res.ens
       this.vis = res.vis
     },

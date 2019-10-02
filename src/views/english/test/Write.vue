@@ -12,13 +12,34 @@
       </b-colxx>
     </b-row>
 
-    <b-card class="form-group" :title="$t(crazy.name)">
+    <b-card class="mb-4" :title="lesson.name">
+      <div class="d-flex flex-row mb-0">
+        <img :src="lesson.img" :alt="lesson.name" class="list-thumbnail border-0"/>
+        <b-badge variant="" pill class="position-absolute badge-top-right">Hot</b-badge>
+        <div class="pl-3 pt-2 pr-2 pb-2">
+          <div class="pr-4">
+            <h3></h3>
+            <p class="text-muted mb-1 text-small">{{ lesson.description }}</p>
+          </div>
+        </div>
+      </div>
+    </b-card>
+
+    <b-card class="mb-3" title="Play & listen">
       <b-row class="form-group">
         <b-colxx xxs="12">
-          <audio :src="crazy.audio" controls></audio>
+          <audio :src="lesson.audio"  controls></audio>
         </b-colxx>
       </b-row>
     </b-card>
+
+<!--    <b-card class="form-group" :title="$t(crazy.name)">-->
+<!--      <b-row class="form-group">-->
+<!--        <b-colxx xxs="12">-->
+<!--          <audio :src="crazy.audio" controls></audio>-->
+<!--        </b-colxx>-->
+<!--      </b-row>-->
+<!--    </b-card>-->
 
     <b-card class="mb-12" :title="$t('Listen and write')">
       <b-row>
@@ -65,7 +86,7 @@
     },
     data () {
       return {
-        crazy: { 'name': '', audio: '' },
+        lesson: { 'name': '', audio: '' },
         ens: [],
         randEns: [],
         result: {},
@@ -88,8 +109,7 @@
     },
     async created () {
       const res = await testService.write(this.$route.params.id)
-      this.lesson = res
-      this.crazy = res.crazy
+      this.lesson = res.crazy
       this.ens = res.ens
       this.randEns = res.randEns
       console.log(this.lesson)

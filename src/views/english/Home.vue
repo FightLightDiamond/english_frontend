@@ -58,7 +58,7 @@
             <b-card  no-body :title="course.name">
               <div class="position-relative">
                 <router-link tag="a" :to="`/courses/${course.id}`">
-                <img class="card-img-top" :src="course.img" alt="Card cap" />
+                <img class="card-img-top" :src="course.large_thumb" alt="Card cap" />
                 </router-link>
                 <b-badge variant="primary" pill class="position-absolute badge-top-left">NEW</b-badge>
                 <b-badge variant="secondary" pill class="position-absolute badge-top-left-2">TRENDING</b-badge>
