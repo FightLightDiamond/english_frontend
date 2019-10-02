@@ -1,19 +1,10 @@
 <template>
   <nav class="navbar fixed-top">
     <div class="d-flex align-items-center navbar-left">
-      <a
-        class="menu-button d-none d-md-block"
-      >
-
-      </a>
-      <a
-        class="menu-button-mobile d-xs-block d-sm-block d-md-none"
-      >
-<!--        <mobile-menu-icon />-->
-      </a>
-
+      <a class="menu-button d-none d-md-block"></a>
+<!--      <a class="menu-button d-none d-md-block"></a>-->
+<!--      <a class="menu-button-mobile d-xs-block d-sm-block d-md-none"></a>-->
       <div class="d-inline-block">
-
     </div>
       <div class="d-inline-block">
         <a
@@ -23,12 +14,23 @@
         >{{$t('Home')}}</a>
       </div>
       <div class="d-inline-block">
-        <a
-          class=" btn-sm ml-2"
-          target="_top"
-          href="/courses"
-        >{{$t('Courses')}}</a>
+        <a class=" btn-sm ml-2" target="_top" href="/courses">
+          {{$t('Courses')}}
+        </a>
       </div>
+      <div class="d-inline-block">
+        <a class=" btn-sm ml-2" target="_top" href="/histories">
+          {{$t('History')}}
+        </a>
+      </div>
+    </div>
+    <router-link class="navbar-logo" tag="a" to="/">
+      <h1>Crazy</h1>
+<!--      <span class="logo d-none d-xs-block"></span>-->
+<!--      <span class="logo-mobile d-block d-xs-none"></span>-->
+    </router-link>
+
+    <div class="navbar-right">
       <div class="d-inline-block">
         <a
           class=" btn-sm ml-2"
@@ -50,14 +52,6 @@
           href="/english"
         >{{$t('About')}}</a>
       </div>
-    </div>
-    <router-link class="navbar-logo" tag="a" to="/">
-      <h1>Crazy</h1>
-<!--      <span class="logo d-none d-xs-block"></span>-->
-<!--      <span class="logo-mobile d-block d-xs-none"></span>-->
-    </router-link>
-
-    <div class="navbar-right">
       <div class="header-icons d-inline-block align-middle">
         <div class="position-relative d-none d-sm-inline-block ">
           <div class="btn-group">
@@ -82,11 +76,11 @@
           <template slot="button-content">
             <span class="name mr-1">Phương</span>
             <span>
-              <img src="https://www.google.com/search?q=zoro&sxsrf=ACYBGNS0e8y2ITNp3s9aWO8-3Xjb1lPpZw:1569911705001&tbm=isch&source=iu&ictx=1&fir=oM-dkvJMjLFCoM%253A%252CdItxiZ6FSLHSNM%252C%252Fm%252F02jzqh&vet=1&usg=AI4_-kRDkNoL_1WCgMCX6N4dNd53P6HoUg&sa=X&ved=2ahUKEwiPlIXsuPrkAhVSeXAKHX9EDnUQ_B0wG3oECAkQAw#imgrc=oM-dkvJMjLFCoM:" />
+<!--              <img src="https://www.google.com/search?q=zoro&sxsrf=ACYBGNS0e8y2ITNp3s9aWO8-3Xjb1lPpZw:1569911705001&tbm=isch&source=iu&ictx=1&fir=oM-dkvJMjLFCoM%253A%252CdItxiZ6FSLHSNM%252C%252Fm%252F02jzqh&vet=1&usg=AI4_-kRDkNoL_1WCgMCX6N4dNd53P6HoUg&sa=X&ved=2ahUKEwiPlIXsuPrkAhVSeXAKHX9EDnUQ_B0wG3oECAkQAw#imgrc=oM-dkvJMjLFCoM:" />-->
             </span>
           </template>
           <b-dropdown-item>Account</b-dropdown-item>
-          <b-dropdown-item>History</b-dropdown-item>
+<!--          <b-dropdown-item>History</b-dropdown-item>-->
           <b-dropdown-divider />
           <b-dropdown-item @click="logout">Sign out</b-dropdown-item>
         </b-dropdown>
@@ -131,28 +125,6 @@
     methods: {
       ...mapMutations(['changeSideMenuStatus', 'changeSideMenuForMobile']),
       ...mapActions(['setLang', 'signOut']),
-      search () {
-        this.$router.push(`${this.searchPath}?search=${this.searchKeyword}`)
-        this.searchKeyword = ''
-      },
-      searchClick () {
-        if (window.innerWidth < this.menuHiddenBreakpoint) {
-          if (!this.isMobileSearch) {
-            this.isMobileSearch = true
-          } else {
-            this.search()
-            this.isMobileSearch = false
-          }
-        } else {
-          this.search()
-        }
-      },
-      handleDocumentforMobileSearch () {
-        if (!this.isSearchOver) {
-          this.isMobileSearch = false
-          this.searchKeyword = ''
-        }
-      },
 
       changeLocale (locale, direction) {
         const currentDirection = getDirection().direction
@@ -164,7 +136,7 @@
       },
       logout () {
         this.signOut().then(() => {
-          this.$router.push('/user/login')
+          this.$router.push('/login')
         })
       },
 

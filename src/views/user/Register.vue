@@ -5,7 +5,7 @@
           <div class="position-relative image-side ">
             <p class=" text-white h2">{{ $t('Crazy English') }}</p>
               <p class="white mb-0">  Please use this form to register. <br />If you are a member, please
-                <router-link tag="a" to="/user/login" class="white">login</router-link>.
+                <router-link tag="a" to="/login" class="white">login</router-link>.
               </p>
           </div>
           <div class="form-side">

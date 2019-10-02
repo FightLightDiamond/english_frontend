@@ -38,8 +38,8 @@ import AuthService from '../../services/AuthService'
 export default {
   data () {
     return {
-      email: 'i.am.m.cuong@gmail.com',
-      password: 'PMC1704bn',
+      email: 'fightlightdiamond@gmail.com',
+      password: '123456',
       processing: false
     }
   },
@@ -63,9 +63,9 @@ export default {
         this.$notify('success', 'Login Success', `Hi, ${this.email} `, { duration: 13000, permanent: false })
         this.$router.push('/english')
       } catch (e) {
-        this.$router.push('/english')
-        // this.$notify('error', 'Login Error', 'Login Fail', { duration: 13000, permanent: false })
-        console.log(e);
+        // this.$router.push('/english')
+        this.$notify('error', 'Login Error', 'Login Fail', { duration: 13000, permanent: false })
+        // console.log(e);
         this.processing = false;
       }
 

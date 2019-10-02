@@ -43,9 +43,9 @@
                     <router-link tag="li" to="/app/pages/search"><a><i class="simple-icon-magnifier"></i> <span>{{ $t("menu.search") }}</span></a></router-link>
                     <router-link tag="li" to="/app/pages/mailing"><a><i class="simple-icon-envelope-open"></i> <span>{{ $t("menu.mailing") }}</span></a></router-link>
                     <router-link tag="li" to="/app/pages/invoice"><a><i class="simple-icon-bag"></i> <span>{{ $t("menu.invoice") }}</span></a></router-link>
-                    <router-link tag="li" to="/user/login"><a target="_blank"><i class="simple-icon-user-following"></i> <span>{{ $t("menu.login") }}</span></a></router-link>
-                    <router-link tag="li" to="/user/register"><a target="_blank"><i class="simple-icon-user-follow"></i> <span>{{ $t("menu.register") }}</span></a></router-link>
-                    <router-link tag="li" to="/user/forgot-password"><a target="_blank"><i class="simple-icon-user-unfollow"></i> <span>{{ $t("menu.forgot-password") }}</span></a></router-link>
+                    <router-link tag="li" to="/login"><a target="_blank"><i class="simple-icon-user-following"></i> <span>{{ $t("menu.login") }}</span></a></router-link>
+                    <router-link tag="li" to="/register"><a target="_blank"><i class="simple-icon-user-follow"></i> <span>{{ $t("menu.register") }}</span></a></router-link>
+                    <router-link tag="li" to="/forgot-password"><a target="_blank"><i class="simple-icon-user-unfollow"></i> <span>{{ $t("menu.forgot-password") }}</span></a></router-link>
                     <router-link tag="li" to="/error"><a target="_blank"><i class="simple-icon-exclamation"></i> <span>{{ $t("menu.error") }}</span></a></router-link>
                 </ul>
 

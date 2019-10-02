@@ -24,6 +24,13 @@ const routes = [
     children: [
       { path: '/english', component: () => import(/* webpackChunkName: "english" */ './views/english/Home') },
       { path: 'courses', component: () => import(/* webpackChunkName: "english" */ './views/english/course/List') },
+
+      { path: 'histories', component: () => import(/* webpackChunkName: "english" */ './views/english/history/History') },
+      { path: 'histories/listen', component: () => import(/* webpackChunkName: "english" */ './views/english/history/Listen') },
+      { path: 'histories/read', component: () => import(/* webpackChunkName: "english" */ './views/english/history/Read') },
+      { path: 'histories/write', component: () => import(/* webpackChunkName: "english" */ './views/english/history/Write') },
+      { path: 'histories/speak', component: () => import(/* webpackChunkName: "english" */ './views/english/history/Speak') },
+
       { path: 'courses/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/course/Detail') },
       { path: 'listen/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Listen') },
       { path: 'read/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Read') },
