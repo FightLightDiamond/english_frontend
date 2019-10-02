@@ -25,7 +25,7 @@
       </div>
     </div>
     <router-link class="navbar-logo" tag="a" to="/">
-      <h1>Crazy</h1>
+      <h1>Crazy English</h1>
 <!--      <span class="logo d-none d-xs-block"></span>-->
 <!--      <span class="logo-mobile d-block d-xs-none"></span>-->
     </router-link>
