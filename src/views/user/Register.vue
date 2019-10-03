@@ -10,26 +10,26 @@
           </div>
           <div class="form-side">
 
-            <h6 class="mb-4">{{ $t('user.register')}}</h6>
+            <h6 class="mb-4">{{ $t('form.register')}}</h6>
             <b-form @submit.prevent="formSubmit">
                <!-- <label class="form-group has-float-label mb-4">
-                <input  class="form-control" v-model="user.name">
-                <span>{{ $t('user.fullname') }}</span>
+                <input  class="form-control" v-model="form.name">
+                <span>{{ $t('form.fullname') }}</span>
               </label> -->
               <label class="form-group has-float-label mb-4">
-                <input type="email" class="form-control" v-model="user.email">
-                <span>{{ $t('user.email') }}</span>
+                <input type="email" class="form-control" v-model="form.email">
+                <span>{{ $t('form.email') }}</span>
               </label>
               <label class="form-group has-float-label mb-4">
-                <input type="password" class="form-control" v-model="user.password">
-                <span>{{ $t('user.password') }}</span>
+                <input type="password" class="form-control" v-model="form.password">
+                <span>{{ $t('form.password') }}</span>
               </label>
               <label class="form-group has-float-label mb-4">
-                <input type="password" class="form-control" v-model="user.password_confirmation">
-                <span>{{ $t('user.password_confirmation') }}</span>
+                <input type="password" class="form-control" v-model="form.password_confirmation">
+                <span>{{ $t('form.password_confirmation') }}</span>
               </label>
               <div class="d-flex justify-content-end align-items-center">
-                  <b-button type="submit" variant="primary" size="lg" class="btn-shadow">{{ $t('user.register-button')}}</b-button>
+                  <b-button type="submit" variant="primary" size="lg" class="btn-shadow">{{ $t('form.register-button')}}</b-button>
               </div>
           </b-form>
         </div>
@@ -43,7 +43,7 @@ import AuthService from '../../services/AuthService';
 export default {
   data () {
     return {
-      user: {
+      form: {
         name: 'Fight',
         email: 'aa@gmail.com',
         password: '123456',
@@ -53,15 +53,14 @@ export default {
   },
   methods: {
     async formSubmit () {
-      console.log(this.user)
-
+      console.log(this.form)
       try {
-        const res = await AuthService.register(this.user);
+        const res = await AuthService.register(this.form);
+        this.$notify('success', 'Register Success', `Hi, ${this.form.email} `, { duration: 13000, permanent: false })
+        this.$router.push('/login')
       } catch(e) {
-        console.log(1234);
+        this.$notify('error', 'Register Fail', 'Server Error', { duration: 13000, permanent: false })
       }
-
-      // this.$router.push('/')
     }
   }
 }

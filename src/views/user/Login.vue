@@ -21,7 +21,7 @@
                 <span>{{ $t('user.password') }}</span>
               </label>
               <div class="d-flex justify-content-between align-items-center">
-                  <router-link tag="a" to="/user/forgot-password">{{ $t('user.forgot-password-question')}}</router-link>
+                  <router-link tag="a" to="/forgot-password">{{ $t('user.forgot-password-question')}}</router-link>
                   <b-button type="submit" variant="primary" size="lg" class="btn-shadow" :disabled="processing">{{ $t('user.login-button')}}</b-button>
               </div>
           </b-form>
