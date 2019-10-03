@@ -93,10 +93,10 @@
         colors: {},
         items: [{
           text: 'Home',
-          link: '#ee',
+          to: '#ee',
         }, {
           text: 'Sessions',
-          link: '/english/lesson',
+          to: '/english/lesson',
         }, {
           text: 'Exercise',
           active: true

@@ -74,10 +74,10 @@
         lesson: [],
         items: [{
           text: 'Home',
-          link: '#',
+          to: '#',
         }, {
           text: 'History',
-          link: '/english/lesson',
+          to: '/english/histories',
         }
         ],
       }

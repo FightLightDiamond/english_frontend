@@ -82,10 +82,10 @@
         result: {},
         items: [{
           text: 'Home',
-          link: '#',
+          to: '#',
         }, {
           text: 'Sessions',
-          link: '/english/lesson',
+          to: '/english/lesson',
         }, {
           text: 'Lesson',
           active: true

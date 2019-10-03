@@ -42,10 +42,10 @@
         courses: [],
         items:  [{
           text: 'Home',
-          link: '#',
+          to: '#',
         }, {
           text: 'Sessions',
-          link: '/english/courses',
+          to: '/english/courses',
         }, {
           text: 'List',
           active: true

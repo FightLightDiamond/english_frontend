@@ -73,13 +73,13 @@
       return {
         items: [{
           text: 'Home',
-          link: '/',
+          to: '/',
         }, {
           text: 'Sessions',
-          link: '/courses',
+          to: '/courses',
         }, {
           text: 'Lessons',
-          active: true
+          to: true
         },
         ],
         id: this.$route.params.id,
