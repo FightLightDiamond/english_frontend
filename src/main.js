@@ -61,7 +61,10 @@ Vue.use(VCalendar, {
   popoverExpanded: true,
   popoverDirection: 'bottom'
 })
+
 Vue.use(VueScrollTo)
+Vue.use(require('vue-shortkey'))
+
 firebase.initializeApp(firebaseConfig)
 
 export default new Vue({

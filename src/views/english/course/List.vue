@@ -45,7 +45,7 @@
           to: '#',
         }, {
           text: 'Sessions',
-          to: '/english/courses',
+          to: '//courses',
         }, {
           text: 'List',
           active: true
