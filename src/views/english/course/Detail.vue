@@ -59,10 +59,9 @@
 </template>
 
 <script>
-  import axios from 'axios'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
   import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
-  import courseService from '../../../services/CourseService'
+  import FactoryService from '../../../services/FactoryService'
 
   export default {
     components: {
@@ -79,7 +78,7 @@
           to: '/courses',
         }, {
           text: 'Lessons',
-          to: true
+          active: true
         },
         ],
         id: this.$route.params.id,
@@ -98,7 +97,7 @@
       }
     },
     async mounted () {
-      this.course = await courseService.show(this.id, {})
+      this.course = await FactoryService.request('CourseService').show(this.id, {})
       this.lessons = this.course.crazies
     },
     methods: {

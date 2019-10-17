@@ -3,21 +3,29 @@ import Api from '../config/Api'
 
 const domain = Api.domain()
 
-axios.interceptors.request.use(function (config) {
-  const user = JSON.parse(localStorage.getItem('user'))
-
-  if (user) {
-    console.log(user.access_token)
-    config.headers.Authorization = `Bearer ${user.access_token}`
+export default class BaseService {
+  constructor (auth = 'user') {
+    if (auth) {
+      this.setAuth(auth)
+    }
   }
 
-  return config
-})
+  setAuth (auth) {
+    axios.interceptors.request.use(function (config) {
+      const user = JSON.parse(localStorage.getItem(auth))
 
-export default class BaseService {
+      if (user) {
+        console.log(user.access_token)
+        config.headers.Authorization = `Bearer ${user.access_token}`
+      }
+
+      return config
+    })
+  }
+
   async get (uri, params = {}) {
     console.log(domain + uri)
-    const res = await axios.get(domain + uri, params)
+    const res = await axios.get(domain + uri, { params: params })
     return res.data
   }
 

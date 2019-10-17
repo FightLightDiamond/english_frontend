@@ -21,6 +21,7 @@
             :attempts="3"
             :time="2"
             :before-recording="callback"
+            :pause-recording="callback"
             :after-recording="callback"
             :before-upload="callback"
             :successful-upload="callback"
@@ -64,6 +65,9 @@
     },
     data () {
       return {
+        headers: {
+          'X-Custom-Header': 'some data'
+        },
         lesson: [],
         items: [{
           text: 'Home',

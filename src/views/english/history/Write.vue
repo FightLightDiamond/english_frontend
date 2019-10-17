@@ -3,7 +3,7 @@
     <b-row>
       <b-colxx xxs="12">
        <span>
-        <h1>Sections</h1>
+        <h1>History</h1>
         <b-nav class="pt-0 breadcrumb-container d-none d-sm-block d-lg-inline-block">
             <b-breadcrumb :items="items"/>
         </b-nav>
@@ -12,126 +12,133 @@
       </b-colxx>
     </b-row>
 
-    <b-card class="mb-4" :title="lesson.name">
-      <div class="d-flex flex-row mb-0">
-        <img :src="lesson.img" :alt="lesson.name" class="list-thumbnail border-0"/>
-        <b-badge variant="" pill class="position-absolute badge-top-right">Hot</b-badge>
-        <div class="pl-3 pt-2 pr-2 pb-2">
-          <div class="pr-4">
-            <h3></h3>
-            <p class="text-muted mb-1 text-small">{{ lesson.description }}</p>
-          </div>
-        </div>
-      </div>
-    </b-card>
-
-    <b-card class="mb-3" title="Play & listen">
-      <b-row class="form-group">
-        <b-colxx xxs="12">
-          <audio :src="lesson.audio"  controls></audio>
-        </b-colxx>
-      </b-row>
-    </b-card>
-
-<!--    <b-card class="form-group" :title="$t(crazy.name)">-->
-<!--      <b-row class="form-group">-->
-<!--        <b-colxx xxs="12">-->
-<!--          <audio :src="crazy.audio" controls></audio>-->
-<!--        </b-colxx>-->
-<!--      </b-row>-->
-<!--    </b-card>-->
-
-    <b-card class="mb-12" :title="$t('Listen and write')">
+    <b-card :title="$t('Filter')" class="mb-4">
       <b-row>
-        <b-colxx xxs="12">
-          <div class="input-group input-group-sm mb-3" v-for="(en, key) in ens">
-            <div class="input-group-prepend" data-toggle="tooltip" data-placement="top" :title="randEns[key].sentence">
-                <span style="width: 40px"
-                      v-bind:class="{
-                        'text-danger': result[key] && !result[key].is_correct,
-                        'text-success': result[key] && result[key].is_correct,
-                        'input-group-text' : true
-                        }"
-                      id="inputGroup-sizing-sm">{{key + 1}}</span>
-            </div>
-            <input v-model="en.sentence"
-                   v-bind:class="{
-                        'text-danger': result[key] && !result[key].is_correct,
-                        'text-success': result[key] && result[key].is_correct,
-                        'form-control' : true
-                        }"
-                   aria-label="Small"
-                   aria-describedby="inputGroup-sizing-sm">
-          </div>
+        <b-colxx xxs="6">
+          <label>Course</label>
+          <select @change="onChangeCourse()" v-model="course_id" class="form-control">
+            <option value="">All</option>
+            <option v-for="course in courses" :value="course.id">{{course.name}}</option>
+          </select>
         </b-colxx>
-      </b-row>
-      <b-row>
-        <b-colxx xxs="12">
-          <button class="btn btn-primary btn-sm" @click="submit()">Submit</button>
+        <b-colxx xxs="6">
+          <label>Lesson</label>
+          <select @change="onChangeLesson()" v-model="lesson_id" class="form-control">
+            <option value="">All</option>
+            <option v-for="lesson in lessons" :value="lesson.id">{{lesson.name}}</option>
+          </select>
         </b-colxx>
       </b-row>
     </b-card>
+
+    <b-card :title="$t('History')">
+      <vuetable
+        ref="vuetable"
+        :api-url="getApi()"
+        :fields="history.fields"
+        pagination-path
+        @vuetable:pagination-data="onPaginationData"
+      ></vuetable>
+      <vuetable-pagination-bootstrap
+        ref="pagination"
+        @vuetable-pagination:change-page="onChangePage"
+      ></vuetable-pagination-bootstrap>
+    </b-card>
+
   </div>
 </template>
 
 <script>
-  import testService from '../../../services/TestService'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
+  import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
   import draggable from 'vuedraggable'
+  import FactoryService from '../../../services/FactoryService'
 
   export default {
     components: {
       Vuetable,
+      VuetablePaginationBootstrap,
       draggable,
     },
     data () {
       return {
-        lesson: { 'name': '', audio: '' },
-        ens: [],
-        randEns: [],
-        result: {},
-        colors: {},
+        course_id: '',
+        lesson_id: '',
+        courses: [],
+        lessons: [],
         items: [{
           text: 'Home',
-          to: '#ee',
+          to: '#',
         }, {
-          text: 'Sessions',
-          to: '/english/lesson',
+          text: 'History',
+          to: '/histories',
         }, {
-          text: 'Exercise',
+          text: 'Read',
           active: true
-        }, {
-          text: 'Write',
-          active: true
+        }],
+        history: {
+          fields: [
+            {
+              name: 'course',
+              title: 'Course',
+            },
+            {
+              name: 'lesson',
+              title: 'Lesson',
+            },
+            {
+              name: 'score',
+              sortField: 'score',
+              title: 'Score',
+            },
+            {
+              name: 'created_at',
+              sortField: 'created_at',
+              title: 'date',
+            }
+          ]
         },
-        ],
       }
     },
-    async created () {
-      const res = await testService.write(this.$route.params.id)
-      this.lesson = res.crazy
-      this.ens = res.ens
-      this.randEns = res.randEns
-      console.log(this.lesson)
+    async mounted () {
+      this.getCourses()
+    },
+    watch: {
+      apiUrl (newVal, oldVal) {
+        this.$refs.vuetable.refresh()
+      }
     },
     methods: {
-      async submit () {
-        const params = {
-          sentences: {},
-        }
-
-        for (let en of this.ens) {
-          console.log(en)
-          params.sentences[en.id] = en.sentence
-        }
-        console.log(params)
-        const res = await testService.written(this.$route.params.id, params)
-        this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, {
-          duration: 13000,
-          permanent: false
-        })
-        this.result = res.result
+      onPaginationData (paginationData) {
+        this.$refs.pagination.setPaginationData(paginationData)
       },
+      onChangePage (page) {
+        this.$refs.vuetable.changePage(page)
+      },
+      async onChangeCourse () {
+        const params = {
+          crazy_course_id: this.course_id
+        }
+        this.lessons = await FactoryService.request('CrazyService').index(params)
+        this.lesson_id = ''
+        this.apiUrl = this.getApi()
+      },
+      async onChangeLesson () {
+        this.apiUrl = this.getApi()
+      },
+      getCourses () {
+        FactoryService.request('CourseService').index().then((res) => {
+          this.courses = res
+        })
+      },
+      getApi () {
+        const api = `/api/crazy-write-histories?crazy_course_id=${this.course_id}&crazy_id=${this.lesson_id}`
+        return FactoryService.request('BaseService')
+          .url(api)
+      },
+      async getData () {
+        return await FactoryService.request('HistoryService').read({})
+      }
     }
   }
 </script>

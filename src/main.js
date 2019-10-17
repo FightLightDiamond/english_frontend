@@ -28,9 +28,15 @@ import 'v-calendar/lib/v-calendar.min.css'
 import VueScrollTo from 'vue-scrollto'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+// import AudioPlayer from '@liripeng/vue-audio-player'
+import AudioRecorder from 'vue-audio-recorder'
+
+// Vue.use(AudioPlayer)
+Vue.use(AudioRecorder)
 
 Vue.use(BootstrapVue)
 Vue.use(VueI18n)
+
 
 const messages = { en: en, es: es }
 const locale = (localStorage.getItem('currentLanguage') && localeOptions.filter(x => x.id === localStorage.getItem('currentLanguage')).length > 0) ? localStorage.getItem('currentLanguage') : defaultLocale

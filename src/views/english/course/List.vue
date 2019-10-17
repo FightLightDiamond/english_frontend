@@ -34,18 +34,18 @@
 </template>
 
 <script>
-  import courseService from '../../../services/CourseService'
+  import FactoryService from '../../../services/FactoryService'
 
   export default {
     data () {
       return {
         courses: [],
-        items:  [{
+        items: [{
           text: 'Home',
           to: '#',
         }, {
           text: 'Sessions',
-          to: '//courses',
+          to: '/courses',
         }, {
           text: 'List',
           active: true
@@ -53,7 +53,7 @@
       }
     },
     async mounted () {
-        this.courses = await courseService.index()
+      this.courses = await FactoryService.request('CourseService').index()
     },
   }
 </script>

@@ -15,13 +15,13 @@ const requestMap = {
 }
 
 export default class FactoryService {
-  static service (classname) {
+  static request (classname, auth = 'user') {
     let RequestClass = requestMap[classname]
 
     if (!RequestClass) {
       throw new Error('Invalid request class name: ' + classname)
     }
 
-    return new RequestClass()
+    return new RequestClass(auth)
   }
 }

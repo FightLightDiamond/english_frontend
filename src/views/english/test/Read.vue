@@ -28,7 +28,7 @@
     <b-card class="mb-3" title="Play & listen">
       <b-row class="form-group">
         <b-colxx xxs="12">
-          <audio id="audio" v-el:audio  :src="lesson.audio" type="audio/mpeg" controls preload >
+          <audio id="audio" ref="audio" v-bind:src="lesson.audio" type="audio/mpeg" controls preload >
             Your browser does not support the audio tag.
           </audio>
         </b-colxx>
@@ -60,9 +60,9 @@
       <b-row>
         <b-colxx xxs="12">
           <button @click="submit()" class="btn btn-primary btn-sm">Submit</button>
-          <button class="btn btn-primary btn-sm" v-shortkey="['ctrl', 'q']" @shortkey="back()">Open</button>
-          <button class="btn btn-primary btn-sm" v-shortkey="['ctrl', 'w']" @shortkey="play()">Open</button>
-          <button class="btn btn-primary btn-sm" v-shortkey="['ctrl', 'e']" @shortkey="next()">Open</button>
+<!--          <button class="btn btn-primary btn-sm" v-shortkey="['ctrl', 'q']" @shortkey="back()">Open</button>-->
+<!--          <button class="btn btn-primary btn-sm" v-shortkey="['ctrl', 'w']" @shortkey="play()">Open</button>-->
+<!--          <button class="btn btn-primary btn-sm" v-shortkey="['ctrl', 'e']" @shortkey="next()">Open</button>-->
         </b-colxx>
       </b-row>
     </b-card>
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-  import testService from '../../../services/TestService'
+  import FactoryService from '../../../services/FactoryService'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
   import draggable from 'vuedraggable'
 
@@ -84,29 +84,32 @@
       return {
         ens: [],
         vis: [],
-        lesson: {},
         colors: {},
         result: {},
+        id: this.$route.params.id,
+        lesson: [],
         items: [{
           text: 'Home',
           to: '#',
         }, {
           text: 'Sessions',
-          to: '/english/lesson',
+          to: `/courses/${this.$route.params.id}`,
         }, {
-          text: 'Lesson',
+          text: 'Read',
           active: true
         }],
         track: {}
       }
     },
     async mounted () {
-      const res = await testService.reading(this.$route.params.id)
-      this.lesson = res.crazy
-      this.$els.audio = new Audio(this.lesson.audio);
-      this.ens = res.ens
-      this.vis = res.vis
-
+      try {
+        const res = await FactoryService.request('TestService').reading(this.$route.params.id)
+        this.lesson = res.crazy
+        this.ens = res.ens
+        this.vis = res.vis
+      } catch (e) {
+        alert(e.toString())
+      }
     },
     methods: {
       async submit () {
@@ -115,7 +118,7 @@
           meanings: this.vis,
         }
 
-        const res = await testService.read(this.$route.params.id, params)
+        const res = await FactoryService.request('TestService').read(this.$route.params.id, params)
         this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, {
           duration: 13000,
           permanent: false
@@ -123,17 +126,17 @@
         this.result = res.result
       },
       play () {
-        if (this.$els.audio.paused === true) {
-          this.$els.audio.play()
+        if (this.$refs.audio.paused === true) {
+          this.$refs.audio.play()
         } else {
-          this.$els.audio.pause()
+          this.$refs.audio.pause()
         }
       },
       next () {
-        this.$els.audio.currentTime += 5;
+        this.$refs.audio.currentTime = this.$refs.audio.currentTime + 5;
       },
       back () {
-        this.$els.audio.currentTime -= 5;
+        this.$refs.audio.currentTime -= 5;
       }
     }
   }

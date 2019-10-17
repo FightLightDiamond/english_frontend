@@ -11,6 +11,7 @@
         <div class="separator mb-5"></div>
       </b-colxx>
     </b-row>
+
     <b-card :title="$t('Filter')" class="mb-4">
       <b-row>
         <b-colxx xxs="6">
@@ -22,21 +23,18 @@
         </b-colxx>
         <b-colxx xxs="6">
           <label>Lesson</label>
-          <select name="" class="form-control">
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
+          <select @change="onChangeLesson()" v-model="lesson_id" class="form-control">
+            <option value="">All</option>
+            <option v-for="lesson in lessons" :value="lesson.id">{{lesson.name}}</option>
           </select>
         </b-colxx>
       </b-row>
     </b-card>
+
     <b-card :title="$t('History')">
       <vuetable
         ref="vuetable"
-        :api-url="history.apiUrl"
+        :api-url="getApi()"
         :fields="history.fields"
         pagination-path
         @vuetable:pagination-data="onPaginationData"
@@ -51,13 +49,9 @@
 </template>
 
 <script>
-  import historyService from '../../../services/HistoryService'
-  import testService from '../../../services/TestService'
-  import courseService from '../../../services/CourseService'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
   import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
   import draggable from 'vuedraggable'
-  import BaseService from '../../../services/BaseService'
   import FactoryService from '../../../services/FactoryService'
 
   export default {
@@ -68,8 +62,10 @@
     },
     data () {
       return {
-        course_id: null,
-        courses: {},
+        course_id: '',
+        lesson_id: '',
+        courses: [],
+        lessons: [],
         items: [{
           text: 'Home',
           to: '#',
@@ -81,7 +77,6 @@
           active: true
         }],
         history: {
-          apiUrl: FactoryService.service('BaseService').url('/api/crazy-read-histories'),
           fields: [
             {
               name: 'course',
@@ -106,36 +101,43 @@
       }
     },
     async mounted () {
-      alert(FactoryService.service('BaseService').url('/api/crazy-read-histories'))
-      FactoryService.service('CourseService').index().then((res) => {
-        this.courses = res;
-        // console.log(this.courses);
-      })
-      // const res = await historyService.read(this.$route.params.id)
-      // console.log(res)
+      this.getCourses()
+    },
+    watch: {
+      apiUrl (newVal, oldVal) {
+        this.$refs.vuetable.refresh()
+      }
     },
     methods: {
-      async submit () {
-        const params = {
-          sentences: this.ens,
-          meanings: this.vis,
-        }
-
-        const res = await testService.read(this.$route.params.id, params)
-        this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, {
-          duration: 13000,
-          permanent: false
-        })
-        this.result = res.result
-      },
       onPaginationData (paginationData) {
         this.$refs.pagination.setPaginationData(paginationData)
       },
       onChangePage (page) {
         this.$refs.vuetable.changePage(page)
       },
-      onChangeCourse() {
-        alert(this.course_id)
+      async onChangeCourse () {
+        const params = {
+          crazy_course_id: this.course_id
+        }
+        this.lessons = await FactoryService.request('CrazyService').index(params)
+        this.lesson_id = ''
+        this.apiUrl = this.getApi()
+      },
+      async onChangeLesson () {
+        this.apiUrl = this.getApi()
+      },
+      getCourses () {
+        FactoryService.request('CourseService').index().then((res) => {
+          this.courses = res
+        })
+      },
+      getApi () {
+        const api = `/api/crazy-read-histories?crazy_course_id=${this.course_id}&crazy_id=${this.lesson_id}`
+        return FactoryService.request('BaseService')
+          .url(api)
+      },
+      async getData () {
+        return await FactoryService.request('HistoryService').read({})
       }
     }
   }

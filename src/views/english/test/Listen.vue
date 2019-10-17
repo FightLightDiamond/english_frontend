@@ -50,7 +50,7 @@
 </template>
 
 <script>
-  import testService from '../../../services/TestService'
+  import FactoryService from '../../../services/FactoryService'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
 
   export default {
@@ -59,15 +59,16 @@
     },
     data () {
       return {
+        id: this.$route.params.id,
         lesson: [],
         items: [{
           text: 'Home',
           to: '#',
         }, {
           text: 'Sessions',
-          to: '/english/lesson',
+          to: `/courses/${this.$route.params.id}`,
         }, {
-          text: 'Lesson',
+          text: 'Listen',
           active: true
         }],
         sentences: [],
@@ -85,7 +86,7 @@
       }
     },
     async mounted () {
-      const res = await testService.listen(this.$route.params.id)
+      const res = await FactoryService.request('TestService').listen(this.id)
       this.lesson = res
       this.sentences = res.details
     },

@@ -202,14 +202,13 @@
 <script>
   import 'swiper/dist/css/swiper.css'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import courseService from '../../services/CourseService'
+  import FactoryService from '../../services/FactoryService'
   import IconCard from '@/components/Cards/IconCard'
 
   export default {
     components: {
       swiper,
       swiperSlide,
-      // ResizeObserver,
       IconCard,
     },
     data() {
@@ -237,7 +236,7 @@
       }
     },
     async mounted () {
-      this.courses = await courseService.index()
+      this.courses = await FactoryService.request('CourseService').index()
     }
   }
 </script>

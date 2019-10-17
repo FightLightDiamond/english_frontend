@@ -38,7 +38,6 @@ export default {
     }
   },
   actions: {
-
     login ({ commit }, payload) {
       commit('clearError')
       commit('setProcessing', true)

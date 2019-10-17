@@ -28,18 +28,12 @@
     <b-card class="mb-3" title="Play & listen">
       <b-row class="form-group">
         <b-colxx xxs="12">
-          <audio :src="lesson.audio"  controls></audio>
+          <audio id="audio" ref="audio" v-bind:src="lesson.audio" type="audio/mpeg" controls preload >
+            Your browser does not support the audio tag.
+          </audio>
         </b-colxx>
       </b-row>
     </b-card>
-
-<!--    <b-card class="form-group" :title="$t(crazy.name)">-->
-<!--      <b-row class="form-group">-->
-<!--        <b-colxx xxs="12">-->
-<!--          <audio :src="crazy.audio" controls></audio>-->
-<!--        </b-colxx>-->
-<!--      </b-row>-->
-<!--    </b-card>-->
 
     <b-card class="mb-12" :title="$t('Listen and write')">
       <b-row>
@@ -75,7 +69,7 @@
 </template>
 
 <script>
-  import testService from '../../../services/TestService'
+  import FactoryService from '../../../services/FactoryService'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
   import draggable from 'vuedraggable'
 
@@ -86,6 +80,7 @@
     },
     data () {
       return {
+        id: this.$route.params.id,
         lesson: { 'name': '', audio: '' },
         ens: [],
         randEns: [],
@@ -93,22 +88,18 @@
         colors: {},
         items: [{
           text: 'Home',
-          to: '#ee',
+          to: '#',
         }, {
           text: 'Sessions',
-          to: '/english/lesson',
-        }, {
-          text: 'Exercise',
-          active: true
+          to: `/courses/${this.$route.params.id}`,
         }, {
           text: 'Write',
           active: true
-        },
-        ],
+        }],
       }
     },
     async created () {
-      const res = await testService.write(this.$route.params.id)
+      const res = await FactoryService.request('TestService').write(this.id)
       this.lesson = res.crazy
       this.ens = res.ens
       this.randEns = res.randEns
@@ -121,15 +112,15 @@
         }
 
         for (let en of this.ens) {
-          console.log(en)
           params.sentences[en.id] = en.sentence
         }
-        console.log(params)
-        const res = await testService.written(this.$route.params.id, params)
+
+        const res = await FactoryService.request('TestService').written(this.id, params)
         this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, {
           duration: 13000,
           permanent: false
         })
+
         this.result = res.result
       },
     }
