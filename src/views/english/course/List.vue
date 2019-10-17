@@ -42,7 +42,7 @@
         courses: [],
         items: [{
           text: 'Home',
-          to: '#',
+          to: '/english',
         }, {
           text: 'Sessions',
           to: '/courses',

@@ -82,7 +82,7 @@
         lesson: [],
         items: [{
           text: 'Home',
-          to: '#',
+          to: '/english',
         }, {
           text: 'Sessions',
           to: '/english/lesson',

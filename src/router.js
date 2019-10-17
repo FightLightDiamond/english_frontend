@@ -5,7 +5,6 @@ import AuthRequired from '@/utils/AuthRequired'
 Vue.use(Router)
 
 const routes = [
-  { path: '/error', component: () => import(/* webpackChunkName: "error" */ './views/Error') },
   {
     path: '/',
     component: () => import(/* webpackChunkName: "user" */ './views/user'),
@@ -18,11 +17,20 @@ const routes = [
     ]
   },
   {
+    path: '/admin',
+    component: () => import(/* webpackChunkName: "user" */ './views/user'),
+    redirect: '/admin/login',
+    children: [
+      { path: 'login', component: () => import(/* webpackChunkName: "user" */ './views/admin/Login') },
+    ]
+  },
+  {
     path: '/',
     component: () => import(/* webpackChunkName: "english" */ './views/english'),
     redirect: '/english',
     children: [
       { path: '/english', component: () => import(/* webpackChunkName: "english" */ './views/english/Home') },
+      { path: '/remind', component: () => import(/* webpackChunkName: "english" */ './views/english/Remind') },
       { path: 'courses', component: () => import(/* webpackChunkName: "english" */ './views/english/course/List') },
 
       { path: 'histories', component: () => import(/* webpackChunkName: "english" */ './views/english/history/History') },
@@ -38,6 +46,7 @@ const routes = [
       { path: 'speak/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Speak') }
     ]
   },
+  { path: '/error', component: () => import(/* webpackChunkName: "error" */ './views/Error') },
   { path: '*', component: () => import(/* webpackChunkName: "error" */ './views/Error') }
 ]
 

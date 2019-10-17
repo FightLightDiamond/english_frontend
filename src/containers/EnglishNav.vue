@@ -23,6 +23,11 @@
           {{$t('History')}}
         </a>
       </div>
+      <div class="d-inline-block">
+        <a class=" btn-sm ml-2" target="_top" href="/remind">
+          {{$t('Remind')}}
+        </a>
+      </div>
     </div>
     <router-link class="navbar-logo" style="min-width: 200px" to="/">
       <h2>Crazy English</h2>

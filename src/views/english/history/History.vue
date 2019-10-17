@@ -74,7 +74,7 @@
         lesson: [],
         items: [{
           text: 'Home',
-          to: '#',
+          to: '/english',
         }, {
           text: 'History',
           to: '/english/histories',

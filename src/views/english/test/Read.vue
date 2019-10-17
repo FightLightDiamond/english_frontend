@@ -90,7 +90,7 @@
         lesson: [],
         items: [{
           text: 'Home',
-          to: '#',
+          to: '/english',
         }, {
           text: 'Sessions',
           to: `/courses/${this.$route.params.id}`,

@@ -68,7 +68,7 @@
         lessons: [],
         items: [{
           text: 'Home',
-          to: '#',
+          to: '/english',
         }, {
           text: 'History',
           to: '/histories',

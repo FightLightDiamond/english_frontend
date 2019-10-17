@@ -3,10 +3,10 @@
     <b-colxx xxs="12" md=10  class="mx-auto my-auto">
       <b-card class="auth-card" no-body>
           <div class="position-relative image-side ">
-            <p class=" text-white h2">{{ $t('Crazy English') }}</p>
-              <p class="white mb-0">Please use your credentials to login.<br>If you are not a member, please
-                <router-link tag="a" to="/user/register" class="white">register</router-link>.
-              </p>
+            <p class=" text-white h2">{{ $t('Crazy English Administrator') }}</p>
+<!--              <p class="white mb-0">Please use your credentials to login.<br>If you are not a member, please-->
+<!--                <router-link tag="a" to="/user/register" class="white">register</router-link>.-->
+<!--              </p>-->
           </div>
           <div class="form-side">
 
@@ -38,8 +38,8 @@ import FactoryService from '../../services/FactoryService'
 export default {
   data () {
     return {
-      email: 'fightlightdiamond@gmail.com',
-      password: '123456',
+      email: 'vincent@admin.vn',
+      password: 'PMC1704bn',
       processing: false
     }
   },
