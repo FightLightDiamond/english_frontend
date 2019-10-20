@@ -30,7 +30,7 @@
 </template>
 <script>
 
-  import AuthService from '../../services/AuthService'
+  import FactoryService from '../../services/FactoryService'
 
   export default {
     data () {
@@ -43,7 +43,9 @@
     methods: {
       async formSubmit () {
         try {
-          const res = await AuthService.forgetPass(this.form)
+          const res = await FactoryService.request('AuthService').forgetPass(this.form)
+          this.$notify('success', 'Success', 'We send you link to reset password. Please check email',
+            { duration: 13000, permanent: false })
           console.log(res)
         } catch (e) {
           console.log(e)

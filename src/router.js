@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import AuthRequired from '@/utils/AuthRequired'
 
 Vue.use(Router)
 

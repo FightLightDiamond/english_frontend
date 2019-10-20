@@ -5,6 +5,7 @@ import { currentUser } from '@/constants/config'
 export default {
   state: {
     currentUser: localStorage.getItem('user') != null ? JSON.parse(localStorage.getItem('user')) : null,
+    currentAdmin: localStorage.getItem('admin') != null ? JSON.parse(localStorage.getItem('admin')) : null,
     loginError: null,
     processing: false
   },

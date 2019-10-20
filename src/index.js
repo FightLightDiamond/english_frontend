@@ -16,9 +16,9 @@ import "./main";
 /* if you want single color remove this section:multicolor */
 var color = defaultColor
 
-if (localStorage.getItem('themeColor')) {
-  color = localStorage.getItem('themeColor')
-}
+// if (localStorage.getItem('themeColor')) {
+//   color = localStorage.getItem('themeColor')
+// }
 let render = () => {
     import('./assets/css/sass/themes/piaf.' + color + '.scss').then(x => require('./main'))
 }

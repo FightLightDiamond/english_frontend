@@ -19,19 +19,20 @@
         <b-row class="form-group">
           <b-colxx xxs="6" class="form-group">
             <label>Hour</label>
-            <select name="" class="form-control">
+            <select v-model="form.hour" class="form-control">
+              <option value=""></option>
               <option v-for="index in 24" :key="index" :value="index - 1">{{index - 1}}</option>
             </select>
           </b-colxx>
           <b-colxx xxs="6" class="form-group">
             <label>Minutes</label>
-            <select name="" class="form-control">
+            <select v-model="form.minute" class="form-control">
+              <option value=""></option>
               <option v-for="index in 60" :key="index" :value="index - 1">{{index -1}}</option>
             </select>
           </b-colxx>
           <b-colxx xxs="12" class="form-group text-center">
-            <button class="btn btn-primary btn-sm">Submit</button>
-            <button class="btn btn-danger btn-sm">Clear</button>
+            <button @click="remind()" class="btn btn-primary btn-sm">Submit</button>
           </b-colxx>
         </b-row>
       </b-card>
@@ -43,6 +44,7 @@
 <script>
   // import FactoryService from '../../../services/FactoryService'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
+  import FactoryService from '../../services/FactoryService'
 
   export default {
     components: {
@@ -51,7 +53,10 @@
     data () {
       return {
         id: this.$route.params.id,
-        lesson: [],
+        form: {
+          minute : null,
+          hour: null
+        },
         items: [{
           text: 'Home',
           to: '/english',
@@ -59,25 +64,20 @@
           text: 'Remind',
           active: true
         }],
-        sentences: [],
-        fields: [
-          {
-            name: 'sentence',
-            title: 'English',
-          },
-          {
-            name: 'meaning',
-            title: 'Vietnamese',
-          },
-          '__slot:actions'
-        ],
       }
     },
     async mounted () {
-      // const res = await FactoryService.request('TestService').listen(this.id)
-      // this.lesson = res
-      // this.sentences = res.details
+      const res = await FactoryService.request('RemindService').index();
+      this.form.hour = res.hour
+      this.form.minute = res.minute
     },
+    methods: {
+      remind() {
+        console.log(this.form)
+
+        FactoryService.request('RemindService').create(this.form)
+      }
+    }
   }
 </script>
 

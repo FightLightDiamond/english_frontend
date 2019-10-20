@@ -31,7 +31,7 @@
   </b-row>
 </template>
 <script>
-  import AuthService from '../../services/AuthService'
+  import FactoryService from '../../services/FactoryService'
 
   export default {
     data () {
@@ -47,7 +47,7 @@
     methods: {
       async formSubmit () {
         try {
-          const res = await AuthService.resetPass(this.form)
+          const res = await FactoryService.request('AuthService').resetPass(this.form)
           console.log(res)
         } catch (e) {
           console.log(e)

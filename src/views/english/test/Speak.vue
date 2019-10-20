@@ -43,7 +43,7 @@
         <b-colxx xxs="6">
           <audio-recorder
             upload-url="some url"
-            :time="0.5"
+            :time="0.7"
             :before-recording="callback"
             :pause-recording="callback"
             :after-recording="callback"

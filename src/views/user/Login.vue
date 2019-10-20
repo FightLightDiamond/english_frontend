@@ -50,6 +50,7 @@ export default {
       auth.username = this.email;
       auth.password = this.password;
       console.log(auth);
+
       try {
         const res = await FactoryService.request('AuthService').login(auth);
 

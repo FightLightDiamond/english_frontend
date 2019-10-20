@@ -50,7 +50,7 @@
 </template>
 
 <script>
-  import testService from '../../../services/TestService'
+  import testService from '../../../services/API/TestService'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
 
   export default {

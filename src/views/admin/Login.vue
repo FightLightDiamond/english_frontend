@@ -46,18 +46,19 @@ export default {
   methods: {
     async formSubmit () {
       this.processing = true;
-      let auth = Auth.passpost();
+      let auth = Auth.passpost('admins');
       auth.username = this.email;
       auth.password = this.password;
       console.log(auth);
+
       try {
         const res = await FactoryService.request('AuthService').login(auth);
 
-        localStorage.setItem('user', JSON.stringify(res))
+        localStorage.setItem('admin', JSON.stringify(res))
         console.log(res);
 
         this.$notify('success', 'Login Success', `Hi, ${this.email} `, { duration: 13000, permanent: false })
-        this.$router.push('/english')
+        this.$router.push('/admin')
       } catch (e) {
         this.$notify('error', 'Login Error', 'Login Fail', { duration: 13000, permanent: false })
         this.processing = false;

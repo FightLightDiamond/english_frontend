@@ -1,9 +1,10 @@
 import AuthService from './AuthService'
-import BaseService from './BaseService'
-import CourseService from './CourseService'
-import CrazyService from './CrazyService'
-import HistoryService from './HistoryService'
-import TestService from './TestService'
+import BaseService from './API/BaseService'
+import CourseService from './API/CourseService'
+import CrazyService from './API/CrazyService'
+import HistoryService from './API/HistoryService'
+import RemindService from './API/RemindService'
+import TestService from './API/TestService'
 
 const requestMap = {
   AuthService,
@@ -11,6 +12,7 @@ const requestMap = {
   CourseService,
   CrazyService,
   HistoryService,
+  RemindService,
   TestService
 }
 
