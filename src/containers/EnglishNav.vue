@@ -2,61 +2,61 @@
   <nav class="navbar fixed-top">
     <div class="d-flex align-items-center navbar-left">
       <a class="menu-button d-none d-md-block"></a>
-<!--      <a class="menu-button d-none d-md-block"></a>-->
-<!--      <a class="menu-button-mobile d-xs-block d-sm-block d-md-none"></a>-->
+      <!--      <a class="menu-button d-none d-md-block"></a>-->
+      <!--      <a class="menu-button-mobile d-xs-block d-sm-block d-md-none"></a>-->
       <div class="d-inline-block">
-    </div>
+      </div>
       <div class="d-inline-block">
         <a
           class=" btn-sm ml-2"
           target="_top"
           href="/english"
-        >{{$t('Home')}}</a>
+        ><i class="simple-icon-home"></i> {{$t('Home')}}</a>
       </div>
       <div class="d-inline-block">
         <a class=" btn-sm ml-2" target="_top" href="/courses">
-          {{$t('Courses')}}
+          <i class="iconsminds-books"></i> {{$t('Courses')}}
         </a>
       </div>
       <div class="d-inline-block">
         <a class=" btn-sm ml-2" target="_top" href="/histories">
-          {{$t('History')}}
+          <i class="iconsminds-notepad"></i> {{$t('History')}}
         </a>
       </div>
       <div class="d-inline-block">
         <a class=" btn-sm ml-2" target="_top" href="/remind">
-          {{$t('Remind')}}
+          <i class="simple-icon-clock"></i> {{$t('Remind')}}
         </a>
       </div>
     </div>
-    <router-link class="navbar-logo" style="min-width: 200px" to='/english'>
-      <h2>Crazy English</h2>
-<!--      <span class="logo d-none d-xs-block"></span>-->
-<!--      <span class="logo-mobile d-block d-xs-none"></span>-->
+    <router-link class="" style="min-width: 200px" to='/english'>
+      <h2 style="color: #145388"><big>Crazy English</big></h2>
+      <!--      <span class="logo d-none d-xs-block"></span>-->
+      <!--      <span class="logo-mobile d-block d-xs-none"></span>-->
     </router-link>
 
     <div class="navbar-right">
-      <div class="d-inline-block">
-        <a
-          class=" btn-sm ml-2"
-          target="_top"
-          href="/blog"
-        >{{$t('Blog')}}</a>
-      </div>
+      <!--      <div class="d-inline-block">-->
+      <!--        <a-->
+      <!--          class=" btn-sm ml-2"-->
+      <!--          target="_top"-->
+      <!--          href="/blog"-->
+      <!--        >{{$t('Blog')}}</a>-->
+      <!--      </div>-->
       <div class="d-inline-block">
         <a
           class=" btn-sm ml-2"
           target="_top"
           href="/contact"
-        >{{$t('Contact')}}</a>
+        ><i class="iconsminds-location-2"></i> {{$t('Contact')}}</a>
       </div>
-      <div class="d-inline-block">
-        <a
-          class=" btn-sm ml-2"
-          target="_top"
-          href="/english"
-        >{{$t('About')}}</a>
-      </div>
+      <!--      <div class="d-inline-block">-->
+      <!--        <a-->
+      <!--          class=" btn-sm ml-2"-->
+      <!--          target="_top"-->
+      <!--          href="/english"-->
+      <!--        >{{$t('About')}}</a>-->
+      <!--      </div>-->
       <div class="header-icons d-inline-block align-middle">
         <div class="position-relative d-none d-sm-inline-block ">
           <div class="btn-group">
@@ -64,7 +64,8 @@
               variant="empty"
               class="header-icon btn-sm"
               @click="toggleFullScreen">
-              <i :class="{'d-inline-block':true,'simple-icon-size-actual':fullScreen,'simple-icon-size-fullscreen':!fullScreen }"/>
+              <i
+                :class="{'d-inline-block':true,'simple-icon-size-actual':fullScreen,'simple-icon-size-fullscreen':!fullScreen }"/>
             </b-button>
           </div>
         </div>
@@ -79,14 +80,15 @@
           no-caret
         >
           <template slot="button-content">
-            <span class="name mr-1">Phương</span>
+            <span class="name mr-1">{{user.email}}</span>
             <span>
-              <img src="https://www.google.com/search?q=zoro&sxsrf=ACYBGNS0e8y2ITNp3s9aWO8-3Xjb1lPpZw:1569911705001&tbm=isch&source=iu&ictx=1&fir=oM-dkvJMjLFCoM%253A%252CdItxiZ6FSLHSNM%252C%252Fm%252F02jzqh&vet=1&usg=AI4_-kRDkNoL_1WCgMCX6N4dNd53P6HoUg&sa=X&ved=2ahUKEwiPlIXsuPrkAhVSeXAKHX9EDnUQ_B0wG3oECAkQAw#imgrc=oM-dkvJMjLFCoM:" />
+              <img
+                :src="user.avatar"/>
             </span>
           </template>
           <b-dropdown-item>Account</b-dropdown-item>
-<!--          <b-dropdown-item>History</b-dropdown-item>-->
-          <b-dropdown-divider />
+          <!--          <b-dropdown-item>History</b-dropdown-item>-->
+          <b-dropdown-divider/>
           <b-dropdown-item @click="logout">Sign out</b-dropdown-item>
         </b-dropdown>
       </div>
@@ -107,6 +109,7 @@
     defaultColor
   } from '@/constants/config'
   import { getDirection, setDirection } from '@/utils'
+
   export default {
     components: {
       MenuIcon,
@@ -125,6 +128,7 @@
         localeOptions,
         buyUrl,
         notifications,
+        user: {}
       }
     },
     methods: {
@@ -200,6 +204,7 @@
     },
     created () {
       const color = this.getThemeColor()
+      this.user = JSON.parse(localStorage.getItem('user'))
     },
     watch: {
       '$i18n.locale' (to, from) {

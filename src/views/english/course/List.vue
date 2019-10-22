@@ -13,7 +13,7 @@
     </b-row>
     <b-row>
       <b-colxx xxs="12">
-        <b-card title="Crazy sections">
+        <b-card title="Crazy sections" class="mb-4" >
           <div class="d-flex flex-row mb-3" v-for="item in courses">
             <router-link tag="a" :to="`/courses/${item.id}`" class="d-block position-relative">
               <img :src="item.img" :alt="item.name" class="list-thumbnail border-0"/>

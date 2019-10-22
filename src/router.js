@@ -24,6 +24,14 @@ const routes = [
     ]
   },
   {
+    path: '/manager',
+    component: () => import(/* webpackChunkName: "user" */ './views/manager'),
+    redirect: '/manager',
+    children: [
+      { path: '/', component: () => import(/* webpackChunkName: "user" */ './views/manager/Admin') },
+    ]
+  },
+  {
     path: '/',
     component: () => import(/* webpackChunkName: "english" */ './views/english'),
     redirect: '/english',

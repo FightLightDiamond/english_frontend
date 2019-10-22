@@ -32,7 +32,7 @@ export const currentUser = {
   date: 'Last seen today 15:24'
 }
 
-export const defaultColor = 'light.purple'
+export const defaultColor = 'light.blue'
 export const colors = [
   'light.purple',
   'dark.purple',
