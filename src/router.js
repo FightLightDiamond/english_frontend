@@ -30,6 +30,10 @@ const routes = [
     children: [
       { path: '/english', component: () => import(/* webpackChunkName: "english" */ './views/english/Home') },
       { path: '/remind', component: () => import(/* webpackChunkName: "english" */ './views/english/Remind') },
+      { path: '/about', component: () => import(/* webpackChunkName: "english" */ './views/english/About') },
+      { path: '/blog', component: () => import(/* webpackChunkName: "english" */ './views/english/Blog') },
+      { path: '/contact', component: () => import(/* webpackChunkName: "english" */ './views/english/Contact') },
+
       { path: 'courses', component: () => import(/* webpackChunkName: "english" */ './views/english/course/List') },
 
       { path: 'histories', component: () => import(/* webpackChunkName: "english" */ './views/english/history/History') },

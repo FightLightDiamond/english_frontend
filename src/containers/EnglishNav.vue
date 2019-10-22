@@ -29,7 +29,7 @@
         </a>
       </div>
     </div>
-    <router-link class="navbar-logo" style="min-width: 200px" to="/">
+    <router-link class="navbar-logo" style="min-width: 200px" to='/english'>
       <h2>Crazy English</h2>
 <!--      <span class="logo d-none d-xs-block"></span>-->
 <!--      <span class="logo-mobile d-block d-xs-none"></span>-->
@@ -40,14 +40,14 @@
         <a
           class=" btn-sm ml-2"
           target="_top"
-          href="/english"
+          href="/blog"
         >{{$t('Blog')}}</a>
       </div>
       <div class="d-inline-block">
         <a
           class=" btn-sm ml-2"
           target="_top"
-          href="/english"
+          href="/contact"
         >{{$t('Contact')}}</a>
       </div>
       <div class="d-inline-block">
