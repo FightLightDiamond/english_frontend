@@ -20,15 +20,20 @@ const routes = [
     component: () => import(/* webpackChunkName: "user" */ './views/user'),
     redirect: '/admin/login',
     children: [
-      { path: 'login', component: () => import(/* webpackChunkName: "user" */ './views/admin/Login') },
+      { path: 'login', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/auth/Login') },
     ]
   },
   {
-    path: '/manager',
-    component: () => import(/* webpackChunkName: "user" */ './views/manager'),
-    redirect: '/manager',
+    path: '/administrator',
+    component: () => import(/* webpackChunkName: "user" */ './views/Administrator'),
+    redirect: '/administrator',
     children: [
-      { path: '/', component: () => import(/* webpackChunkName: "user" */ './views/manager/Admin') },
+      { path: '/administrator/dashboard', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/Dashboard') },
+      { path: '/administrator/admins', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/admin/Index') },
+      { path: '/administrator/users', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/user/Index') },
+      { path: '/administrator/courses', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/course/Index') },
+      { path: '/administrator/lessons', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/lesson/Index') },
+      { path: '/administrator/contacts', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/contact/Index') },
     ]
   },
   {

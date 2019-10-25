@@ -1,4 +1,4 @@
-import BaseService from './BaseService'
+import BaseService from '../BaseService'
 
 export default class TestService extends BaseService {
   async listen (id, params = {}) {

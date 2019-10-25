@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Api from '../../config/Api'
+import Api from '../config/Api'
 import Vue from 'vue'
 
 const domain = Api.domain()

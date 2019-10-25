@@ -1,24 +1,14 @@
-import AuthService from './AuthService'
-import BaseService from './API/BaseService'
-import CourseService from './API/CourseService'
-import CrazyService from './API/CrazyService'
-import HistoryService from './API/HistoryService'
-import RemindService from './API/RemindService'
-import TestService from './API/TestService'
+import adminService from './Admin/IndexService'
+import userService from './API/IndexService'
 
 const requestMap = {
-  AuthService,
-  BaseService,
-  CourseService,
-  CrazyService,
-  HistoryService,
-  RemindService,
-  TestService
+  user: userService,
+  admin: adminService
 }
 
 export default class FactoryService {
   static request (classname, auth = 'user') {
-    let RequestClass = requestMap[classname]
+    let RequestClass = requestMap[auth][classname]
 
     if (!RequestClass) {
       throw new Error('Invalid request class name: ' + classname)

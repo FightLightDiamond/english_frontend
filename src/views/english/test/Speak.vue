@@ -32,12 +32,6 @@
       </b-colxx>
     </b-card>
 
-    <!--    <b-card class="form-group" :title="$t(lesson.name)">-->
-    <!--      <b-row class="form-group">-->
-    <!--        -->
-    <!--      </b-row>-->
-    <!--    </b-card>-->
-
     <b-card class="mb-12" ::title="$t(lesson.name)">
       <b-row class="form-group">
         <b-colxx xxs="6">
@@ -74,11 +68,11 @@
       // AudioRecorder,
       Vuetable
     },
+    watch: {
+
+    },
     data () {
       return {
-        headers: {
-          'X-Custom-Header': 'some data'
-        },
         lesson: [],
         items: [{
           text: 'Home',
@@ -133,9 +127,6 @@
       },
       karaoke () {
         this.sentencesPlay = _.cloneDeep(this.sentences)
-
-        console.log(this.sentencesPlay)
-
         this.kara = []
         const sen = this.sentencesPlay.shift()
         this.kara.push(sen.sentence)
@@ -143,7 +134,6 @@
         this.play()
         this.lyric();
       },
-
       play () {
         this.record.play = true
         this.audio.play()
@@ -165,8 +155,8 @@
             console.log(this.sentences);
             clearInterval(interval_obj)
             this.sentencesPlay = this.sentences
+            this.kara = [];
             // this.record.play = false
-            // // alert(123)
           }
         }, 500)
       },

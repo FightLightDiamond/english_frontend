@@ -1,4 +1,4 @@
-import BaseService from './API/BaseService'
+import BaseService from './BaseService'
 
 export default class AuthService extends BaseService {
   async login (params = {}) {

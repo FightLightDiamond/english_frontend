@@ -32,8 +32,8 @@
 </template>
 <script>
 
-import Auth from '../../config/Auth'
-import FactoryService from '../../services/FactoryService'
+import Auth from '../../../config/Auth'
+import FactoryService from '../../../services/FactoryService'
 
 export default {
   data () {
@@ -58,7 +58,7 @@ export default {
         console.log(res);
 
         this.$notify('success', 'Login Success', `Hi, ${this.email} `, { duration: 13000, permanent: false })
-        this.$router.push('/admin')
+        this.$router.push('/administrator')
       } catch (e) {
         this.$notify('error', 'Login Error', 'Login Fail', { duration: 13000, permanent: false })
         this.processing = false;
