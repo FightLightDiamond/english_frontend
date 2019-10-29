@@ -32,7 +32,11 @@ const routes = [
       { path: '/administrator/admins', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/admin/Index') },
       { path: '/administrator/users', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/user/Index') },
       { path: '/administrator/courses', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/course/Index') },
+      { path: '/administrator/courses/create', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/course/Create') },
+      { path: '/administrator/courses/:id/update', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/course/Update') },
       { path: '/administrator/lessons', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/lesson/Index') },
+      { path: '/administrator/lessons/create', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/lesson/Create') },
+      { path: '/administrator/lessons/:id/update', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/lesson/Update') },
       { path: '/administrator/contacts', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/contact/Index') },
     ]
   },

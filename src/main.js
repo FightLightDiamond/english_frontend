@@ -37,6 +37,8 @@ Vue.use(AudioRecorder)
 Vue.use(BootstrapVue)
 Vue.use(VueI18n)
 
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
 
 const messages = { en: en, es: es }
 const locale = (localStorage.getItem('currentLanguage') && localeOptions.filter(x => x.id === localStorage.getItem('currentLanguage')).length > 0) ? localStorage.getItem('currentLanguage') : defaultLocale

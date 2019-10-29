@@ -15,7 +15,10 @@
     <b-row>
       <b-colxx xxs="12">
         <div class="text-right form-group">
-          <button class="btn btn-primary"><i class="fa fa-plus"></i> Add new</button>
+          <router-link :to="`/administrator/lessons/create`" class="btn btn-xs btn-primary">
+            <button class="btn btn-primary btn-sm"><i class="simple-icon-plus"></i> {{ $t('Add new') }}</button>
+          </router-link>
+
         </div>
       </b-colxx>
       <b-colxx xxs="12">
@@ -28,16 +31,16 @@
             @vuetable:pagination-data="onPaginationData"
           >
             <template slot="image" scope="props">
-                <img :src="props.rowData.small_thumb" alt="">
+              <img :src="props.rowData.small_thumb" alt="">
             </template>
             <template slot="actions" scope="props">
               <div class="table-button-container text-right">
-                <router-link :to="`/listen/${props.rowData.id}`" class="btn btn-xs btn-primary">
+                <router-link :to="`/administrator/lessons/${props.rowData.id}/update`" class="btn btn-xs btn-primary">
                   Update
                 </router-link>
-                <router-link :to="`/read/${props.rowData.id}`" class="btn btn-xs btn-danger">
+                <span class="btn btn-xs btn-danger">
                   Delete
-                </router-link>
+                </span>
               </div>
             </template>
           </vuetable>
@@ -81,7 +84,12 @@
           },
           '__slot:actions'
         ],
-        lessons: []
+        lessons: [],
+        form: {
+          name: '',
+          description: '',
+          file: {}
+        }
       }
     },
     async mounted () {
@@ -99,7 +107,7 @@
         const api = `/api/v1/admin/crazies`
         return FactoryService.request('BaseService')
           .url(api)
-      },
+      }
     }
   }
 </script>

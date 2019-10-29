@@ -58,7 +58,7 @@ export default {
         console.log(res);
 
         this.$notify('success', 'Login Success', `Hi, ${this.email} `, { duration: 13000, permanent: false })
-        this.$router.push('/administrator')
+        this.$router.push('/administrator/dashboard')
       } catch (e) {
         this.$notify('error', 'Login Error', 'Login Fail', { duration: 13000, permanent: false })
         this.processing = false;
