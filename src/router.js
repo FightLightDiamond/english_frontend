@@ -30,7 +30,11 @@ const routes = [
     children: [
       { path: '/administrator/dashboard', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/Dashboard') },
       { path: '/administrator/admins', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/admin/Index') },
+      { path: '/administrator/admins/create', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/admin/Create') },
+      { path: '/administrator/admins/:id/update', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/admin/Update') },
       { path: '/administrator/users', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/user/Index') },
+      { path: '/administrator/users/create', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/user/Create') },
+      { path: '/administrator/users/:id/update', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/user/Update') },
       { path: '/administrator/courses', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/course/Index') },
       { path: '/administrator/courses/create', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/course/Create') },
       { path: '/administrator/courses/:id/update', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/course/Update') },
