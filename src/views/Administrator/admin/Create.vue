@@ -16,7 +16,7 @@
       <b-form @submit.prevent="submit()">
         <b-row>
           <b-colxx xxs="12" >
-            <b-form-group :label="$t('Title')">
+            <b-form-group :label="$t('Name')">
               <b-form-input v-model="form.name" :state="!$v.form.name.$invalid"/>
               <div class="invalid-feedback" v-if="!$v.form.name.minLength">
                 Name must have at least {{$v.form.name.$params.minLength.min}} letters.
@@ -24,18 +24,25 @@
             </b-form-group>
           </b-colxx>
           <b-colxx xxs="12" >
-            <b-form-group :label="$t('Description')">
-              <b-form-textarea v-model="form.description" :state="!$v.form.description.$invalid"
-                               class="form-control"></b-form-textarea>
-              <div class="invalid-feedback" v-if="!$v.form.description.minLength">
-                Name must have at least {{$v.form.description.$params.minLength.min}} letters.
+            <b-form-group :label="$t('Email')">
+              <b-form-input type="email" v-model="form.email" :state="!$v.form.email.$invalid"
+                               class="form-control"></b-form-input>
+              <div class="invalid-feedback" v-if="!$v.form.email.minLength">
+                Name must have at least {{$v.form.email.$params.minLength.min}} letters.
               </div>
             </b-form-group>
           </b-colxx>
 
           <div class="form-group col-sm-12">
-            <b-form-group :label="$t('Image')">
-              <b-form-file ref="img" v-model="form.img" :state="!$v.form.img.$invalid"></b-form-file>
+            <b-form-group :label="$t('Password')">
+              <b-form-input type="password" v-model="form.password" :state="!$v.form.password.$invalid"></b-form-input>
+            </b-form-group>
+          </div>
+
+          <div class="form-group col-sm-12">
+            <b-form-group :label="$t('Password confirm')">
+              <b-form-input type="password" v-model="form.password_confirm" :state="!$v.form.password_confirm.$invalid">
+              </b-form-input>
             </b-form-group>
           </div>
 
@@ -78,8 +85,9 @@
         ],
         form: {
           name: '',
-          description: '',
-          img: '',
+          email: '',
+          password: '',
+          password_confirm: '',
           is_active: 1
         }
       }
@@ -91,11 +99,14 @@
           required,
           minLength: minLength(2)
         },
-        description: {
+        email: {
           required,
           minLength: minLength(4)
         },
-        img: {
+        password: {
+          required,
+        },
+        password_confirm: {
           required,
         },
       }
@@ -108,7 +119,6 @@
         this.form.details.splice(key, 1)
       },
       async submit () {
-        // this.form.details = this.details
         console.log(JSON.stringify(this.form))
         console.log(this.form)
         const res = await FactoryService.request('CrazyService', 'admin').create(this.form);

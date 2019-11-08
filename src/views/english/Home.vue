@@ -131,6 +131,8 @@
     },
     async mounted () {
       this.courses = await FactoryService.request('CourseService').index()
+      console.log("this.courses")
+      console.log(this.courses)
     }
   }
 </script>

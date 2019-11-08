@@ -22,7 +22,6 @@
                   ref="vuetable"
                   :api-url="getApi()"
                   :fields="fields"
-                  @vuetable:pagination-data="onPaginationData"
         >
           <template slot="image" scope="props">
             <div class="d-flex flex-row">
@@ -92,9 +91,9 @@
       }
     },
     methods: {
-      onPaginationData (paginationData) {
-        this.$refs.pagination.setPaginationData(paginationData)
-      },
+      // onPaginationData (paginationData) {
+      //   this.$refs.pagination.setPaginationData(paginationData)
+      // },
       onChangePage (page) {
         this.$refs.vuetable.changePage(page)
       },
