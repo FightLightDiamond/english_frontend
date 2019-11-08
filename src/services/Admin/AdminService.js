@@ -1,28 +1,27 @@
 import BaseService from '../BaseService'
 
-export default class AuthService extends BaseService {
-  async login (params = {}) {
-    const res = await this.post(`/api/login`, params)
+export default class Admin extends BaseService {
+  async index (params = {}) {
+    const res = await this.get(`/api/v1/admin/admins`, params)
+    console.log(res.data)
     return res.data
   }
 
-  async login (params = {}) {
-    const res = await this.post(`/api/register`, params)
+  async create (params = {}) {
+    const res = await this.post(`/api/v1/admin/admins`, params)
+    console.log(res.data)
     return res.data
   }
 
-  async forgetPass (params = {}) {
-    const res = await this.post(`/api/forgot-password`, params)
+  async update (id, params = {}) {
+    const res = await this.put(`/api/v1/admin/admins/${id}`, params)
+    console.log(res.data)
     return res.data
   }
 
-  async resetPass (params = {}) {
-    const res = await this.post(`/api/reset-password`, params)
-    return res.data
-  }
-
-  async changePass (params = {}) {
-    const res = await this.post(`/api/crazy-courses`, params)
+  async show (id, params = {}) {
+    const res = await this.get(`/api/v1/admin/admins/${id}`, params)
+    console.log(res.data)
     return res.data
   }
 }

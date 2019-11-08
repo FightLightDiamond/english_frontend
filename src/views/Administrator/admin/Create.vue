@@ -66,8 +66,6 @@
       draggable,
     },
     async mounted () {
-      this.courses = await FactoryService.request('CourseService', 'admin').index()
-      console.log(this.courses);
     },
     data () {
       return {
@@ -121,7 +119,7 @@
       async submit () {
         console.log(JSON.stringify(this.form))
         console.log(this.form)
-        const res = await FactoryService.request('CrazyService', 'admin').create(this.form);
+        const res = await FactoryService.request('AdminService', 'admin').create(this.form);
       }
     }
   }

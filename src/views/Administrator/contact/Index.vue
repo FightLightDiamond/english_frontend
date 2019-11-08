@@ -19,17 +19,6 @@
                   pagination-path
                   @vuetable:pagination-data="onPaginationData"
         >
-          <template slot="actions" scope="props">
-            <span class="btn btn-xs btn-outline-danger">
-                  <i class="simple-icon-trash"></i>
-                </span>
-            <span class="btn btn-xs btn-outline-danger">
-                  <i class="simple-icon-ban"></i>
-                </span>
-            <span class="btn btn-xs btn-outline-primary">
-                  <i class="simple-icon-refresh"></i>
-                </span>
-          </template>
         </vuetable>
         <vuetable-pagination-bootstrap
           ref="pagination"
@@ -70,22 +59,17 @@
             title: 'Email',
           },
           {
-            name: 'first_name',
-            title: 'First name',
+            name: 'phone_number',
+            title: 'Phone number',
           },
           {
-            name: 'last_name',
-            title: 'Last name',
+            name: 'message',
+            title: 'Message',
           },
           {
             name: 'created_at',
             title: 'Created at',
           },
-          {
-            name: 'is_active',
-            title: 'Active',
-          },
-          '__slot:actions'
         ],
         course: [],
       }
