@@ -32,8 +32,13 @@
             @vuetable:pagination-data="onPaginationData"
           >
             <template slot="actions" scope="props">
-              <span class="btn btn-xs btn-outline-danger">
-                  <i class="simple-icon-trash"></i>
+              <span @click="disable(props.rowData.id)" class="btn btn-xs btn-outline-danger"
+                    v-if="props.rowData.is_active">
+                  <i class="simple-icon-ban"></i> Disable
+                </span>
+              <span @click="enable(props.rowData.id)" class="btn btn-xs btn-outline-success"
+                    v-if="!props.rowData.is_active">
+                  <i class="iconsminds-yes"></i> Enable
                 </span>
             </template>
           </vuetable>
@@ -100,6 +105,16 @@
         const api = `/api/v1/admin/admins`
         return FactoryService.request('BaseService')
           .url(api)
+      },
+      async disable (id) {
+        await FactoryService.request('AdminService', 'admin').update(id, { is_active: 0 })
+        this.$notify('success', 'Success', `Disable successfully`, { duration: 13000, permanent: false })
+        this.$refs.vuetable.refresh()
+      },
+      async enable (id) {
+        await FactoryService.request('AdminService', 'admin').update(id, { is_active: 1 })
+        this.$notify('success', 'Success', `Enable successfully`, { duration: 13000, permanent: false })
+        this.$refs.vuetable.refresh()
       }
     }
   }

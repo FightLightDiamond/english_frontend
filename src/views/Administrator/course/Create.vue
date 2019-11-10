@@ -3,7 +3,7 @@
     <b-row>
       <b-colxx xxs="12">
        <span>
-        <h1>Lessons</h1>
+        <h1>Courses</h1>
         <b-nav class="pt-0 breadcrumb-container d-none d-sm-block d-lg-inline-block">
             <b-breadcrumb :items="items"/>
         </b-nav>
@@ -69,8 +69,8 @@
             text: 'Dashboard',
             to: '/administrator/dashboard',
           }, {
-            text: 'Lessons',
-            to: '/administrator/lessons',
+            text: 'Courses',
+            to: '/administrator/courses',
           }, {
             text: 'Create',
             active: true
@@ -101,17 +101,15 @@
       }
     },
     methods: {
-      addSentence () {
-        this.form.details.push(Object.assign({}, this.baseSentence))
-      },
-      removeSentence (key) {
-        this.form.details.splice(key, 1)
-      },
       async submit () {
-        // this.form.details = this.details
-        console.log(JSON.stringify(this.form))
-        console.log(this.form)
-        const res = await FactoryService.request('CrazyService', 'admin').create(this.form);
+        let formData = new FormData();
+        for (let key in this.form) {
+          console.log(key);
+          formData.append(key, this.form[key]);
+        }
+        console.log(formData)
+
+        const res = await FactoryService.request('CourseService', 'admin').create(formData);
       }
     }
   }

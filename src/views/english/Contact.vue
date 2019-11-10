@@ -17,16 +17,15 @@
     <b-row>
       <b-colxx xxs="12">
         <b-card class="mb-4" :title="$t('Contact us')">
-<!--          <p>We will </p>-->
           <b-form @submit.prevent="submit()">
             <b-form-group :label="$t('forms.email')" :description="$t('forms.email-muted')">
-              <b-form-input type="email" v-model="form.email" />
+              <b-form-input required type="email" v-model="form.email" />
             </b-form-group>
             <b-form-group :label="$t('Phone number')">
-              <b-form-input v-model="form.password" />
+              <b-form-input required type="number" v-model="form.phone_number" />
             </b-form-group>
             <b-form-group :label="$t('Message')">
-              <textarea v-model="form.message"  class="form-control"></textarea>
+              <textarea required v-model="form.message"  class="form-control"></textarea>
             </b-form-group>
             <b-button type="submit" variant="primary" class="mt-4">{{ $t('forms.submit') }}</b-button>
           </b-form>
@@ -75,8 +74,15 @@
 
     },
     methods: {
-      submit() {
+      async submit() {
         console.log(this.form)
+        try {
+          const res = await FactoryService.request('ContactService').create(this.form);
+          this.form = {};
+          this.$notify('success', 'Contact Success', `We will contact you soon`, { duration: 13000, permanent: false })
+        } catch (e) {
+          this.$notify('error', 'Contact Fail', `Server error`, { duration: 13000, permanent: false })
+        }
       }
     }
   }

@@ -11,26 +11,28 @@
         </div>
         <div class="form-side">
 
-          <h6 class="mb-4">{{ $t('form.register')}}</h6>
+          <h6 class="mb-4">{{ $t('register')}}</h6>
           <b-form @submit.prevent="formSubmit">
             <!-- <label class="form-group has-float-label mb-4">
              <input  class="form-control" v-model="form.name">
-             <span>{{ $t('form.fullname') }}</span>
+             <span>{{ $t('fullname') }}</span>
            </label> -->
             <label class="form-group has-float-label mb-4">
               <input type="email" class="form-control" v-model="form.email">
-              <span>{{ $t('form.email') }}</span>
+              <span>{{ $t('email') }}</span>
             </label>
             <label class="form-group has-float-label mb-4">
               <input type="password" class="form-control" v-model="form.password">
-              <span>{{ $t('form.password') }}</span>
+              <span>{{ $t('password') }}</span>
             </label>
             <label class="form-group has-float-label mb-4">
               <input type="password" class="form-control" v-model="form.password_confirmation">
-              <span>{{ $t('form.password_confirmation') }}</span>
+              <span>{{ $t('password confirmation') }}</span>
             </label>
+
             <div class="d-flex justify-content-end align-items-center">
-              <b-button type="submit" variant="primary" size="lg" class="btn-shadow">{{ $t('form.register-button')}}
+              <router-link tag="a" class="btn btn-default" to="/login">{{ $t('Login')}}</router-link>
+              <b-button type="submit" variant="primary" size="lg" class="btn-shadow">{{ $t('register')}}
               </b-button>
             </div>
           </b-form>

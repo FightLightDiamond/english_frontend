@@ -17,7 +17,7 @@
         <b-row>
           <b-colxx xxs="12" >
             <b-form-group :label="$t('Name')">
-              <b-form-input v-model="form.name" :state="!$v.form.name.$invalid"/>
+              <b-form-input required v-model="form.name" :state="!$v.form.name.$invalid"/>
               <div class="invalid-feedback" v-if="!$v.form.name.minLength">
                 Name must have at least {{$v.form.name.$params.minLength.min}} letters.
               </div>
@@ -25,7 +25,7 @@
           </b-colxx>
           <b-colxx xxs="12" >
             <b-form-group :label="$t('Email')">
-              <b-form-input type="email" v-model="form.email" :state="!$v.form.email.$invalid"
+              <b-form-input required type="email" v-model="form.email" :state="!$v.form.email.$invalid"
                                class="form-control"></b-form-input>
               <div class="invalid-feedback" v-if="!$v.form.email.minLength">
                 Name must have at least {{$v.form.email.$params.minLength.min}} letters.
@@ -35,13 +35,13 @@
 
           <div class="form-group col-sm-12">
             <b-form-group :label="$t('Password')">
-              <b-form-input type="password" v-model="form.password" :state="!$v.form.password.$invalid"></b-form-input>
+              <b-form-input required type="password" v-model="form.password" :state="!$v.form.password.$invalid"></b-form-input>
             </b-form-group>
           </div>
 
           <div class="form-group col-sm-12">
             <b-form-group :label="$t('Password confirm')">
-              <b-form-input type="password" v-model="form.password_confirm" :state="!$v.form.password_confirm.$invalid">
+              <b-form-input required type="password" v-model="form.password_confirm" :state="!$v.form.password_confirm.$invalid">
               </b-form-input>
             </b-form-group>
           </div>
@@ -118,8 +118,13 @@
       },
       async submit () {
         console.log(JSON.stringify(this.form))
-        console.log(this.form)
-        const res = await FactoryService.request('AdminService', 'admin').create(this.form);
+        try {
+          const res = await FactoryService.request('AdminService', 'admin').create(this.form);
+          this.form = {};
+          this.$notify('success', 'Create Success', `Add new administrator successfully`, { duration: 13000, permanent: false })
+        } catch (e) {
+          this.$notify('success', 'Create Fail', `Server Error`, { duration: 13000, permanent: false })
+        }
       }
     }
   }

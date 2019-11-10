@@ -14,9 +14,9 @@ export default class BaseService {
   setAuth (auth) {
     axios.interceptors.request.use(function (config) {
       const user = JSON.parse(localStorage.getItem(auth))
-
+      console.log(auth)
+      console.log(user)
       if (user) {
-        console.log(user.access_token)
         config.headers.Authorization = `Bearer ${user.access_token}`
       }
 
