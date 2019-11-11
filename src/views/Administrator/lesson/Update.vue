@@ -15,13 +15,15 @@
     <b-card class="mb-4" :title="$t('Form update')">
       <b-form @submit.prevent="submit()">
         <b-row>
-          <b-colxx xxs="12" >
+          <b-colxx xxs="12">
             <b-form-group :label="$t('Title')">
               <b-form-input v-model="form.name" :state="!$v.form.name.$invalid"/>
-              <div class="invalid-feedback" v-if="!$v.form.name.minLength">Name must have at least {{$v.form.name.$params.minLength.min}} letters.</div>
+              <div class="invalid-feedback" v-if="!$v.form.name.minLength">Name must have at least
+                {{$v.form.name.$params.minLength.min}} letters.
+              </div>
             </b-form-group>
           </b-colxx>
-          <b-colxx xxs="12" >
+          <b-colxx xxs="12">
             <b-form-group :label="$t('Description')">
               <b-form-textarea v-model="form.description" :state="!$v.form.description.$invalid"
                                class="form-control"></b-form-textarea>
@@ -50,7 +52,7 @@
             </b-form-group>
           </div>
 
-          <b-colxx xxs="12" >
+          <b-colxx xxs="12">
             <label>Content</label>
             <table class="table">
               <tr>
@@ -95,7 +97,7 @@
             </table>
           </b-colxx>
 
-          <b-colxx xxs="12" >
+          <b-colxx xxs="12">
             <button class="btn btn-primary btn-sm">Submit</button>
           </b-colxx>
         </b-row>
@@ -107,6 +109,7 @@
 <script>
   import draggable from 'vuedraggable'
   import { validationMixin } from 'vuelidate'
+
   const { required, minLength } = require('vuelidate/lib/validators')
   import FactoryService from '../../../services/FactoryService'
 
@@ -117,7 +120,7 @@
     async mounted () {
       this.courses = await FactoryService.request('CourseService', 'admin').index()
       this.form = await FactoryService.request('CrazyService', 'admin').show(this.id)
-      console.log(this.lesson);
+      console.log(this.lesson)
     },
     data () {
       return {
@@ -195,9 +198,13 @@
         this.form.details.splice(key, 1)
       },
       async submit () {
-        console.log(JSON.stringify(this.form))
-        console.log(this.form)
-        const res = await FactoryService.request('CrazyService', 'admin').update(this.id, this.form);
+        try {
+          const res = await FactoryService.request('CrazyService', 'admin').update(this.id, this.form)
+          this.$notify('success', 'Success', `Update successfully`, { duration: 13000, permanent: false })
+          this.$router.push('/administrator/lessons')
+        } catch (e) {
+          this.$notify('error', 'Fail', `Update fail`, { duration: 13000, permanent: false })
+        }
       }
     }
   }

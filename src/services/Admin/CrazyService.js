@@ -24,4 +24,10 @@ export default class CrazyService extends BaseService {
     console.log(res.data);
     return res.data
   }
+
+  async destroy (id) {
+    const res = await this.delete(`/api/v1/admin/crazies/${id}`)
+    console.log(res.data);
+    return res.data
+  }
 }

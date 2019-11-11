@@ -106,9 +106,7 @@
         this.form.details.splice(key, 1)
       },
       async submit () {
-        console.log(JSON.stringify(this.form))
-        console.log(this.form)
-        const res = await FactoryService.request('CourseService', 'admin').update(this.form);
+const res = await FactoryService.request('CourseService', 'admin').update(this.form);
       }
     }
   }

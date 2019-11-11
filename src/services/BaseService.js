@@ -14,8 +14,8 @@ export default class BaseService {
   setAuth (auth) {
     axios.interceptors.request.use(function (config) {
       const user = JSON.parse(localStorage.getItem(auth))
-      console.log(auth)
-      console.log(user)
+      // console.log(auth)
+      // console.log(user)
       if (user) {
         config.headers.Authorization = `Bearer ${user.access_token}`
       }
@@ -55,7 +55,7 @@ export default class BaseService {
     }
   }
 
-  async path (uri, params = {}) {
+  async patch (uri, params = {}) {
     try {
       const res = await axios.patch(domain + uri, params)
       return res.data
@@ -65,9 +65,19 @@ export default class BaseService {
     }
   }
 
-  async delete (uri, params = {}) {
+  async show (uri) {
     try {
-      const res = await axios.delete(domain + uri, params)
+      const res = await axios.get(domain + uri)
+      return res.data
+    } catch (e) {
+      Vue.$notify('error',  'Error', e, { duration: 13000, permanent: false })
+      throw e
+    }
+  }
+
+  async delete (uri) {
+    try {
+      const res = await axios.delete(domain + uri)
       return res.data
     } catch (e) {
       Vue.$notify('error',  'Error', e, { duration: 13000, permanent: false })

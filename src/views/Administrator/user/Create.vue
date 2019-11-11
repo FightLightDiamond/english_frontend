@@ -109,9 +109,7 @@
       },
       async submit () {
         // this.form.details = this.details
-        console.log(JSON.stringify(this.form))
-        console.log(this.form)
-        const res = await FactoryService.request('CrazyService', 'admin').create(this.form);
+const res = await FactoryService.request('CrazyService', 'admin').create(this.form);
       }
     }
   }

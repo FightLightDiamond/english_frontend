@@ -59,8 +59,9 @@
       draggable,
     },
     async mounted () {
-      this.form = await FactoryService.request('CourseService', 'admin').show(this.id)
-      console.log(this.form);
+      const res = await FactoryService.request('CourseService', 'admin').show(this.id)
+      this.form.name = res.name;
+      this.form.description = res.description;
     },
     data () {
       return {
@@ -99,16 +100,24 @@
       }
     },
     methods: {
-      addSentence () {
-        this.form.details.push(Object.assign({}, this.baseSentence))
-      },
-      removeSentence (key) {
-        this.form.details.splice(key, 1)
-      },
       async submit () {
-        console.log(JSON.stringify(this.form))
-        console.log(this.form)
-        const res = await FactoryService.request('CourseService', 'admin').update(this.form);
+        let formData = new FormData();
+
+        for (let key of ['name', 'description', 'img']) {
+          if(this.form[key]) {
+            formData.append(key, this.form[key]);
+          }
+        }
+
+        formData.append('_method', 'PATCH');
+
+        try {
+          const res = await FactoryService.request('CourseService', 'admin').update(this.id, formData);
+          this.$notify('success', 'Success', `Update successfully`, { duration: 13000, permanent: false })
+          this.$router.push('/administrator/courses')
+        } catch (e) {
+          this.$notify('success', 'error', `Update fail`, { duration: 13000, permanent: false })
+        }
       }
     }
   }

@@ -14,7 +14,7 @@ export default class CourseService extends BaseService {
   }
 
   async update (id, params = {}) {
-    const res = await this.put(`/api/v1/admin/crazy-courses/${id}`, params)
+    const res = await this.post(`/api/v1/admin/crazy-courses/${id}`, params)
     console.log(res.data)
     return res.data
   }
@@ -24,4 +24,11 @@ export default class CourseService extends BaseService {
     console.log(res.data)
     return res.data
   }
+
+  async destroy (id) {
+    const res = await this.delete(`/api/v1/admin/crazy-courses/${id}`)
+    console.log(res.data)
+    return res.data
+  }
+
 }

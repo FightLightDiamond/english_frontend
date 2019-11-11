@@ -15,7 +15,7 @@
     <b-card class="mb-4" :title="$t('Form create')">
       <b-form @submit.prevent="submit()">
         <b-row>
-          <b-colxx xxs="12" >
+          <b-colxx xxs="12">
             <b-form-group :label="$t('Name')">
               <b-form-input required v-model="form.name" :state="!$v.form.name.$invalid"/>
               <div class="invalid-feedback" v-if="!$v.form.name.minLength">
@@ -23,10 +23,10 @@
               </div>
             </b-form-group>
           </b-colxx>
-          <b-colxx xxs="12" >
+          <b-colxx xxs="12">
             <b-form-group :label="$t('Email')">
               <b-form-input required type="email" v-model="form.email" :state="!$v.form.email.$invalid"
-                               class="form-control"></b-form-input>
+                            class="form-control"></b-form-input>
               <div class="invalid-feedback" v-if="!$v.form.email.minLength">
                 Name must have at least {{$v.form.email.$params.minLength.min}} letters.
               </div>
@@ -35,18 +35,20 @@
 
           <div class="form-group col-sm-12">
             <b-form-group :label="$t('Password')">
-              <b-form-input required type="password" v-model="form.password" :state="!$v.form.password.$invalid"></b-form-input>
+              <b-form-input required type="password" v-model="form.password"
+                            :state="!$v.form.password.$invalid"></b-form-input>
             </b-form-group>
           </div>
 
           <div class="form-group col-sm-12">
             <b-form-group :label="$t('Password confirm')">
-              <b-form-input required type="password" v-model="form.password_confirm" :state="!$v.form.password_confirm.$invalid">
+              <b-form-input required type="password" v-model="form.password_confirm"
+                            :state="!$v.form.password_confirm.$invalid">
               </b-form-input>
             </b-form-group>
           </div>
 
-          <b-colxx xxs="12" >
+          <b-colxx xxs="12">
             <button class="btn btn-primary btn-sm">Submit</button>
           </b-colxx>
         </b-row>
@@ -58,6 +60,7 @@
 <script>
   import draggable from 'vuedraggable'
   import { validationMixin } from 'vuelidate'
+
   const { required, minLength } = require('vuelidate/lib/validators')
   import FactoryService from '../../../services/FactoryService'
 
@@ -119,9 +122,13 @@
       async submit () {
         console.log(JSON.stringify(this.form))
         try {
-          const res = await FactoryService.request('AdminService', 'admin').create(this.form);
-          this.form = {};
-          this.$notify('success', 'Create Success', `Add new administrator successfully`, { duration: 13000, permanent: false })
+          const res = await FactoryService.request('AdminService', 'admin').create(this.form)
+          this.form = {}
+          this.$notify('success', 'Create Success', `Add new administrator successfully`, {
+            duration: 13000,
+            permanent: false
+          })
+          this.$router.push('/administrator/users')
         } catch (e) {
           this.$notify('success', 'Create Fail', `Server Error`, { duration: 13000, permanent: false })
         }

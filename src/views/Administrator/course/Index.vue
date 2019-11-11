@@ -42,7 +42,7 @@
                          class="btn btn-xs btn-outline-primary form-group">
               <i class="simple-icon-pencil"></i>
             </router-link>
-            <span class="btn btn-xs btn-outline-danger">
+            <span class="btn btn-xs btn-outline-danger" @click="destroy(props.rowData.id)">
                   <i class="simple-icon-trash"></i>
                 </span>
           </template>
@@ -101,6 +101,15 @@
         const api = `/api/v1/admin/crazy-courses`
         return FactoryService.request('BaseService')
           .url(api)
+      },
+      async destroy (id) {
+        try {
+          await FactoryService.request('CourseService', 'admin').destroy(id)
+          this.$notify('success', 'Success', `Delete successfully`, { duration: 13000, permanent: false })
+          this.$refs.vuetable.refresh()
+        } catch (e) {
+          this.$notify('error', 'Success', `Delete fail`, { duration: 13000, permanent: false })
+        }
       }
     }
   }

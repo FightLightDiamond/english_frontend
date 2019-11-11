@@ -104,12 +104,16 @@
       async submit () {
         let formData = new FormData();
         for (let key in this.form) {
-          console.log(key);
           formData.append(key, this.form[key]);
         }
-        console.log(formData)
 
-        const res = await FactoryService.request('CourseService', 'admin').create(formData);
+        try {
+          const res = await FactoryService.request('CourseService', 'admin').create(formData);
+          this.$notify('success', 'Success', `Create successfully`, { duration: 13000, permanent: false })
+          this.$router.push('/administrator/courses')
+        } catch (e) {
+          this.$notify('error', 'Fail', `Create fail`, { duration: 13000, permanent: false })
+        }
       }
     }
   }
