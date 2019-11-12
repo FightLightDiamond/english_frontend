@@ -67,34 +67,36 @@
                     </span>
                 </th>
               </tr>
-              <tr v-for="(detail, key) in $v.form.details.$each.$iter">
-                <td style="width: 5px"><i>
-                  {{parseInt(key) + 1}}
-                </i></td>
-                <td style="width: 80px; max-width: 80px">
-                  <div class="input-group input-group-sm">
-                    <b-form-input type="number" v-model="detail.time.$model" :state="!detail.time.$invalid"/>
-                  </div>
+              <draggable v-model="list" tag="tbody">
+                <tr v-for="(detail, key) in $v.form.details.$each.$iter">
+                  <td style="width: 5px"><i>
+                    {{parseInt(key) + 1}}
+                  </i></td>
+                  <td style="width: 80px; max-width: 80px">
+                    <div class="input-group input-group-sm">
+                      <b-form-input type="number" v-model="detail.time.$model" :state="!detail.time.$invalid"/>
+                    </div>
 
-                  <div class="invalid-feedback" v-if="!detail.time.required">Name is required.</div>
-                  <div class="invalid-feedback" v-if="!detail.time.minLength">Name is required.</div>
-                </td>
-                <td>
-                  <div class="input-group input-group-sm">
-                    <b-form-input v-model="detail.sentence.$model" :state="!detail.sentence.$invalid"/>
-                  </div>
-                </td>
-                <td>
-                  <div class="input-group input-group-sm">
-                    <b-form-input v-model="detail.sentence.$model" :state="!detail.sentence.$invalid"/>
-                  </div>
-                </td>
-                <td style="width: 20px" class="text-right">
+                    <div class="invalid-feedback" v-if="!detail.time.required">Name is required.</div>
+                    <div class="invalid-feedback" v-if="!detail.time.minLength">Name is required.</div>
+                  </td>
+                  <td>
+                    <div class="input-group input-group-sm">
+                      <b-form-input v-model="detail.sentence.$model" :state="!detail.sentence.$invalid"/>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="input-group input-group-sm">
+                      <b-form-input v-model="detail.sentence.$model" :state="!detail.sentence.$invalid"/>
+                    </div>
+                  </td>
+                  <td style="width: 20px" class="text-right">
                     <span @click="removeSentence(key)" class="btn btn-xs btn-outline-danger">
                       <i class="simple-icon-trash"></i>
                     </span>
-                </td>
-              </tr>
+                  </td>
+                </tr>
+              </draggable>
             </table>
           </b-colxx>
 
