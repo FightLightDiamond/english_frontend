@@ -48,7 +48,7 @@
                         }"
                       id="inputGroup-sizing-sm">{{key + 1}}</span>
             </div>
-            <input v-model="en.sentence"
+            <input v-model="en.sentence" :placeholder="en.sentence"
                    v-bind:class="{
                         'text-danger': result[key] && !result[key].is_correct,
                         'text-success': result[key] && result[key].is_correct,

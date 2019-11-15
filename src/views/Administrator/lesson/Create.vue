@@ -67,7 +67,7 @@
                     </span>
                 </th>
               </tr>
-              <draggable v-model="list" tag="tbody">
+              <draggable tag="tbody">
                 <tr v-for="(detail, key) in $v.form.details.$each.$iter">
                   <td style="width: 5px"><i>
                     {{parseInt(key) + 1}}
@@ -87,7 +87,7 @@
                   </td>
                   <td>
                     <div class="input-group input-group-sm">
-                      <b-form-input v-model="detail.sentence.$model" :state="!detail.sentence.$invalid"/>
+                      <b-form-input v-model="detail.meaning.$model" :state="!detail.meaning.$invalid"/>
                     </div>
                   </td>
                   <td style="width: 20px" class="text-right">
@@ -200,7 +200,6 @@
               required,
               minLength: minLength(2)
             },
-
           }
         }
       }
@@ -213,8 +212,22 @@
         this.form.details.splice(key, 1)
       },
       async submit () {
+        console.log(this.form.details);
+        const details = JSON.stringify(this.form.details);
+        let formData = new FormData();
+
+        for (let key in this.form) {
+          if(this.form[key]) {
+            formData.append(key, this.form[key]);
+          }
+        }
+
+        formData.append('details', details);
+
+        console.log(formData)
+
         try {
-          const res = await FactoryService.request('CrazyService', 'admin').create(this.form)
+          const res = await FactoryService.request('CrazyService', 'admin').create(formData)
           this.$notify('success', 'Success', `Create successfully`, { duration: 13000, permanent: false })
           this.$router.push('/administrator/lessons')
         } catch (e) {

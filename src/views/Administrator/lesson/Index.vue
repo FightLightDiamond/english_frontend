@@ -121,13 +121,22 @@
           .url(api)
       },
       async destroy (id) {
-        try {
-          await FactoryService.request('CrazyService', 'admin').destroy(id)
-          this.$notify('success', 'Success', `Delete successfully`, { duration: 13000, permanent: false })
-          this.$refs.vuetable.refresh()
-        } catch (e) {
-          this.$notify('error', 'Success', `Delete fail`, { duration: 13000, permanent: false })
-        }
+        let options = {
+          okText: 'Yes',
+          cancelText: 'No',
+        };
+
+        this.$dialog
+          .confirm('Are you sure?', options)
+          .then(async (dialog) => {
+            try {
+              await FactoryService.request('CrazyService', 'admin').destroy(id)
+              this.$notify('success', 'Success', `Delete successfully`, { duration: 13000, permanent: false })
+              this.$refs.vuetable.refresh()
+            } catch (e) {
+              this.$notify('error', 'Success', `Delete fail`, { duration: 13000, permanent: false })
+            }
+          });
       }
     }
   }

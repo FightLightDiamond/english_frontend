@@ -200,8 +200,16 @@
         this.form.details.splice(key, 1)
       },
       async submit () {
+        let formData = new FormData();
+
+        for (let key in this.form) {
+          if(this.form[key]) {
+            formData.append(key, this.form[key]);
+          }
+        }
+
         try {
-          const res = await FactoryService.request('CrazyService', 'admin').update(this.id, this.form)
+          const res = await FactoryService.request('CrazyService', 'admin').update(this.id, formData)
           this.$notify('success', 'Success', `Update successfully`, { duration: 13000, permanent: false })
           this.$router.push('/administrator/lessons')
         } catch (e) {

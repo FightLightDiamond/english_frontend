@@ -107,14 +107,40 @@
           .url(api)
       },
       async disable (id) {
-        await FactoryService.request('AdminService', 'admin').update(id, { is_active: 0 })
-        this.$notify('success', 'Success', `Disable successfully`, { duration: 13000, permanent: false })
-        this.$refs.vuetable.refresh()
+        let options = {
+          okText: 'Yes',
+          cancelText: 'No',
+        };
+
+        this.$dialog
+          .confirm('Are you sure?', options)
+          .then(async (dialog) => {
+            try {
+              await FactoryService.request('AdminService', 'admin').update(id, { is_active: 0 })
+              this.$notify('success', 'Success', `Disable successfully`, { duration: 13000, permanent: false })
+              this.$refs.vuetable.refresh()
+            } catch (e) {
+              this.$notify('error', 'Error', `Disable fail`, { duration: 13000, permanent: false })
+            }
+          });
       },
       async enable (id) {
-        await FactoryService.request('AdminService', 'admin').update(id, { is_active: 1 })
-        this.$notify('success', 'Success', `Enable successfully`, { duration: 13000, permanent: false })
-        this.$refs.vuetable.refresh()
+        let options = {
+          okText: 'Yes',
+          cancelText: 'No',
+        };
+
+        this.$dialog
+          .confirm('Are you sure?', options)
+          .then(async (dialog) => {
+            try {
+              await FactoryService.request('AdminService', 'admin').update(id, { is_active: 1 })
+              this.$notify('success', 'Success', `Enable successfully`, { duration: 13000, permanent: false })
+              this.$refs.vuetable.refresh()
+            } catch (e) {
+              this.$notify('error', 'Error', `Enable fail`, { duration: 13000, permanent: false })
+            }
+          });
       }
     }
   }
