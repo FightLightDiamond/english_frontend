@@ -44,11 +44,11 @@
       <!--        >{{$t('Blog')}}</a>-->
       <!--      </div>-->
       <div class="d-inline-block">
-        <a
-          class=" btn-sm ml-2"
-          target="_top"
-          href="/contact"
-        ><i class="iconsminds-location-2"></i> {{$t('Contact')}}</a>
+<!--        <a-->
+<!--          class=" btn-sm ml-2"-->
+<!--          target="_top"-->
+<!--          href="/contact"-->
+<!--        ><i class="iconsminds-location-2"></i> {{$t('Contact')}}</a>-->
       </div>
       <!--      <div class="d-inline-block">-->
       <!--        <a-->

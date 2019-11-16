@@ -1,35 +1,23 @@
 <template>
   <div>
-    <!--    <b-row>-->
-    <!--      <b-colxx xxs="12" class="form-group">-->
-    <!--        <md-card>-->
-    <!--          <md-card-actions >-->
+<!--    <b-row>-->
+<!--      <b-colxx xxs="12" class="form-group">-->
+<!--        <swiper :options="swiperOption">-->
+<!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
+<!--          </swiper-slide>-->
+<!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
+<!--          </swiper-slide>-->
+<!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
+<!--          </swiper-slide>-->
+<!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
+<!--          </swiper-slide>-->
 
-    <!--&lt;!&ndash;            <div class="md-subhead">&ndash;&gt;-->
-    <!--&lt;!&ndash;              <span> </span>&ndash;&gt;-->
-    <!--&lt;!&ndash;              <span>（</span>&ndash;&gt;-->
-    <!--&lt;!&ndash;              <span>键盘控制 / 聚焦后左右键</span>&ndash;&gt;-->
-    <!--&lt;!&ndash;              <span>）</span>&ndash;&gt;-->
-    <!--&lt;!&ndash;            </div>&ndash;&gt;-->
-    <!--&lt;!&ndash;            <md-button class="md-icon-button"&ndash;&gt;-->
-    <!--&lt;!&ndash;                       target="_blank"&ndash;&gt;-->
-    <!--&lt;!&ndash;                       href="https://github.com/surmon-china/vue-awesome-swiper/blob/master/examples/26-keyboard-control.vue">&ndash;&gt;-->
-    <!--&lt;!&ndash;              <md-icon>code</md-icon>&ndash;&gt;-->
-    <!--&lt;!&ndash;            </md-button>&ndash;&gt;-->
-    <!--          </md-card-actions>-->
-    <!--          <md-card-media>-->
-    <!--            &lt;!&ndash; swiper &ndash;&gt;-->
-    <!--            <swiper :options="swiperOption">-->
-    <!--              <swiper-slide> <img  src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg" class="img-responsive"/></swiper-slide>-->
-
-    <!--              <div class="swiper-pagination" slot="pagination"></div>-->
-    <!--              <div class="swiper-button-prev" slot="button-prev"></div>-->
-    <!--              <div class="swiper-button-next" slot="button-next"></div>-->
-    <!--            </swiper>-->
-    <!--          </md-card-media>-->
-    <!--        </md-card>-->
-    <!--      </b-colxx>-->
-    <!--    </b-row>-->
+<!--          <div class="swiper-pagination" slot="pagination"></div>-->
+<!--          <div class="swiper-button-prev" slot="button-prev"></div>-->
+<!--          <div class="swiper-button-next" slot="button-next"></div>-->
+<!--        </swiper>-->
+<!--      </b-colxx>-->
+<!--    </b-row>-->
 
     <b-row>
       <b-colxx xxs="12">
@@ -87,6 +75,35 @@
         </swiper-slide>
       </swiper>
     </b-row>
+
+    <b-row>
+      <b-colxx xxs="12">
+        <b-card class="mb-4" :title="$t('Contact us')">
+          <b-form @submit.prevent="submit()">
+            <b-form-group :label="$t('forms.email')" :description="$t('forms.email-muted')">
+              <b-form-input required type="email" v-model="form.email"/>
+            </b-form-group>
+            <b-form-group :label="$t('Phone number')">
+              <b-form-input required type="number" v-model="form.phone_number"/>
+            </b-form-group>
+            <b-form-group :label="$t('Message')">
+              <textarea required v-model="form.message" class="form-control"></textarea>
+            </b-form-group>
+            <b-button type="submit" variant="primary" class="mt-4">{{ $t('forms.submit') }}</b-button>
+          </b-form>
+        </b-card>
+      </b-colxx>
+    </b-row>
+
+    <b-row>
+      <b-colxx xxs="12">
+        <b-card class="mb-4" :title="$t('Google map')">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.3571080652955!2d105.77413541493245!3d21.018392586003998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454abd8d06f6f%3A0x9c864fbed0cdde0e!2zMTU0IMSQw6xuaCBUaMO0biwgTeG7uSDEkMOsbmgsIFThu6sgTGnDqm0sIEjDoCBO4buZaQ!5e0!3m2!1sen!2s!4v1571673259983!5m2!1sen!2s"
+            width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+        </b-card>
+      </b-colxx>
+    </b-row>
   </div>
 
 </template>
@@ -107,6 +124,7 @@
     },
     data () {
       return {
+        form: {},
         courses: [],
         swiperInfiniteOption: {
           slidesPerView: 4,
@@ -131,8 +149,20 @@
     },
     async mounted () {
       this.courses = await FactoryService.request('CourseService').index()
-      console.log("this.courses")
+      console.log('this.courses')
       console.log(this.courses)
+    },
+    methods: {
+      async submit () {
+        console.log(this.form)
+        try {
+          const res = await FactoryService.request('ContactService').create(this.form)
+          this.form = {}
+          this.$notify('success', 'Contact Success', `We will contact you soon`, { duration: 13000, permanent: false })
+        } catch (e) {
+          this.$notify('error', 'Contact Fail', `Server error`, { duration: 13000, permanent: false })
+        }
+      }
     }
   }
 </script>
