@@ -55,7 +55,8 @@
                         'form-control' : true
                         }"
                    aria-label="Small"
-                   aria-describedby="inputGroup-sizing-sm">
+                   aria-describedby="inputGroup-sizing-sm"
+            >
           </div>
         </b-colxx>
       </b-row>
@@ -95,7 +96,7 @@
         }, {
           text: 'Write',
           active: true
-        }],
+        }]
       }
     },
     async created () {
@@ -108,7 +109,7 @@
     methods: {
       async submit () {
         const params = {
-          sentences: {},
+          sentences: {}
         }
 
         for (let en of this.ens) {

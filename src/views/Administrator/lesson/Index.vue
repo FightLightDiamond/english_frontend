@@ -26,14 +26,14 @@
         <b-card class="mb-4">
           <div class="">
             <label>Course</label>
-            <select v-model="form.crazy_course_id" class="form-control">
+            <select @change="changeCourse()" v-model="form.crazy_course_id" class="form-control">
               <option value=""></option>
               <option :value="course.id" v-for="course in courses">{{course.name}}</option>
             </select>
           </div>
           <vuetable
             ref="vuetable"
-            :api-url="getApi()"
+            :api-url="apiUrl"
             :fields="fields"
             pagination-path
             @vuetable:pagination-data="onPaginationData"
@@ -86,6 +86,7 @@
     },
     data () {
       return {
+        apiUrl: '',
         form: {
           crazy_course_id: null
         },
@@ -107,7 +108,8 @@
       }
     },
     async mounted () {
-      this.courses = await FactoryService.request('CourseService', 'admin').index()
+      this.courses = await FactoryService.request('CourseService', 'admin').index();
+      this.apiUrl = this.getApi();
       console.log(this.courses)
     },
     methods: {
@@ -117,8 +119,8 @@
       onChangePage (page) {
         this.$refs.vuetable.changePage(page)
       },
-      getApi () {
-        const api = `/api/v1/admin/crazies`
+      getApi (params = '') {
+        const api = `/api/v1/admin/crazies/${params}`
         return FactoryService.request('BaseService')
           .url(api)
       },
@@ -127,7 +129,6 @@
           okText: 'Yes',
           cancelText: 'No',
         }
-
         this.$dialog
           .confirm('Are you sure?', options)
           .then(async (dialog) => {
@@ -139,6 +140,13 @@
               this.$notify('error', 'Success', `Delete fail`, { duration: 13000, permanent: false })
             }
           })
+      },
+      changeCourse ()
+      {
+        this.apiUrl = this.getApi(`?crazy_course_id=${this.form.crazy_course_id}`);
+
+        // this.onPaginationData();
+        alert(this.form.crazy_course_id);
       }
     }
   }
