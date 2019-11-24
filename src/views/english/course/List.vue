@@ -3,7 +3,7 @@
     <b-row>
       <b-colxx xxs="12">
        <span>
-        <h1>Sections</h1>
+        <h1>Courses</h1>
         <b-nav class="pt-0 breadcrumb-container d-none d-sm-block d-lg-inline-block">
             <b-breadcrumb :items="items"/>
         </b-nav>
@@ -44,12 +44,9 @@
           text: 'Home',
           to: '/english',
         }, {
-          text: 'Sessions',
+          text: 'Courses',
           to: '/courses',
-        }, {
-          text: 'List',
-          active: true
-        }]
+        }, ]
       }
     },
     async mounted () {

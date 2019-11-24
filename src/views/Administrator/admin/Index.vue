@@ -73,10 +73,7 @@
         }, {
           text: 'Admins',
           to: '/administrator/admins',
-        }, {
-          text: 'List',
-          active: true
-        },],
+        }, ],
         fields: [
           '__slot:image',
           {

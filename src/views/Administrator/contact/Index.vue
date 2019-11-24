@@ -47,10 +47,7 @@
         }, {
           text: 'Contracts',
           to: '/administrator/contacts',
-        }, {
-          text: 'List',
-          active: true
-        },
+        }, 
         ],
         fields: [
           // '__slot:image',
