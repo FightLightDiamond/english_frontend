@@ -63,9 +63,6 @@
         }, {
           text: 'Users',
           to: '/administrator/users',
-        }, {
-          text: 'List',
-          active: true
         },
         ],
         fields: [

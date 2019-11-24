@@ -14,14 +14,14 @@
           </b-colxx>
           <b-colxx class="mb-3">
             <h3 class="text-white">Contract Info</h3>
-            <p class="text-white"><i class="simple-icon-location-pin"></i> Số nhà 59 - Ngõ 54 Đình thôn</p>
-            <p class="text-white"><i class="simple-icon-pin"></i> Nam Từ Liêm - Hà Nội</p>
-            <p class="text-white"><i class="iconsminds-envelope"></i> because.phuong@gmail.com</p>
-            <p class="text-white"><i class="simple-icon-phone"></i> +84359003851</p>
+            <p class="text-white"><i class="simple-icon-location-pin"></i>235 Hoàng Quốc Việt, Cầu Giấy, Hà Nội</p>
+            <p class="text-white"><i class="simple-icon-pin"></i> Bắc Từ Liêm - Hà Nội</p>
+            <p class="text-white"><i class="iconsminds-envelope"></i> doanthilamphuong@gmail.com</p>
+            <p class="text-white"><i class="simple-icon-phone"></i> +8463024312</p>
           </b-colxx>
           <b-colxx class="mb-3">
             <h3 class="text-white">Social network</h3>
-            <p class="text-white"><i class="simple-icon-social-facebook"></i> Crazy English Group</p>
+            <p class="text-white"><i class="simple-icon-social-facebook"></i> Crazy English Fanpage</p>
             <p class="text-white"><i class="simple-icon-social-twitter"></i> Crazy English Group</p>
             <p class="text-white"><i class="simple-icon-social-google"></i> Crazy English Group</p>
             <p class="text-white"><i class="simple-icon-social-youtube"></i> Crazy English Video</p>
@@ -29,9 +29,9 @@
           <b-colxx class="mb-3">
             <h3 class="text-white">About us</h3>
             <p class="text-white"><i class="simple-icon-user"></i> Founder: Đoàn Thị Lâm Phương</p>
-            <p class="text-white"><i class="simple-icon-graduation"></i> Sinh viên trường Đại học Bôn Ba</p>
+            <p class="text-white"><i class="simple-icon-graduation"></i> Sinh viên trường Đại Học Điện Lực</p>
             <p class="text-white"><i class="iconsminds-laptop-3"></i> Khoa công nghệ thông tin</p>
-            <p class="text-white"><i class="iconsminds-quill-3"></i> K33 A99</p>
+            <p class="text-white"><i class="iconsminds-quill-3"></i> D10CNPM</p>
           </b-colxx>
         </b-row>
         <b-row>

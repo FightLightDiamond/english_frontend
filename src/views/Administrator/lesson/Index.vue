@@ -95,10 +95,7 @@
         }, {
           text: 'Lessons',
           to: '/administrator/lessons',
-        }, {
-          text: 'List',
-          active: true
-        },],
+        }, ],
         fields: [
           '__slot:image',
           '__slot:actions'

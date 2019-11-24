@@ -74,9 +74,6 @@
         }, {
           text: 'Courses',
           to: '/administrator/courses',
-        }, {
-          text: 'List',
-          active: true
         },
         ],
         fields: [
