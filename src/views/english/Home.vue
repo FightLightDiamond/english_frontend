@@ -1,23 +1,23 @@
 <template>
   <div>
-<!--    <b-row>-->
-<!--      <b-colxx xxs="12" class="form-group">-->
-<!--        <swiper :options="swiperOption">-->
-<!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
-<!--          </swiper-slide>-->
-<!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
-<!--          </swiper-slide>-->
-<!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
-<!--          </swiper-slide>-->
-<!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
-<!--          </swiper-slide>-->
+    <!--    <b-row>-->
+    <!--      <b-colxx xxs="12" class="form-group">-->
+    <!--        <swiper :options="swiperOption">-->
+    <!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
+    <!--          </swiper-slide>-->
+    <!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
+    <!--          </swiper-slide>-->
+    <!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
+    <!--          </swiper-slide>-->
+    <!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
+    <!--          </swiper-slide>-->
 
-<!--          <div class="swiper-pagination" slot="pagination"></div>-->
-<!--          <div class="swiper-button-prev" slot="button-prev"></div>-->
-<!--          <div class="swiper-button-next" slot="button-next"></div>-->
-<!--        </swiper>-->
-<!--      </b-colxx>-->
-<!--    </b-row>-->
+    <!--          <div class="swiper-pagination" slot="pagination"></div>-->
+    <!--          <div class="swiper-button-prev" slot="button-prev"></div>-->
+    <!--          <div class="swiper-button-next" slot="button-next"></div>-->
+    <!--        </swiper>-->
+    <!--      </b-colxx>-->
+    <!--    </b-row>-->
 
     <b-row>
       <b-colxx xxs="12">

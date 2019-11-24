@@ -212,17 +212,17 @@
         this.form.details.splice(key, 1)
       },
       async submit () {
-        console.log(this.form.details);
-        const details = JSON.stringify(this.form.details);
-        let formData = new FormData();
+        console.log(this.form.details)
+        const details = JSON.stringify(this.form.details)
+        let formData = new FormData()
 
         for (let key in this.form) {
-          if(this.form[key]) {
-            formData.append(key, this.form[key]);
+          if (this.form[key]) {
+            formData.append(key, this.form[key])
           }
         }
 
-        formData.append('details', details);
+        formData.append('details', details)
 
         console.log(formData)
 

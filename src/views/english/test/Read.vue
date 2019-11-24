@@ -28,7 +28,7 @@
     <b-card class="mb-3" title="Play & listen">
       <b-row class="form-group">
         <b-colxx xxs="12">
-          <audio id="audio" ref="audio" v-bind:src="lesson.audio" type="audio/mpeg" controls preload >
+          <audio id="audio" ref="audio" v-bind:src="lesson.audio" type="audio/mpeg" controls preload>
             Your browser does not support the audio tag.
           </audio>
         </b-colxx>
@@ -60,9 +60,9 @@
       <b-row>
         <b-colxx xxs="12">
           <button @click="submit()" class="btn btn-primary btn-sm">Submit</button>
-<!--          <button class="btn btn-primary btn-sm" v-shortkey="['ctrl', 'q']" @shortkey="back()">Open</button>-->
-<!--          <button class="btn btn-primary btn-sm" v-shortkey="['ctrl', 'w']" @shortkey="play()">Open</button>-->
-<!--          <button class="btn btn-primary btn-sm" v-shortkey="['ctrl', 'e']" @shortkey="next()">Open</button>-->
+          <!--          <button class="btn btn-primary btn-sm" v-shortkey="['ctrl', 'q']" @shortkey="back()">Open</button>-->
+          <!--          <button class="btn btn-primary btn-sm" v-shortkey="['ctrl', 'w']" @shortkey="play()">Open</button>-->
+          <!--          <button class="btn btn-primary btn-sm" v-shortkey="['ctrl', 'e']" @shortkey="next()">Open</button>-->
         </b-colxx>
       </b-row>
     </b-card>
@@ -133,10 +133,10 @@
         }
       },
       next () {
-        this.$refs.audio.currentTime = this.$refs.audio.currentTime + 5;
+        this.$refs.audio.currentTime = this.$refs.audio.currentTime + 5
       },
       back () {
-        this.$refs.audio.currentTime -= 5;
+        this.$refs.audio.currentTime -= 5
       }
     }
   }

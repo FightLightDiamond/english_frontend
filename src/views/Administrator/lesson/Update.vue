@@ -200,11 +200,11 @@
         this.form.details.splice(key, 1)
       },
       async submit () {
-        let formData = new FormData();
+        let formData = new FormData()
 
         for (let key in this.form) {
-          if(this.form[key]) {
-            formData.append(key, this.form[key]);
+          if (this.form[key]) {
+            formData.append(key, this.form[key])
           }
         }
 

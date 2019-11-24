@@ -31,7 +31,7 @@
       </b-row>
     </b-card>
 
-    <b-card :title="$t('History')" class="mb-4" >
+    <b-card :title="$t('History')" class="mb-4">
       <vuetable
         ref="vuetable"
         :api-url="getApi()"

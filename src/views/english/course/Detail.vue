@@ -13,16 +13,16 @@
     </b-row>
     <b-row>
       <b-colxx xxs="12">
-        <b-card class="mb-4" >
-          <div  class="d-flex flex-row mb-0">
-              <img :src="course.img" :alt="course.title" class="list-thumbnail border-0" />
-              <b-badge variant="" pill class="position-absolute badge-top-right">Hot</b-badge>
+        <b-card class="mb-4">
+          <div class="d-flex flex-row mb-0">
+            <img :src="course.img" :alt="course.title" class="list-thumbnail border-0"/>
+            <b-badge variant="" pill class="position-absolute badge-top-right">Hot</b-badge>
             <div class="pl-3 pt-2 pr-2 pb-2">
-                <p class="list-item-heading">{{ course.name }}</p>
-                <div class="pr-4">
-                  <p class="text-muted mb-1 text-small">{{ course.description }}</p>
-                </div>
-                <div class="text-primary text-small font-weight-medium d-none d-sm-block">{{ course.created_at }}</div>
+              <p class="list-item-heading">{{ course.name }}</p>
+              <div class="pr-4">
+                <p class="text-muted mb-1 text-small">{{ course.description }}</p>
+              </div>
+              <div class="text-primary text-small font-weight-medium d-none d-sm-block">{{ course.created_at }}</div>
             </div>
           </div>
         </b-card>

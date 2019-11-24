@@ -54,7 +54,7 @@
       return {
         id: this.$route.params.id,
         form: {
-          minute : null,
+          minute: null,
           hour: null
         },
         items: [{
@@ -67,17 +67,20 @@
       }
     },
     async mounted () {
-      const res = await FactoryService.request('RemindService').index();
+      const res = await FactoryService.request('RemindService').index()
       this.form.hour = res.hour
       this.form.minute = res.minute
     },
     methods: {
-      remind() {
+      remind () {
         console.log(this.form)
 
         FactoryService.request('RemindService').create(this.form)
 
-        this.$notify('success', 'Remind Success', `Remind for you at ${this.form.hour < 10 ? '0' + this.form.hour : this.form.hour} : ${this.form.minute < 10 ? '0' + this.form.minute : this.form.minute} per day `, { duration: 13000, permanent: false })
+        this.$notify('success', 'Remind Success', `Remind for you at ${this.form.hour < 10 ? '0' + this.form.hour : this.form.hour} : ${this.form.minute < 10 ? '0' + this.form.minute : this.form.minute} per day `, {
+          duration: 13000,
+          permanent: false
+        })
       }
     }
   }

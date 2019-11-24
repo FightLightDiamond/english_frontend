@@ -15,7 +15,7 @@
     <b-card class="mb-4" :title="$t('Form create')">
       <b-form @submit.prevent="submit()">
         <b-row>
-          <b-colxx xxs="12" >
+          <b-colxx xxs="12">
             <b-form-group :label="$t('Title')">
               <b-form-input v-model="form.name" :state="!$v.form.name.$invalid"/>
               <div class="invalid-feedback" v-if="!$v.form.name.minLength">
@@ -23,7 +23,7 @@
               </div>
             </b-form-group>
           </b-colxx>
-          <b-colxx xxs="12" >
+          <b-colxx xxs="12">
             <b-form-group :label="$t('Description')">
               <b-form-textarea v-model="form.description" :state="!$v.form.description.$invalid"
                                class="form-control"></b-form-textarea>
@@ -39,7 +39,7 @@
             </b-form-group>
           </div>
 
-          <b-colxx xxs="12" >
+          <b-colxx xxs="12">
             <button class="btn btn-primary btn-sm">Submit</button>
           </b-colxx>
         </b-row>
@@ -51,6 +51,7 @@
 <script>
   import draggable from 'vuedraggable'
   import { validationMixin } from 'vuelidate'
+
   const { required, minLength } = require('vuelidate/lib/validators')
   import FactoryService from '../../../services/FactoryService'
 
@@ -60,7 +61,7 @@
     },
     async mounted () {
       this.courses = await FactoryService.request('CourseService', 'admin').index()
-      console.log(this.courses);
+      console.log(this.courses)
     },
     data () {
       return {
@@ -102,13 +103,13 @@
     },
     methods: {
       async submit () {
-        let formData = new FormData();
+        let formData = new FormData()
         for (let key in this.form) {
-          formData.append(key, this.form[key]);
+          formData.append(key, this.form[key])
         }
 
         try {
-          const res = await FactoryService.request('CourseService', 'admin').create(formData);
+          const res = await FactoryService.request('CourseService', 'admin').create(formData)
           this.$notify('success', 'Success', `Create successfully`, { duration: 13000, permanent: false })
           this.$router.push('/administrator/courses')
         } catch (e) {

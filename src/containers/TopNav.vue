@@ -16,7 +16,7 @@
         <mobile-menu-icon />
       </a>
     </div>
-    <router-link class="navbar-logo" tag="a" to="/app" style="width: 150px">
+    <router-link class="navbar-logo" tag="a" to="/administrator/dashboard" style="width: 150px">
       <h1>Administrator</h1>
 <!--      <span class="logo d-none d-xs-block"></span>-->
 <!--      <span class="logo-mobile d-block d-xs-none"></span>-->

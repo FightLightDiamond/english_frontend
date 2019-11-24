@@ -106,7 +106,7 @@
         let options = {
           okText: 'Yes',
           cancelText: 'No',
-        };
+        }
 
         this.$dialog
           .confirm('Are you sure?', options)
@@ -118,7 +118,7 @@
             } catch (e) {
               this.$notify('error', 'Success', `Delete fail`, { duration: 13000, permanent: false })
             }
-          });
+          })
       }
     }
   }

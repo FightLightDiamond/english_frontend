@@ -44,7 +44,9 @@
                 <div class="pl-3 pt-2 pr-2 pb-2">
                   <p class="list-item-heading">{{ props.rowData.name }}</p>
                   <div class="pr-4">
-                    <p class="text-muted mb-1 text-small">{{ props.rowData.description && (props.rowData.description.length > 250) ? props.rowData.description.substring(0,250) + '...' : props.rowData.description  }}</p>
+                    <p class="text-muted mb-1 text-small">{{ props.rowData.description &&
+                      (props.rowData.description.length > 250) ? props.rowData.description.substring(0,250) + '...' :
+                      props.rowData.description }}</p>
                   </div>
                   <div class="text-primary text-small font-weight-medium d-none d-sm-block">
                     {{ props.rowData.created_at }}
@@ -124,7 +126,7 @@
         let options = {
           okText: 'Yes',
           cancelText: 'No',
-        };
+        }
 
         this.$dialog
           .confirm('Are you sure?', options)
@@ -136,7 +138,7 @@
             } catch (e) {
               this.$notify('error', 'Success', `Delete fail`, { duration: 13000, permanent: false })
             }
-          });
+          })
       }
     }
   }

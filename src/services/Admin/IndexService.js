@@ -3,6 +3,7 @@ import AuthService from '../AuthService'
 import BaseService from '../BaseService'
 import CourseService from './CourseService'
 import CrazyService from './CrazyService'
+import DashboardService from './DashboardService'
 import UserService from './UserService'
 
 export default {
@@ -11,5 +12,6 @@ export default {
   BaseService,
   CourseService,
   CrazyService,
+  DashboardService,
   UserService,
 }

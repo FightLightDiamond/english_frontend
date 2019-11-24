@@ -28,7 +28,7 @@
     <b-card class="mb-3" title="Play & listen">
       <b-row class="form-group">
         <b-colxx xxs="12">
-          <audio id="audio" ref="audio" v-bind:src="lesson.audio" type="audio/mpeg" controls preload >
+          <audio id="audio" ref="audio" v-bind:src="lesson.audio" type="audio/mpeg" controls preload>
             Your browser does not support the audio tag.
           </audio>
         </b-colxx>

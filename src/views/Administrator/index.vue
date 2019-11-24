@@ -10,20 +10,20 @@
   </div>
 </template>
 <script>
-import Sidebar from '@/containers/Sidebar'
-import TopNav from '@/containers/TopNav'
-import { mapGetters } from 'vuex'
+  import Sidebar from '@/containers/Sidebar'
+  import TopNav from '@/containers/TopNav'
+  import { mapGetters } from 'vuex'
 
-export default {
-  data () {
-    return { show: false }
-  },
-  components: {
-    TopNav,
-    Sidebar
-  },
-  computed: {
-    ...mapGetters(['getMenuType'])
+  export default {
+    data () {
+      return { show: false }
+    },
+    components: {
+      TopNav,
+      Sidebar
+    },
+    computed: {
+      ...mapGetters(['getMenuType'])
+    }
   }
-}
 </script>

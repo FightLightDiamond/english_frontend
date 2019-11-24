@@ -110,7 +110,7 @@
         let options = {
           okText: 'Yes',
           cancelText: 'No',
-        };
+        }
 
         this.$dialog
           .confirm('Are you sure?', options)
@@ -122,13 +122,13 @@
             } catch (e) {
               this.$notify('error', 'Error', `Disable fail`, { duration: 13000, permanent: false })
             }
-          });
+          })
       },
       async enable (id) {
         let options = {
           okText: 'Yes',
           cancelText: 'No',
-        };
+        }
 
         this.$dialog
           .confirm('Are you sure?', options)
@@ -140,7 +140,7 @@
             } catch (e) {
               this.$notify('error', 'Error', `Enable fail`, { duration: 13000, permanent: false })
             }
-          });
+          })
       }
     }
   }

@@ -33,13 +33,13 @@
     <b-card class="form-group" :title="$t(lesson.name)">
       <b-row class="form-group">
         <b-colxx xxs="12">
-          <audio :src="lesson.audio"  controls></audio>
+          <audio :src="lesson.audio" controls></audio>
         </b-colxx>
       </b-row>
     </b-card>
 
     <b-row>
-      <b-colxx xxs="12" >
+      <b-colxx xxs="12">
         <b-card class="mb-4">
           <vuetable ref="vuetable" class="table-bordered table-hover"
                     :api-mode="false"
@@ -94,7 +94,7 @@
       }
     },
     async mounted () {
-      const res = await testService.listen(this.$route.params.id);
+      const res = await testService.listen(this.$route.params.id)
       this.lesson = res
       this.sentences = res.details
     },

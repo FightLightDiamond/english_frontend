@@ -68,9 +68,7 @@
       // AudioRecorder,
       Vuetable
     },
-    watch: {
-
-    },
+    watch: {},
     data () {
       return {
         lesson: [],
@@ -132,7 +130,7 @@
         this.kara.push(sen.sentence)
 
         this.play()
-        this.lyric();
+        this.lyric()
       },
       play () {
         this.record.play = true
@@ -152,10 +150,10 @@
           }
 
           if (this.sentencesPlay.length === 0 && this.record.play) {
-            console.log(this.sentences);
+            console.log(this.sentences)
             clearInterval(interval_obj)
             this.sentencesPlay = this.sentences
-            this.kara = [];
+            this.kara = []
             // this.record.play = false
           }
         }, 500)

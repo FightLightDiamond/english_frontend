@@ -17,10 +17,8 @@
       swiperSlide,
       IconCard,
     },
-    data() {
-      return {
-
-      }
+    data () {
+      return {}
     },
     async mounted () {
 

@@ -15,7 +15,7 @@
     <b-card class="mb-4" :title="$t('Form create')">
       <b-form @submit.prevent="submit()">
         <b-row>
-          <b-colxx xxs="12" >
+          <b-colxx xxs="12">
             <b-form-group :label="$t('Title')">
               <b-form-input v-model="form.name" :state="!$v.form.name.$invalid"/>
               <div class="invalid-feedback" v-if="!$v.form.name.minLength">
@@ -23,7 +23,7 @@
               </div>
             </b-form-group>
           </b-colxx>
-          <b-colxx xxs="12" >
+          <b-colxx xxs="12">
             <b-form-group :label="$t('Description')">
               <b-form-textarea v-model="form.description" :state="!$v.form.description.$invalid"
                                class="form-control"></b-form-textarea>
@@ -35,11 +35,11 @@
 
           <div class="form-group col-sm-12">
             <b-form-group :label="$t('Image')">
-              <b-form-file ref="img" v-model="form.img" ></b-form-file>
+              <b-form-file ref="img" v-model="form.img"></b-form-file>
             </b-form-group>
           </div>
 
-          <b-colxx xxs="12" >
+          <b-colxx xxs="12">
             <button class="btn btn-primary btn-sm">Submit</button>
           </b-colxx>
         </b-row>
@@ -51,6 +51,7 @@
 <script>
   import draggable from 'vuedraggable'
   import { validationMixin } from 'vuelidate'
+
   const { required, minLength } = require('vuelidate/lib/validators')
   import FactoryService from '../../../services/FactoryService'
 
@@ -60,8 +61,8 @@
     },
     async mounted () {
       const res = await FactoryService.request('CourseService', 'admin').show(this.id)
-      this.form.name = res.name;
-      this.form.description = res.description;
+      this.form.name = res.name
+      this.form.description = res.description
     },
     data () {
       return {
@@ -101,18 +102,18 @@
     },
     methods: {
       async submit () {
-        let formData = new FormData();
+        let formData = new FormData()
 
         for (let key of ['name', 'description', 'img']) {
-          if(this.form[key]) {
-            formData.append(key, this.form[key]);
+          if (this.form[key]) {
+            formData.append(key, this.form[key])
           }
         }
 
-        formData.append('_method', 'PATCH');
+        formData.append('_method', 'PATCH')
 
         try {
-          const res = await FactoryService.request('CourseService', 'admin').update(this.id, formData);
+          const res = await FactoryService.request('CourseService', 'admin').update(this.id, formData)
           this.$notify('success', 'Success', `Update successfully`, { duration: 13000, permanent: false })
           this.$router.push('/administrator/courses')
         } catch (e) {
