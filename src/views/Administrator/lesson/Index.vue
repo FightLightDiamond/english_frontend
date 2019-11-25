@@ -141,9 +141,6 @@
       changeCourse ()
       {
         this.apiUrl = this.getApi(`?crazy_course_id=${this.form.crazy_course_id}`);
-
-        // this.onPaginationData();
-        alert(this.form.crazy_course_id);
       }
     }
   }

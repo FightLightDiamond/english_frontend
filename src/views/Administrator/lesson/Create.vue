@@ -156,7 +156,7 @@
             { sentence: '', meaning: '', time: null },
             { sentence: '', meaning: '', time: null },
             { sentence: '', meaning: '', time: null },
-            { sentence: '', meaning: '', time: null },
+            { sentence: '', meaning: '', time: null }
           ],
           img: '',
           crazy_course_id: null,
