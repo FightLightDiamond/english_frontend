@@ -52,7 +52,6 @@
 
         auth.username = this.email
         auth.password = this.password
-
         try {
           const res = await FactoryService.request('AuthService').login(auth)
 
