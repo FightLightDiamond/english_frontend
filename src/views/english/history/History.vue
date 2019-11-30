@@ -20,7 +20,7 @@
             <icon-card
               :title="$t('LISTEN')"
               icon="simple-icon-earphones-alt"
-              :value="14"
+              :value="count.listen"
             />
           </router-link>
         </div>
@@ -31,7 +31,7 @@
             <icon-card
               :title="$t('READ')"
               icon="simple-icon-book-open"
-              :value="32"
+              :value="count.read"
             />
           </router-link>
         </div>
@@ -42,7 +42,7 @@
             <icon-card
               :title="$t('WRITE')"
               icon="simple-icon-note"
-              :value="74"
+              :value="count.write"
             />
           </router-link>
         </div>
@@ -53,7 +53,7 @@
             <icon-card
               :title="$t('SPEAK')"
               icon="iconsminds-speaker"
-              :value="25"
+              :value="count.speak"
             />
           </router-link>
         </div>
@@ -64,13 +64,26 @@
 
 <script>
   import IconCard from '@/components/Cards/IconCard'
+  import FactoryService from '../../../services/FactoryService'
 
   export default {
+    async mounted() {
+       const data = await FactoryService.request('HistoryService').index();
+       console.log('------------------')
+        console.log(data);
+       this.count = data;
+    },
     components: {
       IconCard,
     },
     data () {
       return {
+        count: {
+          read: 0,
+          listen: 0,
+          write: 0,
+          speak: 0
+        },
         lesson: [],
         items: [{
           text: 'Home',
@@ -82,7 +95,6 @@
         ],
       }
     },
-
   }
 </script>
 
