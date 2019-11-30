@@ -48,7 +48,7 @@
                         }"
                       id="inputGroup-sizing-sm">{{key + 1}}</span>
             </div>
-            <input v-model="en.sentence" :placeholder="en.sentence"
+            <input v-model="params.sentences[en.id]" :placeholder="en.sentence"
                    v-bind:class="{
                         'text-danger': result[key] && !result[key].is_correct,
                         'text-success': result[key] && result[key].is_correct,
@@ -83,6 +83,9 @@
       return {
         id: this.$route.params.id,
         lesson: { 'name': '', audio: '' },
+        params: {
+          sentences: {}
+        },
         ens: [],
         randEns: [],
         result: {},
@@ -105,18 +108,22 @@
       this.ens = res.ens
       this.randEns = res.randEns
       console.log(this.lesson)
+
+      for (let en of this.ens) {
+        this.params.sentences[en.id] = '';
+      }
     },
     methods: {
       async submit () {
-        const params = {
-          sentences: {}
-        }
+        // const params = {
+        //   sentences: {}
+        // }
 
         for (let en of this.ens) {
-          params.sentences[en.id] = en.sentence
+          this.params.sentences[en.id] = en.sentence
         }
 
-        const res = await FactoryService.request('TestService').written(this.id, params)
+        const res = await FactoryService.request('TestService').written(this.id, this.params)
         this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, {
           duration: 13000,
           permanent: false

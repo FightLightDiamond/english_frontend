@@ -44,11 +44,11 @@
       <!--        >{{$t('Blog')}}</a>-->
       <!--      </div>-->
       <div class="d-inline-block">
-<!--        <a-->
-<!--          class=" btn-sm ml-2"-->
-<!--          target="_top"-->
-<!--          href="/contact"-->
-<!--        ><i class="iconsminds-location-2"></i> {{$t('Contact')}}</a>-->
+        <!--        <a-->
+        <!--          class=" btn-sm ml-2"-->
+        <!--          target="_top"-->
+        <!--          href="/contact"-->
+        <!--        ><i class="iconsminds-location-2"></i> {{$t('Contact')}}</a>-->
       </div>
       <!--      <div class="d-inline-block">-->
       <!--        <a-->
@@ -86,8 +86,16 @@
                 :src="user.avatar"/>
             </span>
           </template>
-          <b-dropdown-item>Account</b-dropdown-item>
-          <!--          <b-dropdown-item>History</b-dropdown-item>-->
+          <b-dropdown-item>
+            <router-link :to="`/profiles`">
+              Profile
+            </router-link>
+          </b-dropdown-item>
+          <b-dropdown-item>
+            <router-link :to="`/change-password`">
+              Change password
+            </router-link>
+          </b-dropdown-item>
           <b-dropdown-divider/>
           <b-dropdown-item @click="logout">Sign out</b-dropdown-item>
         </b-dropdown>

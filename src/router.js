@@ -50,6 +50,9 @@ const routes = [
     redirect: '/english',
     children: [
       { path: '/english', component: () => import(/* webpackChunkName: "english" */ './views/english/Home') },
+      { path: '/profiles', component: () => import(/* webpackChunkName: "english" */ './views/english/user/Profile') },
+      { path: '/change-password', component: () => import(/* webpackChunkName: "english" */ './views/english/user/ChangePassword') },
+
       { path: '/remind', component: () => import(/* webpackChunkName: "english" */ './views/english/Remind') },
       { path: '/about', component: () => import(/* webpackChunkName: "english" */ './views/english/About') },
       { path: '/blog', component: () => import(/* webpackChunkName: "english" */ './views/english/Blog') },

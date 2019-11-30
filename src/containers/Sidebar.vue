@@ -25,6 +25,13 @@
             </a>
           </li>
 
+          <li :class="{ active : selectedParentMenu==='contact' }">
+            <a @click.prevent="logout()" >
+              <i class="iconsminds-inbox-out"></i>
+              {{$t('Logout') }}
+            </a>
+          </li>
+
         </ul>
       </vue-perfect-scrollbar>
     </div>
@@ -84,6 +91,10 @@
 
     methods: {
       ...mapMutations(['changeSideMenuStatus', 'addMenuClassname', 'changeSelectedMenuHasSubItems']),
+      logout () {
+          localStorage.removeItem('admin')
+          this.$router.push('/admin/login')
+      },
       selectMenu () {
         const currentParentUrl = this.$route.path.split('/').filter(x => x !== '')[1]
         if (currentParentUrl !== undefined || currentParentUrl !== null) {
