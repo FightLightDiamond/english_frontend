@@ -6,6 +6,7 @@ import CrazyService from './CrazyService'
 import HistoryService from './HistoryService'
 import RemindService from './RemindService'
 import TestService from './TestService'
+import UserService from './UserService'
 
 export default {
     AuthService,
@@ -15,5 +16,6 @@ export default {
     CrazyService,
     HistoryService,
     RemindService,
-    TestService
+    TestService,
+    UserService
 }

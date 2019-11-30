@@ -25,4 +25,8 @@ export default class AuthService extends BaseService {
     const res = await this.post(`/api/crazy-courses`, params)
     return res.data
   }
+
+  async Profile() {
+
+  }
 }
