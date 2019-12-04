@@ -31,7 +31,7 @@
               <b-form-input required v-model="form.phone_number"/>
             </b-form-group>
             <b-form-group :label="$t('Avatar')">
-              <b-form-file required v-model="form.avatar"/>
+              <b-form-file v-model="form.avatar"/>
             </b-form-group>
             <b-form-group :label="$t('Address')">
               <textarea required v-model="form.address" class="form-control"></textarea>
@@ -53,7 +53,6 @@
     data () {
       return {
         id: JSON.parse(localStorage.getItem('user')).id,
-        // form: JSON.parse(localStorage.getItem('user')),
         form: {},
         courses: [],
         items: [{
@@ -63,19 +62,28 @@
       }
     },
     async mounted () {
-
       this.form = await FactoryService.request('UserService').show(this.id)
       console.log(this.form)
     },
     methods: {
       async submit () {
-        const parrams = new FormData()
+        const formData = new FormData()
 
         for (let en in this.form) {
-          parrams.append(en, this.form[en])
+          if (this.form[en]) {
+            formData.append(en, this.form[en])
+          }
         }
+        formData.append('_method', 'PATCH')
+        console.log(formData)
 
-        await FactoryService.request('UserService').update(this.id, this.form)
+        try {
+          await FactoryService.request('UserService').update(this.id, formData)
+
+          this.$notify('success', 'Success', `Update successfully`, { duration: 13000, permanent: false })
+        } catch (e) {
+          this.$notify('error', 'Error', `Update fail`, { duration: 13000, permanent: false })
+        }
       }
     }
   }

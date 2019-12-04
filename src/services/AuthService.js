@@ -22,11 +22,7 @@ export default class AuthService extends BaseService {
   }
 
   async changePass (params = {}) {
-    const res = await this.post(`/api/crazy-courses`, params)
+    const res = await this.post(`/api/change-password`, params)
     return res.data
-  }
-
-  async Profile() {
-
   }
 }
