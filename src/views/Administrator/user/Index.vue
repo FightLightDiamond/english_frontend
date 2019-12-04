@@ -12,9 +12,24 @@
 
     <b-colxx xxs="12">
       <b-card>
+        <b-row class="form-group">
+        <b-colxx xxs="6">
+            <b-form-group :label="$t('Email')">
+              <b-form-input @change="search()" v-model="filter.email" class="input-group-sm" />
+            </b-form-group>
+        </b-colxx>
+        <b-colxx xxs="6">
+          <label>Course</label>
+          <select @change="search()" v-model="filter.is_active" class="form-control">
+            <option value="">All</option>
+            <option value="0">Inactive</option>
+            <option value="1">Active</option>
+          </select>
+        </b-colxx>
+        </b-row>
         <vuetable style="margin-top: -30px"
                   ref="vuetable"
-                  :api-url="getApi()"
+                  :api-url="apiUrl"
                   :fields="fields"
                   pagination-path
                   @vuetable:pagination-data="onPaginationData"
@@ -57,6 +72,11 @@
     },
     data () {
       return {
+        filter: {
+          email: '',
+          is_active: '',
+        },
+        apiUrl: '',
         items: [{
           text: 'Dashboard',
           to: '/administrator/dashboard',
@@ -92,6 +112,9 @@
         course: [],
       }
     },
+    async mounted () {
+      this.apiUrl = this.getApi()
+    },
     methods: {
       onPaginationData (paginationData) {
         this.$refs.pagination.setPaginationData(paginationData)
@@ -99,10 +122,14 @@
       onChangePage (page) {
         this.$refs.vuetable.changePage(page)
       },
-      getApi () {
-        const api = `/api/v1/admin/users`
+      getApi (params = '') {
+        const api = `/api/v1/admin/users/${params}`
         return FactoryService.request('BaseService')
           .url(api)
+      },
+      search ()
+      {
+        this.apiUrl = this.getApi(`?email=${this.filter.email}&is_active=${this.filter.is_active}`)
       },
       async disable (id) {
         let options = {

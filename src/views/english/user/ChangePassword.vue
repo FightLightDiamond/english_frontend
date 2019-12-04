@@ -5,13 +5,13 @@
         <b-card class="mb-4" :title="$t('Change password')">
           <b-form @submit.prevent="submit()">
             <b-form-group :label="$t('forms.password')">
-              <b-form-input required v-model="form.password"/>
+              <b-form-input type="password" required v-model="form.password"/>
             </b-form-group>
             <b-form-group :label="$t('New password')">
-              <b-form-input required v-model="form.new_password"/>
+              <b-form-input type="password" required v-model="form.new_password"/>
             </b-form-group>
             <b-form-group :label="$t('Confirmation password')">
-              <b-form-input required v-model="form.confirmation_password"/>
+              <b-form-input type="password" required v-model="form.confirmation_password"/>
             </b-form-group>
             <b-button type="submit" variant="primary" class="mt-4">{{ $t('forms.submit') }}</b-button>
           </b-form>
