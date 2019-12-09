@@ -14,8 +14,6 @@ export default class BaseService {
   setAuth (auth) {
     axios.interceptors.request.use(function (config) {
       const user = JSON.parse(localStorage.getItem(auth))
-      // console.log(auth)
-      // console.log(user)
       if (user) {
         config.headers.Authorization = `Bearer ${user.access_token}`
       }
@@ -30,8 +28,7 @@ export default class BaseService {
       const res = await axios.get(domain + uri, { params: params })
       return res.data
     } catch (e) {
-      Vue.$notify('error',  'Error', e, { duration: 13000, permanent: false })
-      throw e
+      this.errorMsg(e)
     }
   }
 
@@ -40,8 +37,7 @@ export default class BaseService {
       const res = await axios.post(domain + uri, params)
       return res.data
     } catch (e) {
-      Vue.$notify('error',  'Error', e, { duration: 13000, permanent: false })
-      throw e
+      this.errorMsg(e)
     }
   }
 
@@ -50,8 +46,7 @@ export default class BaseService {
       const res = await axios.put(domain + uri, params)
       return res.data
     } catch (e) {
-      Vue.$notify('error',  'Error', e, { duration: 13000, permanent: false })
-      throw e
+      this.errorMsg(e)
     }
   }
 
@@ -60,8 +55,7 @@ export default class BaseService {
       const res = await axios.patch(domain + uri, params)
       return res.data
     } catch (e) {
-      Vue.$notify('error',  'Error', e, { duration: 13000, permanent: false })
-      throw e
+      this.errorMsg(e)
     }
   }
 
@@ -70,8 +64,7 @@ export default class BaseService {
       const res = await axios.get(domain + uri)
       return res.data
     } catch (e) {
-      Vue.$notify('error',  'Error', e, { duration: 13000, permanent: false })
-      throw e
+      this.errorMsg(e)
     }
   }
 
@@ -80,12 +73,28 @@ export default class BaseService {
       const res = await axios.delete(domain + uri)
       return res.data
     } catch (e) {
-      Vue.$notify('error',  'Error', e, { duration: 13000, permanent: false })
-      throw e
+      this.errorMsg(e)
     }
   }
 
   url (uri) {
     return domain + uri
+  }
+
+  errorMsg (e) {
+    console.log(e.response)
+    let validationErrors = ''
+    if (e.response.status === 422) {
+      const errors = e.response.data.errors
+      for (let key in errors) {
+        validationErrors += errors[key] + '. '
+      }
+    }
+
+    if (e.response.status === 500) {
+      validationErrors = e.response.data.message
+    }
+
+    Vue.$notify('error', e.response.statusText, validationErrors, { duration: 13000, permanent: false })
   }
 }

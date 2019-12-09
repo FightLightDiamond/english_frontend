@@ -64,7 +64,7 @@
           this.$notify('success', 'Login Success', `Hi, ${this.email} `, { duration: 13000, permanent: false })
           this.$router.push('/english')
         } catch (e) {
-          this.$notify('error', 'Login Error', 'Login Fail', { duration: 13000, permanent: false })
+          this.$notify('error', 'Error', 'Login Fail', { duration: 13000, permanent: false })
           this.processing = false
         }
       }
