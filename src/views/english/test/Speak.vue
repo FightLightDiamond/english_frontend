@@ -35,8 +35,10 @@
     <b-card class="mb-12" ::title="$t(lesson.name)">
       <b-row class="form-group">
         <b-colxx xxs="6">
+          {{uploadLink}}
           <audio-recorder
-            upload-url="some url"
+            :attempts="3"
+            :upload-url="uploadLink"
             :time="0.7"
             :before-recording="callback"
             :pause-recording="callback"
@@ -59,7 +61,9 @@
   // import AudioRecorder from 'vue-audio-recorder'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
   import FactoryService from '../../../services/FactoryService'
-
+  import Vue from 'vue'
+  import axios from 'axios'
+  Vue.prototype.$http = axios
   var _ = require('lodash')
 
   export default {
@@ -71,6 +75,7 @@
     watch: {},
     data () {
       return {
+        uploadLink: `http://localhost:8000/api/test/crazy-speak/${this.$route.params.id}`,
         lesson: [],
         items: [{
           text: 'Home',
@@ -103,6 +108,7 @@
       }
     },
     async mounted () {
+      // alert()
       const res = await FactoryService.request('TestService').listen(this.$route.params.id)
       this.lesson = res
       this.sentences = res.details
@@ -110,6 +116,7 @@
     },
     methods: {
       callback (msg) {
+        console.debug(msg)
         if (msg === 'start recording') {
           if (this.record.play === true) {
             this.play()
