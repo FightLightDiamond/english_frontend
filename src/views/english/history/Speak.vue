@@ -3,104 +3,141 @@
     <b-row>
       <b-colxx xxs="12">
        <span>
-        <h1>Lesson</h1>
+        <h1>History</h1>
         <b-nav class="pt-0 breadcrumb-container d-none d-sm-block d-lg-inline-block">
             <b-breadcrumb :items="items"/>
         </b-nav>
       </span>
-        <div class="separator mb-5">
-        </div>
+        <div class="separator mb-5"></div>
       </b-colxx>
     </b-row>
 
-    <b-card class="mb-12" :title="$t('Listen and write')">
+    <b-card :title="$t('Filter')" class="mb-4">
       <b-row>
-        <b-colxx xxs="12">
-          <audio-recorder
-            upload-url="some url"
-            :attempts="3"
-            :time="2"
-            :before-recording="callback"
-            :pause-recording="callback"
-            :after-recording="callback"
-            :before-upload="callback"
-            :successful-upload="callback"
-            :failed-upload="callback"/>
+        <b-colxx xxs="6">
+          <label>Course</label>
+          <select @change="onChangeCourse()" v-model="course_id" class="form-control">
+            <option value="">All</option>
+            <option v-for="course in courses" :value="course.id">{{course.name}}</option>
+          </select>
+        </b-colxx>
+        <b-colxx xxs="6">
+          <label>Lesson</label>
+          <select @change="onChangeLesson()" v-model="lesson_id" class="form-control">
+            <option value="">All</option>
+            <option v-for="lesson in lessons" :value="lesson.id">{{lesson.name}}</option>
+          </select>
         </b-colxx>
       </b-row>
     </b-card>
 
-    <b-card class="form-group" :title="$t(lesson.name)">
-      <b-row class="form-group">
-        <b-colxx xxs="12">
-          <audio :src="lesson.audio" controls></audio>
-        </b-colxx>
-      </b-row>
+    <b-card :title="$t('History')" class="mb-4">
+      <vuetable
+        ref="vuetable"
+        :api-url="getApi()"
+        :fields="history.fields"
+        pagination-path
+        @vuetable:pagination-data="onPaginationData"
+      ></vuetable>
+      <vuetable-pagination-bootstrap
+        ref="pagination"
+        @vuetable-pagination:change-page="onChangePage"
+      ></vuetable-pagination-bootstrap>
     </b-card>
 
-    <b-row>
-      <b-colxx xxs="12">
-        <b-card class="mb-4">
-          <vuetable ref="vuetable" class="table-bordered table-hover"
-                    :api-mode="false"
-                    :data="sentences"
-                    :fields="fields"
-          >
-          </vuetable>
-        </b-card>
-      </b-colxx>
-    </b-row>
   </div>
 </template>
 
 <script>
-  import AudioRecorder from 'vue-audio-recorder'
   import Vuetable from 'vuetable-2/src/components/Vuetable'
+  import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
+  import draggable from 'vuedraggable'
+  import FactoryService from '../../../services/FactoryService'
 
   export default {
-    name: 'Speak',
     components: {
-      VueAudioRecorder,
-      Vuetable
+      Vuetable,
+      VuetablePaginationBootstrap,
+      draggable,
     },
     data () {
       return {
-        headers: {
-          'X-Custom-Header': 'some data'
-        },
-        lesson: [],
+        course_id: '',
+        lesson_id: '',
+        courses: [],
+        lessons: [],
         items: [{
           text: 'Home',
           to: '/english',
         }, {
-          text: 'Sessions',
-          to: '/english/lesson',
+          text: 'History',
+          to: '/histories',
         }, {
-          text: 'Lesson',
+          text: 'Read',
           active: true
         }],
-        sentences: [],
-        fields: [
-          {
-            name: 'sentence',
-            title: 'English',
-          },
-          {
-            name: 'meaning',
-            title: 'Vietnamese',
-          },
-          '__slot:actions'
-        ],
+        history: {
+          fields: [
+            {
+              name: 'course',
+              title: 'Course',
+            },
+            {
+              name: 'lesson',
+              title: 'Lesson',
+            },
+            {
+              name: 'score',
+              sortField: 'score',
+              title: 'Score',
+            },
+            {
+              name: 'created_at',
+              sortField: 'created_at',
+              title: 'date',
+            }
+          ]
+        },
       }
     },
     async mounted () {
-      const res = await testService.listen(this.$route.params.id)
-      this.lesson = res
-      this.sentences = res.details
+      this.getCourses()
+    },
+    watch: {
+      apiUrl (newVal, oldVal) {
+        this.$refs.vuetable.refresh()
+      }
     },
     methods: {
-      callback (msg) {
-        console.debug('Event: ', msg)
+      onPaginationData (paginationData) {
+        this.$refs.pagination.setPaginationData(paginationData)
+      },
+      onChangePage (page) {
+        this.$refs.vuetable.changePage(page)
+      },
+      async onChangeCourse () {
+        const params = {
+          crazy_course_id: this.course_id
+        }
+        this.lessons = await FactoryService.request('CrazyService').index(params)
+        this.lesson_id = ''
+        this.apiUrl = this.getApi()
+      },
+      async onChangeLesson () {
+        this.apiUrl = this.getApi()
+      },
+      getCourses () {
+        FactoryService.request('CourseService').index().then((res) => {
+          this.courses = res
+        })
+      },
+      getApi () {
+        const api = `/api/crazy-speak-histories?crazy_course_id=${this.course_id}&crazy_id=${this.lesson_id}`
+        return FactoryService.request('BaseService')
+          .url(api)
+      },
+      async getData () {
+        return await FactoryService.request('HistoryService').read({})
       }
     }
   }
