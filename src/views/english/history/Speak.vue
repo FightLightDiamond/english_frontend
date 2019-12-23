@@ -87,13 +87,11 @@
               title: 'Lesson',
             },
             {
-              name: 'score',
-              sortField: 'score',
-              title: 'Score',
+              name: 'audio',
+              title: 'Audio',
             },
             {
               name: 'created_at',
-              sortField: 'created_at',
               title: 'date',
             }
           ]

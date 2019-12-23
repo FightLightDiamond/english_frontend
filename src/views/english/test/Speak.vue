@@ -35,7 +35,6 @@
     <b-card class="mb-12" ::title="$t(lesson.name)">
       <b-row class="form-group">
         <b-colxx xxs="6">
-          {{uploadLink}}
           <audio-recorder
             :attempts="3"
             :upload-url="uploadLink"
