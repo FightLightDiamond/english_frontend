@@ -7,6 +7,7 @@ import user from './modules/user'
 import chat from './modules/chat'
 import todo from './modules/todo'
 import survey from './modules/survey'
+import train from './modules/train'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export const store = new Vuex.Store({
   state: {
   },
   getters: {
+
   },
   mutations: {
     changeLang (state, payload) {
@@ -31,6 +33,7 @@ export const store = new Vuex.Store({
     user,
     chat,
     todo,
+    train,
     survey
   }
 })

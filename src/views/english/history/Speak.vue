@@ -60,6 +60,10 @@
       VuetablePaginationBootstrap,
       draggable,
     },
+    // computed: mapState([
+    //   // map this.count to store.state.count
+    //   'count'
+    // ]),
     data () {
       return {
         course_id: '',
