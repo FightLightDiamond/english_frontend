@@ -6,7 +6,10 @@
 // export const store = new Vuex.Store({
 //
 // })
-
+/**
+ * Properties
+ * @type {{registrations: [], users: *[]}}
+ */
 const state = {
   registrations: [],
   users: [
@@ -18,7 +21,10 @@ const state = {
     { id: 6, name: 'Mc', registered: false },
   ]
 }
-
+/**
+ * Get property state
+ * @type {{totalRegistrations(*): *, registrations(*): *, unregisteredUsers(*): *}}
+ */
 const getters = {
   unregisteredUsers (state) {
     return state.users.filter(user => {
@@ -33,9 +39,12 @@ const getters = {
   }
 }
 
+/**
+ * Modify state
+ * @type {{unregister(*, *): void, register(*=, *): void}}
+ */
 const mutations = {
   register (state, userId) {
-    console.log('xxxx', state)
     const date = new Date()
     const user = state.users.find(user => {
       return user.id === userId
@@ -66,6 +75,10 @@ const mutations = {
   }
 }
 
+/**
+ * Method
+ * @type {{unregister({commit: *}, *=): void, register({commit: *}, *=): void}}
+ */
 const actions = {
   register ({ commit }, userId) {
     setTimeout(() => {

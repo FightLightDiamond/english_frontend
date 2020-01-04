@@ -29,6 +29,22 @@
   export default {
     name: 'Registrations',
     // props: ['registrations'],
+    computed: {
+      ...mapGetters ({
+        registrations: 'registrations',
+        total: 'totalRegistrations'
+      })
+
+
+      // registrations () {
+      //   //return this.$store.state.train.registrations
+      //   return this.$store.getters.registrations
+      // },
+      // total () {
+      //   //return this.$store.state.train.registrations.length
+      //   return this.$store.getters.totalRegistrations
+      // },
+    },
     methods: {
       unregister (registration) {
         //this.$emit('userUnregistered', registration)
@@ -47,22 +63,6 @@
         this.$store.dispatch(payload)
       }
     },
-    computed: {
-      ...mapGetters ({
-        registrations: 'registrations',
-        total: 'totalRegistrations'
-      })
-
-
-      // registrations () {
-      //   //return this.$store.state.train.registrations
-      //   return this.$store.getters.registrations
-      // },
-      // total () {
-      //   //return this.$store.state.train.registrations.length
-      //   return this.$store.getters.totalRegistrations
-      // },
-    }
   }
 </script>
 

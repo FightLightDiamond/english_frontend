@@ -18,17 +18,21 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     name: 'Registration',
     // props: ['users'],
     computed: {
-      users () {
-        console.log(this.$store)
-        // return this.$store.state.train.users.filter(user => {
-        //   return !user.registered
-        // })
-        return this.$store.getters.unregisteredUsers
-      }
+      ...mapGetters ({
+        users: 'unregisteredUsers',
+      })
+      // users () {
+      //   // return this.$store.state.train.users.filter(user => {
+      //   //   return !user.registered
+      //   // })
+      //   return this.$store.getters.unregisteredUsers
+      // }
     },
     methods: {
       registerUser (userId) {
