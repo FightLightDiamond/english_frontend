@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
 
   export default {
     name: 'Registration',
@@ -35,22 +35,25 @@
       // }
     },
     methods: {
-      registerUser (userId) {
-        //this.$emit('userRegistered', user)
-        // user.registered = true
-        //
-        // const date = new Date()
-        // const userInfo = {
-        //   userId: user.id,
-        //   name: user.name,
-        //   date: date.getMonth() + '/' + date.getDate()
-        // }
-        //
-        // this.$store.state.train.registrations.push(userInfo)
-
-        //this.$store.commit('register', userId)
-        this.$store.dispatch('register', userId)
-      }
+      ...mapMutations({
+        registerUser: 'register'
+      })
+      // registerUser (userId) {
+      //   //this.$emit('userRegistered', user)
+      //   // user.registered = true
+      //   //
+      //   // const date = new Date()
+      //   // const userInfo = {
+      //   //   userId: user.id,
+      //   //   name: user.name,
+      //   //   date: date.getMonth() + '/' + date.getDate()
+      //   // }
+      //   //
+      //   // this.$store.state.train.registrations.push(userInfo)
+      //
+      //   //this.$store.commit('register', userId)
+      //   this.$store.dispatch('register', userId)
+      // }
     }
   }
 </script>

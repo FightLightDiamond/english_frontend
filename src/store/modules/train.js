@@ -22,29 +22,29 @@ const state = {
   ]
 }
 /**
- * Get property state
+ * Get property state => Computed in component
  * @type {{totalRegistrations(*): *, registrations(*): *, unregisteredUsers(*): *}}
  */
 const getters = {
-  unregisteredUsers (state) {
+  unregisteredUsers: state => {
     return state.users.filter(user => {
       return !user.registered
     })
   },
-  registrations (state) {
+  registrations: state => {
     return state.registrations
   },
-  totalRegistrations (state) {
+  totalRegistrations: state => {
     return state.registrations.length
   }
 }
 
 /**
- * Modify state
+ * Modify state => call by commit on store
  * @type {{unregister(*, *): void, register(*=, *): void}}
  */
 const mutations = {
-  register (state, userId) {
+  register: (state, userId) => {
     const date = new Date()
     const user = state.users.find(user => {
       return user.id === userId
@@ -60,7 +60,7 @@ const mutations = {
 
     state.registrations.push(registration)
   },
-  unregister (state, payload) {
+  unregister: (state, payload) => {
     const user = state.users.find(user => {
       return user.id === payload.userId
     })
@@ -76,16 +76,17 @@ const mutations = {
 }
 
 /**
- * Method
+ * Method => call by dispatch on store
+ * Call API
  * @type {{unregister({commit: *}, *=): void, register({commit: *}, *=): void}}
  */
 const actions = {
-  register ({ commit }, userId) {
+  register: ({ commit }, userId) => {
     setTimeout(() => {
       commit('register', userId)
     }, 0)
   },
-  unregister ({ commit }, payload) {
+  unregister: ({ commit }, payload) => {
     commit('unregister', payload)
   }
 }

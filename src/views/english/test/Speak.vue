@@ -112,6 +112,7 @@
       this.lesson = res
       this.sentences = res.details
       this.audio = document.getElementById('audio')
+      this.audio.muted = true;
     },
     methods: {
       callback (msg) {

@@ -38,7 +38,18 @@
         :fields="history.fields"
         pagination-path
         @vuetable:pagination-data="onPaginationData"
-      ></vuetable>
+      >
+
+        <template slot="actions" scope="props">
+          <audio :src="props.rowData.audio" controls></audio>
+<!--          <div class="table-button-container text-right">-->
+<!--            <router-link :to="`/listen/${props.rowData.id}`" class="btn btn-xs btn-primary">-->
+<!--              Listen-->
+<!--            </router-link>-->
+<!--          </div>-->
+        </template>
+
+      </vuetable>
       <vuetable-pagination-bootstrap
         ref="pagination"
         @vuetable-pagination:change-page="onChangePage"
@@ -91,13 +102,10 @@
               title: 'Lesson',
             },
             {
-              name: 'audio',
-              title: 'Audio',
-            },
-            {
               name: 'created_at',
               title: 'date',
-            }
+            },
+            '__slot:actions',
           ]
         },
       }

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
 
   export default {
     name: 'Registrations',
@@ -46,22 +46,23 @@
       // },
     },
     methods: {
-      unregister (registration) {
-        //this.$emit('userUnregistered', registration)
-        // const user = this.$store.state.train.users.find(user => {
-        //   return user.id === registration.userId
-        // })
-        //
-        // user.registered = false
-        // this.$store.state.train.registrations.splice(this.$store.state.train.registrations.indexOf(registration), 1)
-        const payload = {
-          type: 'unregister',
-          userId: registration.userId,
-        };
-
-        //this.$store.commit(payload)
-        this.$store.dispatch(payload)
-      }
+      ...mapActions(['unregister'])
+      // unregister (registration) {
+      //   //this.$emit('userUnregistered', registration)
+      //   // const user = this.$store.state.train.users.find(user => {
+      //   //   return user.id === registration.userId
+      //   // })
+      //   //
+      //   // user.registered = false
+      //   // this.$store.state.train.registrations.splice(this.$store.state.train.registrations.indexOf(registration), 1)
+      //   const payload = {
+      //     type: 'unregister',
+      //     userId: registration.userId,
+      //   };
+      //
+      //   //this.$store.commit(payload)
+      //   this.$store.dispatch(payload)
+      // }
     },
   }
 </script>
