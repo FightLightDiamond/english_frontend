@@ -14,11 +14,11 @@
           <h6 class="mb-4">{{ $t('user.login-title')}}</h6>
           <b-form @submit.prevent="formSubmit">
             <label class="form-group has-float-label mb-4">
-              <input type="email" class="form-control" v-model="email">
+              <input type="email" class="form-control" v-model="form.email">
               <span>{{ $t('user.email') }}</span>
             </label>
             <label class="form-group has-float-label mb-4">
-              <input type="password" class="form-control" v-model="password">
+              <input type="password" class="form-control" v-model="form.password">
               <span>{{ $t('user.password') }}</span>
             </label>
             <div class="d-flex justify-content-between align-items-center">
@@ -37,35 +37,34 @@
 <script>
 
   import Auth from '../../config/Auth'
-  import FactoryService from '../../services/FactoryService'
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
 
   export default {
     data () {
       return {
-        email: 'fightlightdiamond@gmail.com',
-        password: '123456',
-        processing: false
+        form: {
+          email: 'fightlightdiamond@gmail.com',
+          password: '123456',
+        }
       }
     },
+    computed: {
+      ...mapGetters(["currentUser", "processing", "loginError"])
+    },
     methods: {
+      ...mapActions(['login']),
       async formSubmit () {
-        this.processing = true
         let auth = Auth.passpost()
-        auth.username = this.email
-        auth.password = this.password
-        console.log(auth)
+        auth.username = this.form.email
+        auth.password = this.form.password
 
-        try {
-          const res = await FactoryService.request('AuthService').login(auth)
+        await this.login(auth)
 
-          localStorage.setItem('user', JSON.stringify(res))
-          console.log(res)
-
-          this.$notify('success', 'Login Success', `Hi, ${this.email} `, { duration: 13000, permanent: false })
+        if(this.loginError === null) {
+          this.$notify('success', 'Login Success', `Hi, ${this.form.email} `, { duration: 13000, permanent: false })
           this.$router.push('/english')
-        } catch (e) {
+        } else {
           this.$notify('error', 'Error', 'Login Fail', { duration: 13000, permanent: false })
-          this.processing = false
         }
       }
     },
