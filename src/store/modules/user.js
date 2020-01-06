@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import { currentUser } from '@/constants/config'
+import FactoryService from '../../services/FactoryService'
 
 export default {
   state: {
@@ -39,32 +40,34 @@ export default {
     }
   },
   actions: {
-    login ({ commit }, payload) {
+    async login ({ commit }, payload) {
       commit('clearError')
       commit('setProcessing', true)
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(payload.email, payload.password)
-        .then(
-          user => {
-            const item = { uid: user.user.uid, ...currentUser }
-            localStorage.setItem('user', JSON.stringify(item))
-            commit('setUser', { uid: user.user.uid, ...currentUser })
-          },
-          err => {
-            localStorage.removeItem('user')
-            commit('setError', err.message)
-          }
-        )
+
+      try {
+        const res = await FactoryService.request('AuthService').login(payload)
+        localStorage.setItem('user', JSON.stringify(res))
+        commit('setUser', res)
+      } catch (e) {
+        localStorage.removeItem('user')
+        commit('setError', e.message)
+        this.processing = false
+      }
+    },
+    async register({commit}, payload) {
+      try {
+        const res = await FactoryService.request('AuthService').register(payload)
+        localStorage.setItem('user', JSON.stringify(res))
+        commit('setUser', res)
+      } catch (e) {
+        localStorage.removeItem('user')
+        commit('setError', e.message)
+        this.processing = false
+      }
     },
     signOut ({ commit }) {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
           localStorage.removeItem('user')
           commit('setLogout')
-        }, _error => {})
     }
   }
 }

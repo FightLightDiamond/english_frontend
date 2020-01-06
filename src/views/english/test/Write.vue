@@ -110,19 +110,11 @@
       console.log(this.lesson)
 
       for (let en of this.ens) {
-        this.params.sentences[en.id] = '';
+        this.params.sentences[en.id] = ''
       }
     },
     methods: {
       async submit () {
-        // const params = {
-        //   sentences: {}
-        // }
-
-        for (let en of this.ens) {
-          this.params.sentences[en.id] = en.sentence
-        }
-
         const res = await FactoryService.request('TestService').written(this.id, this.params)
         this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, {
           duration: 13000,

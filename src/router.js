@@ -73,6 +73,14 @@ const routes = [
       { path: 'speak/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Speak') }
     ]
   },
+  {
+    path: '/train',
+    component: () => import(/* webpackChunkName: "english" */ './views/english'),
+    redirect: '/train/re',
+    children: [
+      { path: '/re', component: () => import(/* webpackChunkName: "english" */ './views/train/Register') },
+    ]
+  },
   { path: '/error', component: () => import(/* webpackChunkName: "error" */ './views/Error') },
   { path: '*', component: () => import(/* webpackChunkName: "error" */ './views/Error') }
 ]
