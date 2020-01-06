@@ -1,6 +1,5 @@
 export default {
-  domain() {
-     return 'http://localhost:8000';
+  domain () {
+    return 'http://localhost:8000'
   }
 }
-
