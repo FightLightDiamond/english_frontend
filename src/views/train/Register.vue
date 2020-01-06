@@ -2,6 +2,16 @@
   <div>
     <!--    <app-registration @userRegistered="userRegistered" :users="unregisteredUsers"></app-registration>-->
     <!--    <app-registrations @userUnregistered="userRegistered" :registrations="registrations"></app-registrations>-->
+    <b-row>
+      <b-colxx xss="12">
+        <t-grid></t-grid>
+      </b-colxx>
+    </b-row>
+    <!--<b-row>-->
+      <!--<b-colxx xss="12">-->
+        <!--<e-grid></e-grid>-->
+      <!--</b-colxx>-->
+    <!--</b-row>-->
 
     <b-row>
       <b-colxx xxs="6">
@@ -18,12 +28,16 @@
 <script>
   import Registration from './Registration'
   import Registrations from './Registrations'
+  import TGrid from './grid/TGrid'
+  import EGrid from './grid/EGrid'
 
   export default {
     name: 'Register',
     components: {
       appRegistration: Registration,
       appRegistrations: Registrations,
+      tGrid: TGrid,
+      eGrid: EGrid,
     },
     // data() {
     //   return {
@@ -57,6 +71,12 @@
     // }
   }
 </script>
+
+<style>
+  .vue-grid-item {
+    background: silver;
+  }
+</style>
 
 <style scoped>
 

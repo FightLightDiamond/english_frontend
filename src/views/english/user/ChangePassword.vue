@@ -45,9 +45,9 @@
         try {
           const res = await FactoryService.request('AuthService').changePass(this.form)
 
-          this.$notify('success', 'Success', `Update successfully`, { duration: 13000, permanent: false })
+          this.$notify('success', 'Success', `Update successfully`, { duration: 1300, permanent: false })
         } catch (e) {
-          this.$notify('error', 'Error', `Update fail`, { duration: 13000, permanent: false })
+          this.$notify('error', 'Error', `Update fail`, { duration: 1300, permanent: false })
         }
       }
     }

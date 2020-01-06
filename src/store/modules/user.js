@@ -1,42 +1,41 @@
-import firebase from 'firebase/app'
-import 'firebase/auth'
 import { currentUser } from '@/constants/config'
 import FactoryService from '../../services/FactoryService'
+import Auth from '../../config/Auth'
 
 export default {
   state: {
     currentUser: localStorage.getItem('user') != null ? JSON.parse(localStorage.getItem('user')) : null,
     currentAdmin: localStorage.getItem('admin') != null ? JSON.parse(localStorage.getItem('admin')) : null,
-    loginError: null,
+    msgError: null,
     processing: false
   },
   getters: {
     currentUser: state => state.currentUser,
     processing: state => state.processing,
-    loginError: state => state.loginError
+    msgError: state => state.msgError
   },
   mutations: {
     setUser (state, payload) {
       state.currentUser = payload
       state.processing = false
-      state.loginError = null
+      state.msgError = null
     },
     setLogout (state) {
       state.currentUser = null
       state.processing = false
-      state.loginError = null
+      state.msgError = null
     },
     setProcessing (state, payload) {
       state.processing = payload
-      state.loginError = null
+      state.msgError = null
     },
     setError (state, payload) {
-      state.loginError = payload
+      state.msgError = payload
       state.currentUser = null
       state.processing = false
     },
     clearError (state) {
-      state.loginError = null
+      state.msgError = null
     }
   },
   actions: {
@@ -45,25 +44,30 @@ export default {
       commit('setProcessing', true)
 
       try {
-        const res = await FactoryService.request('AuthService').login(payload)
+        let auth = Auth.passpost()
+        auth.username = payload.email
+        auth.password = payload.password
+
+        const res = await FactoryService.request('AuthService').login(auth)
+
         localStorage.setItem('user', JSON.stringify(res))
+
         commit('setUser', res)
       } catch (e) {
         localStorage.removeItem('user')
         commit('setError', e.message)
-        this.processing = false
+        commit('setProcessing', false)
       }
     },
     async register({commit}, payload) {
-      try {
         const res = await FactoryService.request('AuthService').register(payload)
-        localStorage.setItem('user', JSON.stringify(res))
-        commit('setUser', res)
-      } catch (e) {
-        localStorage.removeItem('user')
-        commit('setError', e.message)
-        this.processing = false
-      }
+
+        if(res.stats < 200 && res.status > 300) {
+
+        } else {
+          commit('setError', res.statusText)
+          commit('setProcessing', false)
+        }
     },
     signOut ({ commit }) {
           localStorage.removeItem('user')

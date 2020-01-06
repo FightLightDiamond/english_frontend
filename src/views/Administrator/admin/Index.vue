@@ -114,10 +114,10 @@
           .then(async (dialog) => {
             try {
               await FactoryService.request('AdminService', 'admin').update(id, { is_active: 0 })
-              this.$notify('success', 'Success', `Disable successfully`, { duration: 13000, permanent: false })
+              this.$notify('success', 'Success', `Disable successfully`, { duration: 1300, permanent: false })
               this.$refs.vuetable.refresh()
             } catch (e) {
-              this.$notify('error', 'Error', `Disable fail`, { duration: 13000, permanent: false })
+              this.$notify('error', 'Error', `Disable fail`, { duration: 1300, permanent: false })
             }
           })
       },
@@ -132,10 +132,10 @@
           .then(async (dialog) => {
             try {
               await FactoryService.request('AdminService', 'admin').update(id, { is_active: 1 })
-              this.$notify('success', 'Success', `Enable successfully`, { duration: 13000, permanent: false })
+              this.$notify('success', 'Success', `Enable successfully`, { duration: 1300, permanent: false })
               this.$refs.vuetable.refresh()
             } catch (e) {
-              this.$notify('error', 'Error', `Enable fail`, { duration: 13000, permanent: false })
+              this.$notify('error', 'Error', `Enable fail`, { duration: 1300, permanent: false })
             }
           })
       }

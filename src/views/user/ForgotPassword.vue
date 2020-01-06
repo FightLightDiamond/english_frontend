@@ -29,7 +29,7 @@
   </b-row>
 </template>
 <script>
-
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
   import FactoryService from '../../services/FactoryService'
 
   export default {
@@ -45,7 +45,7 @@
         try {
           const res = await FactoryService.request('AuthService').forgetPass(this.form)
           this.$notify('success', 'Success', 'We send you link to reset password. Please check email',
-            { duration: 13000, permanent: false })
+            { duration: 1300, permanent: false })
           console.log(res)
         } catch (e) {
           console.log(e)

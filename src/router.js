@@ -75,7 +75,7 @@ const routes = [
   },
   {
     path: '/train',
-    component: () => import(/* webpackChunkName: "english" */ './views/english'),
+    component: () => import(/* webpackChunkName: "english" */ './views/train'),
     redirect: '/train/re',
     children: [
       { path: '/re', component: () => import(/* webpackChunkName: "english" */ './views/train/Register') },

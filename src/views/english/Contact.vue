@@ -80,9 +80,9 @@
         try {
           const res = await FactoryService.request('ContactService').create(this.form)
           this.form = {}
-          this.$notify('success', 'Contact Success', `We will contact you soon`, { duration: 13000, permanent: false })
+          this.$notify('success', 'Contact Success', `We will contact you soon`, { duration: 1300, permanent: false })
         } catch (e) {
-          this.$notify('error', 'Contact Fail', `Server error`, { duration: 13000, permanent: false })
+          this.$notify('error', 'Contact Fail', `Server error`, { duration: 1300, permanent: false })
         }
       }
     }

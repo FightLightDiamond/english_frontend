@@ -50,15 +50,18 @@ const mutations = {
       return user.id === userId
     })
 
-    user.registered = true
+    if(user) {
+      user.registered = true
 
-    const registration = {
-      userId: user.id,
-      name: user.name,
-      date: date.getMonth() + '/' + date.getDate()
+      const registration = {
+        userId: user.id,
+        name: user.name,
+        date: date.getMonth() + '/' + date.getDate()
+      }
+
+      state.registrations.push(registration)
     }
 
-    state.registrations.push(registration)
   },
   unregister: (state, payload) => {
     const user = state.users.find(user => {

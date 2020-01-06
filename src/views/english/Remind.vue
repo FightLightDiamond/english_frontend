@@ -78,7 +78,7 @@
         FactoryService.request('RemindService').create(this.form)
 
         this.$notify('success', 'Remind Success', `Remind for you at ${this.form.hour < 10 ? '0' + this.form.hour : this.form.hour} : ${this.form.minute < 10 ? '0' + this.form.minute : this.form.minute} per day `, {
-          duration: 13000,
+          duration: 1300,
           permanent: false
         })
       }

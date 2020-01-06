@@ -110,10 +110,10 @@
           .then(async (dialog) => {
             try {
               await FactoryService.request('CourseService', 'admin').destroy(id)
-              this.$notify('success', 'Success', `Delete successfully`, { duration: 13000, permanent: false })
+              this.$notify('success', 'Success', `Delete successfully`, { duration: 1300, permanent: false })
               this.$refs.vuetable.refresh()
             } catch (e) {
-              this.$notify('error', 'Success', `Delete fail`, { duration: 13000, permanent: false })
+              this.$notify('error', 'Success', `Delete fail`, { duration: 1300, permanent: false })
             }
           })
       }

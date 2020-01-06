@@ -125,12 +125,12 @@
           const res = await FactoryService.request('AdminService', 'admin').create(this.form)
           this.form = {}
           this.$notify('success', 'Create Success', `Add new administrator successfully`, {
-            duration: 13000,
+            duration: 1300,
             permanent: false
           })
           this.$router.push('/administrator/users')
         } catch (e) {
-          this.$notify('success', 'Create Fail', `Server Error`, { duration: 13000, permanent: false })
+          this.$notify('success', 'Create Fail', `Server Error`, { duration: 1300, permanent: false })
         }
       }
     }

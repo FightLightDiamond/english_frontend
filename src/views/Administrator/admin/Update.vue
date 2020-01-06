@@ -109,10 +109,10 @@
       async submit () {
         try {
           const res = await FactoryService.request('CourseService', 'admin').update(this.form)
-          this.$notify('success', 'Success', `Update successfully`, { duration: 13000, permanent: false })
+          this.$notify('success', 'Success', `Update successfully`, { duration: 1300, permanent: false })
           this.$router.push('/administrator/admins')
         } catch (e) {
-          this.$notify('error', 'Fail', `Update fail`, { duration: 13000, permanent: false })
+          this.$notify('error', 'Fail', `Update fail`, { duration: 1300, permanent: false })
         }
       }
     }

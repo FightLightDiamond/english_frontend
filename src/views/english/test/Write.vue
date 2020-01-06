@@ -117,7 +117,7 @@
       async submit () {
         const res = await FactoryService.request('TestService').written(this.id, this.params)
         this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, {
-          duration: 13000,
+          duration: 1300,
           permanent: false
         })
 

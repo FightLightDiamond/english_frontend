@@ -120,7 +120,7 @@
 
         const res = await FactoryService.request('TestService').read(this.$route.params.id, params)
         this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, {
-          duration: 13000,
+          duration: 1300,
           permanent: false
         })
         this.result = res.result

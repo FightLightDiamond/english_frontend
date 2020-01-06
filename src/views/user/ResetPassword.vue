@@ -31,6 +31,7 @@
   </b-row>
 </template>
 <script>
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
   import FactoryService from '../../services/FactoryService'
 
   export default {

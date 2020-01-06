@@ -95,6 +95,6 @@ export default class BaseService {
       validationErrors = e.response.data.message
     }
 
-    Vue.$notify('error', e.response.statusText, validationErrors, { duration: 13000, permanent: false })
+    Vue.$notify('error', e.response.statusText, validationErrors, { duration: 1300, permanent: false })
   }
 }
