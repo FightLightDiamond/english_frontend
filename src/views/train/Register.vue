@@ -13,14 +13,14 @@
       <!--</b-colxx>-->
     <!--</b-row>-->
 
-    <b-row>
-      <b-colxx xxs="6">
-        <app-registration></app-registration>
-      </b-colxx>
-      <b-colxx xxs="6">
-        <app-registrations></app-registrations>
-      </b-colxx>
-    </b-row>
+    <!--<b-row>-->
+      <!--<b-colxx xxs="6">-->
+        <!--<app-registration></app-registration>-->
+      <!--</b-colxx>-->
+      <!--<b-colxx xxs="6">-->
+        <!--<app-registrations></app-registrations>-->
+      <!--</b-colxx>-->
+    <!--</b-row>-->
 
   </div>
 </template>

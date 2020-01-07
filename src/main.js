@@ -84,6 +84,14 @@ Vue.use(require('vue-shortkey'))
 
 firebase.initializeApp(firebaseConfig)
 
+
+Vue.use(require('vue-moment'));
+
+import moment from 'moment';
+
+Vue.prototype.moment = moment;
+Vue.use(require('v-validate'))
+
 export default new Vue({
   el: '#app',
   i18n,
@@ -91,5 +99,8 @@ export default new Vue({
   store,
   render: h => h(App)
 })
+
+
+
 
 
