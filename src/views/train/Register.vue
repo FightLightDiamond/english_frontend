@@ -21,7 +21,7 @@
         <!--<app-registrations></app-registrations>-->
       <!--</b-colxx>-->
     <!--</b-row>-->
-
+    <test-date></test-date>
   </div>
 </template>
 
@@ -30,6 +30,7 @@
   import Registrations from './Registrations'
   import TGrid from './grid/TGrid'
   import EGrid from './grid/EGrid'
+  import TestDate from './grid/TestDate'
 
   export default {
     name: 'Register',
@@ -38,6 +39,7 @@
       appRegistrations: Registrations,
       tGrid: TGrid,
       eGrid: EGrid,
+      testDate: TestDate,
     },
     // data() {
     //   return {

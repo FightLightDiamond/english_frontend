@@ -21,6 +21,7 @@
     "v-calendar": "^0.9.7",
     "v-contextmenu": "^2.8.0",
     "v-validate": "^0.1.4",
+    "vee-validate": "^3.2.1",
     "video.js": "^7.4.1",
     "vue": "^2.6.6",
     "vue-audio-recorder": "^3.0.1",
