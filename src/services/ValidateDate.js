@@ -2,8 +2,9 @@ import moment from 'moment'
 
 export default class ValidateDate {
   check (date) {
-    if (!this.checkFormat(date)) return 'The format field must yyyy/MM/dd. Ex: ' + moment().format('YYYY/MM/DD')
+    if (!this.checkFormat(date)) return 'The field format is invalid. Ex: ' + moment().format('YYYY/MM/DD')
     if (!this.checkDay(date)) return 'The day of field is incorrect'
+
     return true
   }
 

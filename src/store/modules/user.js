@@ -43,35 +43,45 @@ export default {
       commit('clearError')
       commit('setProcessing', true)
 
-      try {
-        let auth = Auth.passpost()
-        auth.username = payload.email
-        auth.password = payload.password
+      let auth = Auth.passpost()
+      auth.username = payload.email
+      auth.password = payload.password
 
-        const res = await FactoryService.request('AuthService').login(auth)
+      const res = await FactoryService.request('AuthService').login(auth)
 
+      if (!(res.status < 200 && res.status > 300)) {
         localStorage.setItem('user', JSON.stringify(res))
 
         commit('setUser', res)
-      } catch (e) {
+      } else {
         localStorage.removeItem('user')
-        commit('setError', e.message)
+        commit('setError', res.statusText)
         commit('setProcessing', false)
       }
     },
-    async register({commit}, payload) {
-        const res = await FactoryService.request('AuthService').register(payload)
+    async register ({ commit }, payload) {
+      commit('clearError')
+      commit('setProcessing', true)
+      const res = await FactoryService.request('AuthService').register(payload)
 
-        if(res.stats < 200 && res.status > 300) {
+      if (!(res.status < 200 && res.status > 300)) {
+        commit('setError', res.statusText)
+        commit('setProcessing', false)
+      }
+    },
+    async forgotPassword({commit}, payload) {
+      commit('clearError')
+      commit('setProcessing', true)
+      const res = await FactoryService.request('AuthService').forgetPass(payload)
 
-        } else {
-          commit('setError', res.statusText)
-          commit('setProcessing', false)
-        }
+      if (!(res.status < 200 && res.status > 300)) {
+        commit('setError', res.statusText)
+      }
+      commit('setProcessing', false)
     },
     signOut ({ commit }) {
-          localStorage.removeItem('user')
-          commit('setLogout')
+      localStorage.removeItem('user')
+      commit('setLogout')
     }
   }
 }

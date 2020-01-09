@@ -34,12 +34,11 @@
 </template>
 
 <script>
-  import FactoryService from '../../../services/FactoryService'
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
 
   export default {
     data () {
       return {
-        courses: [],
         items: [{
           text: 'Home',
           to: '/english',
@@ -49,9 +48,15 @@
         }, ]
       }
     },
-    async mounted () {
-      this.courses = await FactoryService.request('CourseService').index()
+    computed: {
+      ...mapGetters(['courses'])
     },
+    async mounted () {
+      await this.getCourses({type: 'getCourses'})
+    },
+    methods: {
+      ...mapActions(['getCourses']),
+    }
   }
 </script>
 

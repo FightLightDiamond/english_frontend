@@ -6,10 +6,28 @@
             <!--<datepicker @change="checkTime()" format="yyyy/MM/dd" placeholder="yyyy/MM/dd" :typeable="true"-->
             <!--v-model="date"></datepicker>-->
             <!--<input v-model="date" v-validate="{ date_format: 'yyyy/MM/dd', date_between:['01/01/1990', maxStartDate] }"/>-->
-            <validation-provider rules="checkdate" v-slot="{ errors }">
-                <input v-model="date" name="date"/>
-                <span>{{ errors[0] }}</span>
-            </validation-provider>
+
+            <ValidationObserver v-slot="{ invalid }">
+                <form @submit.prevent="onSubmit">
+                        <validation-provider rules="checkdate|required" v-slot="{ errors }">
+                        <input v-model="date" placeholder="yyyy/MM/dd" name="date"/>
+                        <span>{{ errors[0] }}</span>
+                    </validation-provider>
+
+                    <button type="submit" :disabled="invalid">Submit</button>
+                </form>
+            </ValidationObserver>
+
+            <ValidationObserver v-slot="{ handleSubmit }">
+                <form @submit.prevent="handleSubmit(onSubmit)">
+                    <validation-provider rules="checkdate|required" v-slot="{ errors }">
+                        <input v-model="date" name="date"/>
+                        <span>{{ errors[0] }}</span>
+                    </validation-provider>
+
+                    <button type="submit">Submit</button>
+                </form>
+            </ValidationObserver>
         </div>
 
         <div>
@@ -25,10 +43,12 @@
 <script>
   import Datepicker from 'vuejs-datepicker'
   import ValidateDate from '../../../services/ValidateDate'
+
   import { ValidationProvider, extend } from 'vee-validate'
   import { required } from 'vee-validate/dist/rules'
   import { Validator } from 'vee-validate'
-  // import { extend } from 'vee-validate';
+  import { ValidationObserver } from 'vee-validate'
+
   const validator = new ValidateDate
 
   extend('checkdate', value => {
@@ -51,7 +71,11 @@
     name: 'TestDate',
     components: {
       Datepicker: Datepicker,
-      ValidationProvider
+      ValidationProvider,
+      ValidationObserver
+    },
+    mounted () {
+
     },
     data () {
       return {
@@ -78,6 +102,9 @@
           return day
         }
       },
+      onSubmit () {
+        alert('Form has been submitted!');
+      }
       // validatorDate (date) {
       //   if (!this.checkFormat(date)) {
       //     alert('Format phải là yyyy/MM/dd. Ex: ' + this.moment().format('YYYY/MM/DD'))
