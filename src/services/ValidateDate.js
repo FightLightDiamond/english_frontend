@@ -13,11 +13,28 @@ export default class ValidateDate {
     return reGoodDate.test(date)
   }
 
+  isValidDateTime (dateTime) {
+    console.log('checkDateTimeFormat', this.checkDateTimeFormat(dateTime));
+    console.log('checkDateTimeValue', this.checkDateTimeValue(dateTime))
+    return this.checkDateTimeFormat(dateTime) && this.checkDateTimeValue(dateTime)
+  }
+
+  checkDateTimeFormat (dateTime) {
+    const reGoodDate = /^((19|20)?[0-9]{2}[- /.](0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])) (2[0-3]|[01][0-9]):(00|30)/
+    return reGoodDate.test(dateTime)
+  }
+
+  checkDateTimeValue (dateTime) {
+    const dateTimeArray = dateTime.split(' ')
+    console.log(dateTimeArray)
+    return this.checkDay(dateTimeArray[0])
+  }
+
   checkDay (date) {
     const a = date.split('/')
     const endMonth = moment(a[0] + '/' + a[1]).endOf('month')
     const day = endMonth.format('DD')
-
+    console.log(date)
     return a[2] <= day
   }
 }

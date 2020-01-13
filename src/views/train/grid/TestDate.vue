@@ -43,7 +43,7 @@
                       input-id="startDate"
             ></datetime>
 
-            <validation-provider rules="checkdate|required" v-slot="{ errors }">
+            <validation-provider rules="checkdatetime|required" v-slot="{ errors }">
                 <input v-model="datetimeInput" @change="changeDatetime()">
                 <span>{{ errors[0] }}</span>
             </validation-provider>
@@ -69,6 +69,10 @@
 
   extend('checkdate', value => {
     return validator.check(value)
+  })
+
+  extend('checkdatetime', value => {
+    return validator.isValidDateTime(value)
   })
 
   import formatDatetime from '../../../helpers/datetime'

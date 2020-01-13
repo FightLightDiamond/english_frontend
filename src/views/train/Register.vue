@@ -2,11 +2,11 @@
   <div>
     <!--    <app-registration @userRegistered="userRegistered" :users="unregisteredUsers"></app-registration>-->
     <!--    <app-registrations @userUnregistered="userRegistered" :registrations="registrations"></app-registrations>-->
-    <b-row>
-      <b-colxx xss="12">
-        <t-grid></t-grid>
-      </b-colxx>
-    </b-row>
+    <!--<b-row>-->
+      <!--<b-colxx xss="12">-->
+        <!--<t-grid></t-grid>-->
+      <!--</b-colxx>-->
+    <!--</b-row>-->
     <!--<b-row>-->
       <!--<b-colxx xss="12">-->
         <!--<e-grid></e-grid>-->
