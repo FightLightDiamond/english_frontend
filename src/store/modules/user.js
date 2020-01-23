@@ -27,7 +27,6 @@ export default {
     },
     setProcessing (state, payload) {
       state.processing = payload
-      state.msgError = null
     },
     setError (state, payload) {
       state.msgError = payload
@@ -40,7 +39,6 @@ export default {
   },
   actions: {
     async login ({ commit }, payload) {
-      commit('clearError')
       commit('setProcessing', true)
 
       let auth = Auth.passpost()
@@ -48,36 +46,41 @@ export default {
       auth.password = payload.password
 
       const res = await FactoryService.request('AuthService').login(auth)
-
-      if (!(res.status < 200 && res.status > 300)) {
+      console.log('FactoryService', res)
+      if (!(res.status < 200 || res.status > 300)) {
         localStorage.setItem('user', JSON.stringify(res))
-
         commit('setUser', res)
+        commit('clearError')
       } else {
         localStorage.removeItem('user')
         commit('setError', res.statusText)
-        commit('setProcessing', false)
       }
+
+      commit('setProcessing', false)
     },
     async register ({ commit }, payload) {
-      commit('clearError')
       commit('setProcessing', true)
       const res = await FactoryService.request('AuthService').register(payload)
 
-      if (!(res.status < 200 && res.status > 300)) {
+      if (!(res.status < 200 || res.status > 300)) {
+        commit('clearError')
+      } else {
         commit('setError', res.statusText)
-        commit('setProcessing', false)
       }
+
+      commit('setProcessing', false)
     },
     async forgotPassword({commit}, payload) {
-      commit('clearError')
       commit('setProcessing', true)
       const res = await FactoryService.request('AuthService').forgetPass(payload)
 
-      if (!(res.status < 200 && res.status > 300)) {
+      if (!(res.status < 200 || res.status > 300)) {
+        commit('clearError')
+      } else {
         commit('setError', res.statusText)
       }
       commit('setProcessing', false)
+
     },
     signOut ({ commit }) {
       localStorage.removeItem('user')
