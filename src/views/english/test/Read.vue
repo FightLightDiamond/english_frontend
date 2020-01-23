@@ -12,14 +12,14 @@
             </b-colxx>
         </b-row>
 
-        <b-card class="mb-4" :title="read.name">
+        <b-card class="mb-4" :title="read.crazy.name">
             <div class="d-flex flex-row mb-0">
-                <img :src="read.img" :alt="read.name" class="list-thumbnail border-0"/>
+                <img :src="read.crazy.img" :alt="read.crazy.name" class="list-thumbnail border-0"/>
                 <b-badge variant="" pill class="position-absolute badge-top-right">Hot</b-badge>
                 <div class="pl-3 pt-2 pr-2 pb-2">
                     <div class="pr-4">
                         <h3></h3>
-                        <p class="text-muted mb-1 text-small">{{ read.description }}</p>
+                        <p class="text-muted mb-1 text-small">{{ read.crazy.description }}</p>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,12 @@
         <b-card class="mb-3" title="Play & listen">
             <b-row class="form-group">
                 <b-colxx xxs="12">
-                    <audio id="audio" ref="audio" v-bind:src="read.audio" type="audio/mpeg" controls preload>
+<!--                  {{read}}-->
+<!--                  <p>-->
+<!--                    -->
+<!--                  </p>-->
+<!--                  {{read.audio}}-->
+                    <audio id="audio" ref="audio" v-bind:src="read.crazy.audio" type="audio/mpeg" controls preload>
                         Your browser does not support the audio tag.
                     </audio>
                 </b-colxx>
