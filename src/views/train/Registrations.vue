@@ -24,47 +24,46 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
-  export default {
-    name: 'Registrations',
-    // props: ['registrations'],
-    computed: {
-      ...mapGetters ({
-        registrations: 'registrations',
-        total: 'totalRegistrations'
-      })
+export default {
+  name: 'Registrations',
+  // props: ['registrations'],
+  computed: {
+    ...mapGetters({
+      registrations: 'registrations',
+      total: 'totalRegistrations'
+    })
 
-
-      // registrations () {
-      //   //return this.$store.state.train.registrations
-      //   return this.$store.getters.registrations
-      // },
-      // total () {
-      //   //return this.$store.state.train.registrations.length
-      //   return this.$store.getters.totalRegistrations
-      // },
-    },
-    methods: {
-      ...mapActions(['unregister'])
-      // unregister (registration) {
-      //   //this.$emit('userUnregistered', registration)
-      //   // const user = this.$store.state.train.users.find(user => {
-      //   //   return user.id === registration.userId
-      //   // })
-      //   //
-      //   // user.registered = false
-      //   // this.$store.state.train.registrations.splice(this.$store.state.train.registrations.indexOf(registration), 1)
-      //   const payload = {
-      //     type: 'unregister',
-      //     userId: registration.userId,
-      //   };
-      //
-      //   //this.$store.commit(payload)
-      //   this.$store.dispatch(payload)
-      // }
-    },
+    // registrations () {
+    //   //return this.$store.state.train.registrations
+    //   return this.$store.getters.registrations
+    // },
+    // total () {
+    //   //return this.$store.state.train.registrations.length
+    //   return this.$store.getters.totalRegistrations
+    // },
+  },
+  methods: {
+    ...mapActions(['unregister'])
+    // unregister (registration) {
+    //   //this.$emit('userUnregistered', registration)
+    //   // const user = this.$store.state.train.users.find(user => {
+    //   //   return user.id === registration.userId
+    //   // })
+    //   //
+    //   // user.registered = false
+    //   // this.$store.state.train.registrations.splice(this.$store.state.train.registrations.indexOf(registration), 1)
+    //   const payload = {
+    //     type: 'unregister',
+    //     userId: registration.userId,
+    //   };
+    //
+    //   //this.$store.commit(payload)
+    //   this.$store.dispatch(payload)
+    // }
   }
+}
 </script>
 
 <style scoped>

@@ -57,119 +57,118 @@
 </template>
 
 <script>
-  // import AudioRecorder from 'vue-audio-recorder'
-  import Vuetable from 'vuetable-2/src/components/Vuetable'
-  import FactoryService from '../../../services/FactoryService'
-  import Vue from 'vue'
-  import axios from 'axios'
-  Vue.prototype.$http = axios
-  var _ = require('lodash')
+// import AudioRecorder from 'vue-audio-recorder'
+import Vuetable from 'vuetable-2/src/components/Vuetable'
+import FactoryService from '../../../services/FactoryService'
+import Vue from 'vue'
+import axios from 'axios'
+Vue.prototype.$http = axios
+var _ = require('lodash')
 
-  export default {
-    name: 'Speak',
-    components: {
-      // AudioRecorder,
-      Vuetable
-    },
-    watch: {},
-    data () {
-      return {
-        uploadLink: `http://localhost:8000/api/test/crazy-speak/${this.$route.params.id}`,
-        lesson: [],
-        items: [{
-          text: 'Home',
-          to: '/english',
-        }, {
-          text: 'Sessions',
-          to: '/english/lesson',
-        }, {
-          text: 'Lesson',
-          active: true
-        }],
-        sentences: [],
-        sentencesPlay: [],
-        fields: [
-          {
-            name: 'sentence',
-            title: 'English',
-          },
-          {
-            name: 'meaning',
-            title: 'Vietnamese',
-          },
-          '__slot:actions'
-        ],
-        kara: [],
-        record: {
-          play: false,
+export default {
+  name: 'Speak',
+  components: {
+    // AudioRecorder,
+    Vuetable
+  },
+  watch: {},
+  data () {
+    return {
+      uploadLink: `http://localhost:8000/api/test/crazy-speak/${this.$route.params.id}`,
+      lesson: [],
+      items: [{
+        text: 'Home',
+        to: '/english'
+      }, {
+        text: 'Sessions',
+        to: '/english/lesson'
+      }, {
+        text: 'Lesson',
+        active: true
+      }],
+      sentences: [],
+      sentencesPlay: [],
+      fields: [
+        {
+          name: 'sentence',
+          title: 'English'
         },
-        audio: null
+        {
+          name: 'meaning',
+          title: 'Vietnamese'
+        },
+        '__slot:actions'
+      ],
+      kara: [],
+      record: {
+        play: false
+      },
+      audio: null
+    }
+  },
+  async mounted () {
+    // alert()
+    const res = await FactoryService.request('TestService').listen(this.$route.params.id)
+    this.lesson = res
+    this.sentences = res.details
+    this.audio = document.getElementById('audio')
+    this.audio.muted = true
+  },
+  methods: {
+    callback (msg) {
+      console.debug(msg)
+      if (msg === 'start recording') {
+        if (this.record.play === true) {
+          this.play()
+        } else {
+          this.karaoke()
+        }
       }
+
+      if (msg === 'pause recording') {
+        this.audio.pause()
+      }
+      console.debug('Event: ', msg)
     },
-    async mounted () {
-      // alert()
-      const res = await FactoryService.request('TestService').listen(this.$route.params.id)
-      this.lesson = res
-      this.sentences = res.details
-      this.audio = document.getElementById('audio')
-      this.audio.muted = true;
+    karaoke () {
+      this.sentencesPlay = _.cloneDeep(this.sentences)
+      this.kara = []
+      const sen = this.sentencesPlay.shift()
+      this.kara.push(sen.sentence)
+
+      this.play()
+      this.lyric()
     },
-    methods: {
-      callback (msg) {
-        console.debug(msg)
-        if (msg === 'start recording') {
-          if (this.record.play === true) {
-            this.play()
-          } else {
-            this.karaoke()
+    play () {
+      this.record.play = true
+      this.audio.play()
+      console.log(this.sentences)
+    },
+    lyric () {
+      var interval_obj = setInterval(() => {
+        const current = this.audio.currentTime
+
+        for (let item of this.sentencesPlay) {
+          if (item.time < current + 1.5) {
+            const es = this.sentencesPlay.shift().sentence
+            this.kara.push(es)
           }
         }
 
-        if (msg === 'pause recording') {
-          this.audio.pause()
+        if (this.sentencesPlay.length === 0 && this.record.play) {
+          console.log(this.sentences)
+          clearInterval(interval_obj)
+          this.sentencesPlay = this.sentences
+          this.kara = []
+          // this.record.play = false
         }
-        console.debug('Event: ', msg)
-      },
-      karaoke () {
-        this.sentencesPlay = _.cloneDeep(this.sentences)
-        this.kara = []
-        const sen = this.sentencesPlay.shift()
-        this.kara.push(sen.sentence)
+      }, 500)
+    },
+    reset () {
 
-        this.play()
-        this.lyric()
-      },
-      play () {
-        this.record.play = true
-        this.audio.play()
-        console.log(this.sentences)
-
-      },
-      lyric () {
-        var interval_obj = setInterval(() => {
-          const current = this.audio.currentTime
-
-          for (let item of this.sentencesPlay) {
-            if (item.time < current + 1.5) {
-              const es = this.sentencesPlay.shift().sentence
-              this.kara.push(es)
-            }
-          }
-
-          if (this.sentencesPlay.length === 0 && this.record.play) {
-            console.log(this.sentences)
-            clearInterval(interval_obj)
-            this.sentencesPlay = this.sentences
-            this.kara = []
-            // this.record.play = false
-          }
-        }, 500)
-      },
-      reset () {
-
-      }
     }
   }
+}
 </script>
 
 <style scoped>

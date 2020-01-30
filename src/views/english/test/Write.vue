@@ -70,61 +70,61 @@
 </template>
 
 <script>
-  import FactoryService from '../../../services/FactoryService'
-  import Vuetable from 'vuetable-2/src/components/Vuetable'
-  import draggable from 'vuedraggable'
+import FactoryService from '../../../services/FactoryService'
+import Vuetable from 'vuetable-2/src/components/Vuetable'
+import draggable from 'vuedraggable'
 
-  export default {
-    components: {
-      Vuetable,
-      draggable,
-    },
-    data () {
-      return {
-        id: this.$route.params.id,
-        lesson: { 'name': '', audio: '' },
-        params: {
-          sentences: {}
-        },
-        ens: [],
-        randEns: [],
-        result: {},
-        colors: {},
-        items: [{
-          text: 'Home',
-          to: '/english',
-        }, {
-          text: 'Sessions',
-          to: `/courses/${this.$route.params.id}`,
-        }, {
-          text: 'Write',
-          active: true
-        }]
-      }
-    },
-    async created () {
-      const res = await FactoryService.request('TestService').write(this.id)
-      this.lesson = res.crazy
-      this.ens = res.ens
-      this.randEns = res.randEns
-      console.log(this.lesson)
-
-      for (let en of this.ens) {
-        this.params.sentences[en.id] = ''
-      }
-    },
-    methods: {
-      async submit () {
-        const res = await FactoryService.request('TestService').written(this.id, this.params)
-        this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, {
-          duration: 1300,
-          permanent: false
-        })
-
-        this.result = res.result
+export default {
+  components: {
+    Vuetable,
+    draggable
+  },
+  data () {
+    return {
+      id: this.$route.params.id,
+      lesson: { 'name': '', audio: '' },
+      params: {
+        sentences: {}
       },
+      ens: [],
+      randEns: [],
+      result: {},
+      colors: {},
+      items: [{
+        text: 'Home',
+        to: '/english'
+      }, {
+        text: 'Sessions',
+        to: `/courses/${this.$route.params.id}`
+      }, {
+        text: 'Write',
+        active: true
+      }]
+    }
+  },
+  async created () {
+    const res = await FactoryService.request('TestService').write(this.id)
+    this.lesson = res.crazy
+    this.ens = res.ens
+    this.randEns = res.randEns
+    console.log(this.lesson)
+
+    for (let en of this.ens) {
+      this.params.sentences[en.id] = ''
+    }
+  },
+  methods: {
+    async submit () {
+      const res = await FactoryService.request('TestService').written(this.id, this.params)
+      this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, {
+        duration: 1300,
+        permanent: false
+      })
+
+      this.result = res.result
     }
   }
+}
 </script>
 
 <style scoped>

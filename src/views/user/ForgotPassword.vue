@@ -30,33 +30,33 @@
     </b-row>
 </template>
 <script>
-  import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-  export default {
-    data () {
-      return {
-        form: {
-          email: 'i.am.m.cuong@gmail.com'
-        },
-      }
-    },
-    computed: {
-      ...mapGetters(['currentUser', 'processing', 'msgError'])
-    },
-    methods: {
-      ...mapActions(['forgotPassword']),
-      async formSubmit () {
-        await this.forgotPassword(this.form)
-
-        if (this.msgError === null) {
-          this.$notify('success', 'Success', 'We send you link to reset password. Please check email',
-            { duration: 1300, permanent: false })
-        } else {
-          this.$notify('error', 'Fail', this.msgError,
-            { duration: 1300, permanent: false })
-        }
-        console.log('this.msgError', this.msgError)
+export default {
+  data () {
+    return {
+      form: {
+        email: 'i.am.m.cuong@gmail.com'
       }
     }
+  },
+  computed: {
+    ...mapGetters(['currentUser', 'processing', 'msgError'])
+  },
+  methods: {
+    ...mapActions(['forgotPassword']),
+    async formSubmit () {
+      await this.forgotPassword(this.form)
+
+      if (this.msgError === null) {
+        this.$notify('success', 'Success', 'We send you link to reset password. Please check email',
+          { duration: 1300, permanent: false })
+      } else {
+        this.$notify('error', 'Fail', this.msgError,
+          { duration: 1300, permanent: false })
+      }
+      console.log('this.msgError', this.msgError)
+    }
   }
+}
 </script>

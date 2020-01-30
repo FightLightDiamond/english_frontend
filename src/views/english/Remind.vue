@@ -42,48 +42,48 @@
 </template>
 
 <script>
-  // import FactoryService from '../../../services/FactoryService'
-  import Vuetable from 'vuetable-2/src/components/Vuetable'
-  import FactoryService from '../../services/FactoryService'
+// import FactoryService from '../../../services/FactoryService'
+import Vuetable from 'vuetable-2/src/components/Vuetable'
+import FactoryService from '../../services/FactoryService'
 
-  export default {
-    components: {
-      Vuetable
-    },
-    data () {
-      return {
-        id: this.$route.params.id,
-        form: {
-          minute: null,
-          hour: null
-        },
-        items: [{
-          text: 'Home',
-          to: '/english',
-        }, {
-          text: 'Remind',
-          active: true
-        }],
-      }
-    },
-    async mounted () {
-      const res = await FactoryService.request('RemindService').index()
-      this.form.hour = res.hour
-      this.form.minute = res.minute
-    },
-    methods: {
-      remind () {
-        console.log(this.form)
+export default {
+  components: {
+    Vuetable
+  },
+  data () {
+    return {
+      id: this.$route.params.id,
+      form: {
+        minute: null,
+        hour: null
+      },
+      items: [{
+        text: 'Home',
+        to: '/english'
+      }, {
+        text: 'Remind',
+        active: true
+      }]
+    }
+  },
+  async mounted () {
+    const res = await FactoryService.request('RemindService').index()
+    this.form.hour = res.hour
+    this.form.minute = res.minute
+  },
+  methods: {
+    remind () {
+      console.log(this.form)
 
-        FactoryService.request('RemindService').create(this.form)
+      FactoryService.request('RemindService').create(this.form)
 
-        this.$notify('success', 'Remind Success', `Remind for you at ${this.form.hour < 10 ? '0' + this.form.hour : this.form.hour} : ${this.form.minute < 10 ? '0' + this.form.minute : this.form.minute} per day `, {
-          duration: 1300,
-          permanent: false
-        })
-      }
+      this.$notify('success', 'Remind Success', `Remind for you at ${this.form.hour < 10 ? '0' + this.form.hour : this.form.hour} : ${this.form.minute < 10 ? '0' + this.form.minute : this.form.minute} per day `, {
+        duration: 1300,
+        permanent: false
+      })
     }
   }
+}
 </script>
 
 <style scoped>

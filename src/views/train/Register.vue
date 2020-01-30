@@ -26,52 +26,52 @@
 </template>
 
 <script>
-  import Registration from './Registration'
-  import Registrations from './Registrations'
-  import TGrid from './grid/TGrid'
-  import EGrid from './grid/EGrid'
-  import TestDate from './grid/TestDate'
+import Registration from './Registration'
+import Registrations from './Registrations'
+import TGrid from './grid/TGrid'
+import EGrid from './grid/EGrid'
+import TestDate from './grid/TestDate'
 
-  export default {
-    name: 'Register',
-    components: {
-      appRegistration: Registration,
-      appRegistrations: Registrations,
-      tGrid: TGrid,
-      eGrid: EGrid,
-      testDate: TestDate,
-    },
-    // data() {
-    //   return {
-    //
-    //   }
-    // },
-    // computed: {
-    //   unregisteredUsers() {
-    //     return this.users.filter((user) => {
-    //       return !user.registered
-    //     })
-    //   }
-    // },
-    // methods: {
-    // userRegistered(user) {
-    //   const date = new Date()
-    //   const userInfo = {
-    //     userId: user.id,
-    //     name: user.name,
-    //     data: date.getMonth() + '/' + date.getDate()
-    //   };
-    //   this.registrations.push(userInfo)
-    // },
-    // userUnregistered(registration) {
-    //   const user = this.users.find(user => {
-    //     return user.id === registration.userId
-    //   })
-    //   user.registered = false
-    //   this.registrations.splice(this.registrations.indexOf(registration), 1)
-    // }
-    // }
+export default {
+  name: 'Register',
+  components: {
+    appRegistration: Registration,
+    appRegistrations: Registrations,
+    tGrid: TGrid,
+    eGrid: EGrid,
+    testDate: TestDate
   }
+  // data() {
+  //   return {
+  //
+  //   }
+  // },
+  // computed: {
+  //   unregisteredUsers() {
+  //     return this.users.filter((user) => {
+  //       return !user.registered
+  //     })
+  //   }
+  // },
+  // methods: {
+  // userRegistered(user) {
+  //   const date = new Date()
+  //   const userInfo = {
+  //     userId: user.id,
+  //     name: user.name,
+  //     data: date.getMonth() + '/' + date.getDate()
+  //   };
+  //   this.registrations.push(userInfo)
+  // },
+  // userUnregistered(registration) {
+  //   const user = this.users.find(user => {
+  //     return user.id === registration.userId
+  //   })
+  //   user.registered = false
+  //   this.registrations.splice(this.registrations.indexOf(registration), 1)
+  // }
+  // }
+}
 </script>
 
 <style>

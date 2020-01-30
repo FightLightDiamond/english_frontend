@@ -57,68 +57,68 @@
 </template>
 
 <script>
-  import FactoryService from '../../../services/FactoryService'
-  import Vuetable from 'vuetable-2/src/components/Vuetable'
-  import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
+import FactoryService from '../../../services/FactoryService'
+import Vuetable from 'vuetable-2/src/components/Vuetable'
+import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
 
-  export default {
-    components: {
-      Vuetable,
-      VuetablePaginationBootstrap
-    },
-    data () {
-      return {
-        items: [{
-          text: 'Dashboard',
-          to: '/administrator/dashboard',
-        }, {
-          text: 'Courses',
-          to: '/administrator/courses',
-        },
-        ],
-        fields: [
-          '__slot:image',
-          // {
-          //   name: 'name',
-          //   title: 'Course',
-          // },
-          '__slot:actions'
-        ],
-        course: [],
+export default {
+  components: {
+    Vuetable,
+    VuetablePaginationBootstrap
+  },
+  data () {
+    return {
+      items: [{
+        text: 'Dashboard',
+        to: '/administrator/dashboard'
+      }, {
+        text: 'Courses',
+        to: '/administrator/courses'
       }
+      ],
+      fields: [
+        '__slot:image',
+        // {
+        //   name: 'name',
+        //   title: 'Course',
+        // },
+        '__slot:actions'
+      ],
+      course: []
+    }
+  },
+  methods: {
+    // onPaginationData (paginationData) {
+    //   this.$refs.pagination.setPaginationData(paginationData)
+    // },
+    onChangePage (page) {
+      this.$refs.vuetable.changePage(page)
     },
-    methods: {
-      // onPaginationData (paginationData) {
-      //   this.$refs.pagination.setPaginationData(paginationData)
-      // },
-      onChangePage (page) {
-        this.$refs.vuetable.changePage(page)
-      },
-      getApi () {
-        const api = `/api/v1/admin/crazy-courses`
-        return FactoryService.request('BaseService')
-          .url(api)
-      },
-      async destroy (id) {
-        let options = {
-          okText: 'Yes',
-          cancelText: 'No',
-        }
+    getApi () {
+      const api = `/api/v1/admin/crazy-courses`
+      return FactoryService.request('BaseService')
+        .url(api)
+    },
+    async destroy (id) {
+      let options = {
+        okText: 'Yes',
+        cancelText: 'No'
+      }
 
-        this.$dialog
-          .confirm('Are you sure?', options)
-          .then(async (dialog) => {
-            try {
-              await FactoryService.request('CourseService', 'admin').destroy(id)
-              this.$notify('success', 'Success', `Delete successfully`, { duration: 1300, permanent: false })
-              this.$refs.vuetable.refresh()
-            } catch (e) {
-              this.$notify('error', 'Success', `Delete fail`, { duration: 1300, permanent: false })
-            }
-          })
-      }
+      this.$dialog
+        .confirm('Are you sure?', options)
+        .then(async (dialog) => {
+          try {
+            await FactoryService.request('CourseService', 'admin').destroy(id)
+            this.$notify('success', 'Success', `Delete successfully`, { duration: 1300, permanent: false })
+            this.$refs.vuetable.refresh()
+          } catch (e) {
+            this.$notify('error', 'Success', `Delete fail`, { duration: 1300, permanent: false })
+          }
+        })
     }
   }
+}
 </script>
 
 <style scoped>

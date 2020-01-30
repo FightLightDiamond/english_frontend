@@ -22,36 +22,36 @@
 </template>
 
 <script>
-  import FactoryService from '../../../services/FactoryService'
+import FactoryService from '../../../services/FactoryService'
 
-  export default {
-    components: {},
-    data () {
-      return {
-        form: {},
-        courses: [],
-        items: [{
-          text: 'Home',
-          to: '/english',
-        },
-        ],
+export default {
+  components: {},
+  data () {
+    return {
+      form: {},
+      courses: [],
+      items: [{
+        text: 'Home',
+        to: '/english'
       }
-    },
-    async mounted () {
+      ]
+    }
+  },
+  async mounted () {
 
-    },
-    methods: {
-      async submit () {
-        try {
-          const res = await FactoryService.request('AuthService').changePass(this.form)
+  },
+  methods: {
+    async submit () {
+      try {
+        const res = await FactoryService.request('AuthService').changePass(this.form)
 
-          this.$notify('success', 'Success', `Update successfully`, { duration: 1300, permanent: false })
-        } catch (e) {
-          this.$notify('error', 'Error', `Update fail`, { duration: 1300, permanent: false })
-        }
+        this.$notify('success', 'Success', `Update successfully`, { duration: 1300, permanent: false })
+      } catch (e) {
+        this.$notify('error', 'Error', `Update fail`, { duration: 1300, permanent: false })
       }
     }
   }
+}
 </script>
 
 <style scoped>

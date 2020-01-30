@@ -6,13 +6,13 @@ export default {
   state: {
     swiperInfiniteOption: {
       slidesPerView: 4,
-      loop: true,
+      loop: true
     },
     swiperOption: {
       slidesPerView: 1,
       spaceBetween: 30,
       keyboard: {
-        enabled: true,
+        enabled: true
       },
       pagination: {
         el: '.swiper-pagination',
@@ -26,7 +26,7 @@ export default {
   },
   getters: {
     swiperInfiniteOption: state => state.swiperInfiniteOption,
-    swiperOption: state => state.swiperOption,
+    swiperOption: state => state.swiperOption
   },
   mutations: {
 

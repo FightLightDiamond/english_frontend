@@ -18,7 +18,7 @@ const state = {
     { id: 3, name: 'Me', registered: false },
     { id: 4, name: 'Mo', registered: false },
     { id: 5, name: 'Mb', registered: false },
-    { id: 6, name: 'Mc', registered: false },
+    { id: 6, name: 'Mc', registered: false }
   ]
 }
 /**
@@ -50,7 +50,7 @@ const mutations = {
       return user.id === userId
     })
 
-    if(user) {
+    if (user) {
       user.registered = true
 
       const registration = {
@@ -61,7 +61,6 @@ const mutations = {
 
       state.registrations.push(registration)
     }
-
   },
   unregister: (state, payload) => {
     const user = state.users.find(user => {

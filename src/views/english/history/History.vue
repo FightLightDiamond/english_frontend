@@ -63,39 +63,39 @@
 </template>
 
 <script>
-  import IconCard from '@/components/Cards/IconCard'
-  import FactoryService from '../../../services/FactoryService'
+import IconCard from '@/components/Cards/IconCard'
+import FactoryService from '../../../services/FactoryService'
 
-  export default {
-    async mounted() {
-       const data = await FactoryService.request('HistoryService').index();
-       console.log('------------------')
-        console.log(data);
-       this.count = data;
-    },
-    components: {
-      IconCard,
-    },
-    data () {
-      return {
-        count: {
-          read: 0,
-          listen: 0,
-          write: 0,
-          speak: 0
-        },
-        lesson: [],
-        items: [{
-          text: 'Home',
-          to: '/english',
-        }, {
-          text: 'History',
-          to: '/english/histories',
-        }
-        ],
+export default {
+  async mounted () {
+    const data = await FactoryService.request('HistoryService').index()
+    console.log('------------------')
+    console.log(data)
+    this.count = data
+  },
+  components: {
+    IconCard
+  },
+  data () {
+    return {
+      count: {
+        read: 0,
+        listen: 0,
+        write: 0,
+        speak: 0
+      },
+      lesson: [],
+      items: [{
+        text: 'Home',
+        to: '/english'
+      }, {
+        text: 'History',
+        to: '/english/histories'
       }
-    },
+      ]
+    }
   }
+}
 </script>
 
 <style scoped>

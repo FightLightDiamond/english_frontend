@@ -109,115 +109,115 @@
 </template>
 
 <script>
-  import draggable from 'vuedraggable'
-  import { validationMixin } from 'vuelidate'
+import draggable from 'vuedraggable'
+import { validationMixin } from 'vuelidate'
+import FactoryService from '../../../services/FactoryService'
 
-  const { required, minLength } = require('vuelidate/lib/validators')
-  import FactoryService from '../../../services/FactoryService'
+const { required, minLength } = require('vuelidate/lib/validators')
 
-  export default {
-    components: {
-      draggable,
-    },
-    async mounted () {
-      this.courses = await FactoryService.request('CourseService', 'admin').index()
-      this.form = await FactoryService.request('CrazyService', 'admin').show(this.id)
-      console.log(this.lesson)
-    },
-    data () {
-      return {
-        id: this.$route.params.id,
-        courses: [],
-        baseSentence: { sentence: '', meaning: '', time: '' },
-        items: [
-          {
-            text: 'Dashboard',
-            to: '/administrator/dashboard',
-          }, {
-            text: 'Lessons',
-            to: '/administrator/lessons',
-          }, {
-            text: 'Create',
-            active: true
-          },
-        ],
-        form: {
-          name: '',
-          description: '',
-          audio: '',
-          details: [],
-          img: '',
-          crazy_course_id: null,
-          is_active: 1
+export default {
+  components: {
+    draggable
+  },
+  async mounted () {
+    this.courses = await FactoryService.request('CourseService', 'admin').index()
+    this.form = await FactoryService.request('CrazyService', 'admin').show(this.id)
+    console.log(this.lesson)
+  },
+  data () {
+    return {
+      id: this.$route.params.id,
+      courses: [],
+      baseSentence: { sentence: '', meaning: '', time: '' },
+      items: [
+        {
+          text: 'Dashboard',
+          to: '/administrator/dashboard'
+        }, {
+          text: 'Lessons',
+          to: '/administrator/lessons'
+        }, {
+          text: 'Create',
+          active: true
         }
-      }
-    },
-    mixins: [validationMixin],
-    validations: {
+      ],
       form: {
-        name: {
-          required,
-          minLength: minLength(2)
-        },
-        description: {
-          required,
-          minLength: minLength(4)
-        },
-        crazy_course_id: {
-          required,
-        },
-        img: {
-          required,
-        },
-        audio: {
-          required,
-        },
-        file: {
-          required
-        },
-        details: {
-          $each: {
-            time: {
-              required,
-            },
-            sentence: {
-              required,
-              minLength: minLength(2)
-            },
-            meaning: {
-              required,
-              minLength: minLength(2)
-            },
-          }
-        }
+        name: '',
+        description: '',
+        audio: '',
+        details: [],
+        img: '',
+        crazy_course_id: null,
+        is_active: 1
       }
-    },
-    methods: {
-      addSentence () {
-        this.form.details.push(Object.assign({}, this.baseSentence))
+    }
+  },
+  mixins: [validationMixin],
+  validations: {
+    form: {
+      name: {
+        required,
+        minLength: minLength(2)
       },
-      removeSentence (key) {
-        this.form.details.splice(key, 1)
+      description: {
+        required,
+        minLength: minLength(4)
       },
-      async submit () {
-        let formData = new FormData()
-
-        for (let key in this.form) {
-          if (this.form[key]) {
-            formData.append(key, this.form[key])
+      crazy_course_id: {
+        required
+      },
+      img: {
+        required
+      },
+      audio: {
+        required
+      },
+      file: {
+        required
+      },
+      details: {
+        $each: {
+          time: {
+            required
+          },
+          sentence: {
+            required,
+            minLength: minLength(2)
+          },
+          meaning: {
+            required,
+            minLength: minLength(2)
           }
-        }
-
-        try {
-          const res = await FactoryService.request('CrazyService', 'admin').update(this.id, formData)
-          this.$notify('success', 'Success', `Update successfully`, { duration: 1300, permanent: false })
-          this.$router.push('/administrator/lessons')
-        } catch (e) {
-          this.$notify('error', 'Fail', `Update fail`, { duration: 1300, permanent: false })
         }
       }
     }
+  },
+  methods: {
+    addSentence () {
+      this.form.details.push(Object.assign({}, this.baseSentence))
+    },
+    removeSentence (key) {
+      this.form.details.splice(key, 1)
+    },
+    async submit () {
+      let formData = new FormData()
+
+      for (let key in this.form) {
+        if (this.form[key]) {
+          formData.append(key, this.form[key])
+        }
+      }
+
+      try {
+        const res = await FactoryService.request('CrazyService', 'admin').update(this.id, formData)
+        this.$notify('success', 'Success', `Update successfully`, { duration: 1300, permanent: false })
+        this.$router.push('/administrator/lessons')
+      } catch (e) {
+        this.$notify('error', 'Fail', `Update fail`, { duration: 1300, permanent: false })
+      }
+    }
   }
+}
 </script>
 
 <style scoped>

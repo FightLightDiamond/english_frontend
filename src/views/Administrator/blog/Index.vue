@@ -46,105 +46,105 @@
 </template>
 
 <script>
-  import FactoryService from '../../../services/FactoryService'
-  import Vuetable from 'vuetable-2/src/components/Vuetable'
-  import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
+import FactoryService from '../../../services/FactoryService'
+import Vuetable from 'vuetable-2/src/components/Vuetable'
+import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
 
-  export default {
-    components: {
-      Vuetable,
-      VuetablePaginationBootstrap
-    },
-    data () {
-      return {
-        items: [{
-          text: 'Dashboard',
-          to: '/administrator/dashboard',
-        }, {
-          text: 'Users',
-          to: '/administrator/users',
-        }, {
-          text: 'List',
-          active: true
+export default {
+  components: {
+    Vuetable,
+    VuetablePaginationBootstrap
+  },
+  data () {
+    return {
+      items: [{
+        text: 'Dashboard',
+        to: '/administrator/dashboard'
+      }, {
+        text: 'Users',
+        to: '/administrator/users'
+      }, {
+        text: 'List',
+        active: true
+      }
+      ],
+      fields: [
+        // '__slot:image',
+        {
+          name: 'email',
+          title: 'Email'
         },
-        ],
-        fields: [
-          // '__slot:image',
-          {
-            name: 'email',
-            title: 'Email',
-          },
-          {
-            name: 'first_name',
-            title: 'First name',
-          },
-          {
-            name: 'last_name',
-            title: 'Last name',
-          },
-          {
-            name: 'created_at',
-            title: 'Created at',
-          },
-          {
-            name: 'is_active',
-            title: 'Active',
-          },
-          '__slot:actions'
-        ],
-        course: [],
-      }
+        {
+          name: 'first_name',
+          title: 'First name'
+        },
+        {
+          name: 'last_name',
+          title: 'Last name'
+        },
+        {
+          name: 'created_at',
+          title: 'Created at'
+        },
+        {
+          name: 'is_active',
+          title: 'Active'
+        },
+        '__slot:actions'
+      ],
+      course: []
+    }
+  },
+  methods: {
+    onPaginationData (paginationData) {
+      this.$refs.pagination.setPaginationData(paginationData)
     },
-    methods: {
-      onPaginationData (paginationData) {
-        this.$refs.pagination.setPaginationData(paginationData)
-      },
-      onChangePage (page) {
-        this.$refs.vuetable.changePage(page)
-      },
-      getApi () {
-        const api = `/api/v1/admin/users`
-        return FactoryService.request('BaseService')
-          .url(api)
-      },
-      async disable (id) {
-        let options = {
-          okText: 'Yes',
-          cancelText: 'No',
-        }
-
-        this.$dialog
-          .confirm('Are you sure?', options)
-          .then(async (dialog) => {
-            try {
-              await FactoryService.request('UserService', 'admin').update(id, { is_active: 0 })
-              this.$notify('success', 'Success', `Disable successfully`, { duration: 1300, permanent: false })
-              this.$refs.vuetable.refresh()
-            } catch (e) {
-              this.$notify('error', 'Error', `Disable fail`, { duration: 1300, permanent: false })
-            }
-          })
-      },
-      async enable (id) {
-        let options = {
-          okText: 'Yes',
-          cancelText: 'No',
-        }
-
-        this.$dialog
-          .confirm('Are you sure?', options)
-          .then(async (dialog) => {
-            try {
-              await FactoryService.request('UserService', 'admin').update(id, { is_active: 1 })
-              this.$notify('success', 'Success', `Enable successfully`, { duration: 1300, permanent: false })
-              this.$refs.vuetable.refresh()
-            } catch (e) {
-              this.$notify('error', 'Error', `Enable fail`, { duration: 1300, permanent: false })
-            }
-          })
+    onChangePage (page) {
+      this.$refs.vuetable.changePage(page)
+    },
+    getApi () {
+      const api = `/api/v1/admin/users`
+      return FactoryService.request('BaseService')
+        .url(api)
+    },
+    async disable (id) {
+      let options = {
+        okText: 'Yes',
+        cancelText: 'No'
       }
+
+      this.$dialog
+        .confirm('Are you sure?', options)
+        .then(async (dialog) => {
+          try {
+            await FactoryService.request('UserService', 'admin').update(id, { is_active: 0 })
+            this.$notify('success', 'Success', `Disable successfully`, { duration: 1300, permanent: false })
+            this.$refs.vuetable.refresh()
+          } catch (e) {
+            this.$notify('error', 'Error', `Disable fail`, { duration: 1300, permanent: false })
+          }
+        })
+    },
+    async enable (id) {
+      let options = {
+        okText: 'Yes',
+        cancelText: 'No'
+      }
+
+      this.$dialog
+        .confirm('Are you sure?', options)
+        .then(async (dialog) => {
+          try {
+            await FactoryService.request('UserService', 'admin').update(id, { is_active: 1 })
+            this.$notify('success', 'Success', `Enable successfully`, { duration: 1300, permanent: false })
+            this.$refs.vuetable.refresh()
+          } catch (e) {
+            this.$notify('error', 'Error', `Enable fail`, { duration: 1300, permanent: false })
+          }
+        })
     }
   }
+}
 </script>
 
 <style scoped>

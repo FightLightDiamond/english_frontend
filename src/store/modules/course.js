@@ -5,15 +5,15 @@ const state = {
   courses: [],
   course: {
     name: '',
-    description: '',
+    description: ''
   },
-  isLoadCourses: false,
+  isLoadCourses: false
 }
 
 const getters = {
   courses: state => state.courses,
   course: state => state.course,
-  isLoadCourses: state => state.isLoadCourses,
+  isLoadCourses: state => state.isLoadCourses
 }
 
 const mutations = {

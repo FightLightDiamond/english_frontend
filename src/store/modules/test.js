@@ -11,7 +11,7 @@ const getters = {
   listen: state => state.listen,
   read: state => state.read,
   write: state => state.write,
-  speak: state => state.speak,
+  speak: state => state.speak
 }
 
 const mutations = {
@@ -26,7 +26,7 @@ const mutations = {
   },
   getSpeak (state, payload) {
     state.speak = payload
-  },
+  }
 }
 
 const actions = {
@@ -48,14 +48,13 @@ const actions = {
   },
   async submitRead ({ commit }, payload) {
     const res = await FactoryService.request('TestService').read(payload.id)
-
   },
   async submitWrite ({ commit }, payload) {
     const res = await FactoryService.request('TestService').written(payload.id)
   },
   async submitSpeak ({ commit }, payload) {
     const res = await FactoryService.request('TestService').speak(payload.id)
-  },
+  }
 }
 
 export default {

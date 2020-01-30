@@ -18,44 +18,44 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-  export default {
-    name: 'Registration',
-    // props: ['users'],
-    computed: {
-      ...mapGetters ({
-        users: 'unregisteredUsers',
-      })
-      // users () {
-      //   // return this.$store.state.train.users.filter(user => {
-      //   //   return !user.registered
-      //   // })
-      //   return this.$store.getters.unregisteredUsers
-      // }
-    },
-    methods: {
-      ...mapMutations({
-        registerUser: 'register'
-      })
-      // registerUser (userId) {
-      //   //this.$emit('userRegistered', user)
-      //   // user.registered = true
-      //   //
-      //   // const date = new Date()
-      //   // const userInfo = {
-      //   //   userId: user.id,
-      //   //   name: user.name,
-      //   //   date: date.getMonth() + '/' + date.getDate()
-      //   // }
-      //   //
-      //   // this.$store.state.train.registrations.push(userInfo)
-      //
-      //   //this.$store.commit('register', userId)
-      //   this.$store.dispatch('register', userId)
-      // }
-    }
+export default {
+  name: 'Registration',
+  // props: ['users'],
+  computed: {
+    ...mapGetters({
+      users: 'unregisteredUsers'
+    })
+    // users () {
+    //   // return this.$store.state.train.users.filter(user => {
+    //   //   return !user.registered
+    //   // })
+    //   return this.$store.getters.unregisteredUsers
+    // }
+  },
+  methods: {
+    ...mapMutations({
+      registerUser: 'register'
+    })
+    // registerUser (userId) {
+    //   //this.$emit('userRegistered', user)
+    //   // user.registered = true
+    //   //
+    //   // const date = new Date()
+    //   // const userInfo = {
+    //   //   userId: user.id,
+    //   //   name: user.name,
+    //   //   date: date.getMonth() + '/' + date.getDate()
+    //   // }
+    //   //
+    //   // this.$store.state.train.registrations.push(userInfo)
+    //
+    //   //this.$store.commit('register', userId)
+    //   this.$store.dispatch('register', userId)
+    // }
   }
+}
 </script>
 
 <style scoped>

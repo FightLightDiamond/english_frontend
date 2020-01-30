@@ -69,7 +69,7 @@ export default {
         commit('setProcessing', false)
       }
     },
-    async forgotPassword({commit}, payload) {
+    async forgotPassword ({ commit }, payload) {
       commit('clearError')
       commit('setProcessing', true)
       const res = await FactoryService.request('AuthService').forgetPass(payload)

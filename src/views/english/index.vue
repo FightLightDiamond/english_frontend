@@ -14,10 +14,10 @@
           </b-colxx>
           <b-colxx class="mb-3">
             <h3 class="text-white">Contract Info</h3>
-            <p class="text-white"><i class="simple-icon-location-pin"></i>235 Hoàng Quốc Việt, Cầu Giấy, Hà Nội</p>
-            <p class="text-white"><i class="simple-icon-pin"></i> Bắc Từ Liêm - Hà Nội</p>
-            <p class="text-white"><i class="iconsminds-envelope"></i> doanthilamphuong@gmail.com</p>
-            <p class="text-white"><i class="simple-icon-phone"></i> +8463024312</p>
+            <p class="text-white"><i class="simple-icon-location-pin"></i>Tân Chi - Tiên Du - Bắc Ninh</p>
+            <!--<p class="text-white"><i class="simple-icon-pin"></i> Tân Chi - Tiên Du - Bắc Ninh</p>-->
+            <p class="text-white"><i class="iconsminds-envelope"></i> fightlightdiamond@gmail.com</p>
+            <p class="text-white"><i class="simple-icon-phone"></i> 0359003851</p>
           </b-colxx>
           <b-colxx class="mb-3">
             <h3 class="text-white">Social network</h3>
@@ -28,10 +28,10 @@
           </b-colxx>
           <b-colxx class="mb-3">
             <h3 class="text-white">About us</h3>
-            <p class="text-white"><i class="simple-icon-user"></i> Founder: Đoàn Thị Lâm Phương</p>
-            <p class="text-white"><i class="simple-icon-graduation"></i> Sinh viên trường Đại Học Điện Lực</p>
-            <p class="text-white"><i class="iconsminds-laptop-3"></i> Khoa công nghệ thông tin</p>
-            <p class="text-white"><i class="iconsminds-quill-3"></i> D10CNPM</p>
+            <p class="text-white"><i class="simple-icon-user"></i> Founder: Phạm Minh Cương</p>
+            <p class="text-white"><i class="simple-icon-graduation"></i>Web Developer</p>
+            <!--<p class="text-white"><i class="iconsminds-laptop-3"></i> Tân Chi - Tiên Du - Bắc Ninh</p>-->
+            <!--<p class="text-white"><i class="iconsminds-quill-3"></i> </p>-->
           </b-colxx>
         </b-row>
         <b-row>
@@ -46,19 +46,19 @@
 </template>
 <script>
 
-  import EnglishNav from '@/containers/EnglishNav'
-  import { mapGetters } from 'vuex'
+import EnglishNav from '@/containers/EnglishNav'
+import { mapGetters } from 'vuex'
 
-  export default {
-    data () {
-      return { show: false }
-    },
-    components: {
-      EnglishNav
-      // Sidebar
-    },
-    computed: {
-      ...mapGetters(['getMenuType'])
-    }
+export default {
+  data () {
+    return { show: false }
+  },
+  components: {
+    EnglishNav
+    // Sidebar
+  },
+  computed: {
+    ...mapGetters(['getMenuType'])
   }
+}
 </script>

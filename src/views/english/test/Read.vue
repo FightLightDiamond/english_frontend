@@ -71,74 +71,74 @@
 </template>
 
 <script>
-  import FactoryService from '../../../services/FactoryService'
-  import Vuetable from 'vuetable-2/src/components/Vuetable'
-  import draggable from 'vuedraggable'
-  import { mapGetters, mapMutations, mapActions } from 'vuex'
+import FactoryService from '../../../services/FactoryService'
+import Vuetable from 'vuetable-2/src/components/Vuetable'
+import draggable from 'vuedraggable'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-  export default {
-    components: {
-      Vuetable,
-      draggable,
+export default {
+  components: {
+    Vuetable,
+    draggable
+  },
+  data () {
+    return {
+      ens: [],
+      vis: [],
+      colors: {},
+      result: {},
+      id: this.$route.params.id,
+      items: [{
+        text: 'Home',
+        to: '/english'
+      }, {
+        text: 'Sessions',
+        to: `/courses/${this.$route.params.id}`
+      }, {
+        text: 'Read',
+        active: true
+      }],
+      track: {}
+    }
+  },
+  computed: {
+    ...mapGetters(['read'])
+  },
+  async mounted () {
+    await this.getRead({ id: this.id })
+    this.ens = this.read.ens
+    this.vis = this.read.vis
+  },
+  methods: {
+    ...mapActions(['getRead']),
+    async submit () {
+      const params = {
+        sentences: this.ens,
+        meanings: this.vis
+      }
+
+      const res = await FactoryService.request('TestService').read(this.$route.params.id, params)
+      this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, {
+        duration: 1300,
+        permanent: false
+      })
+      this.result = res.result
     },
-    data () {
-      return {
-        ens: [],
-        vis: [],
-        colors: {},
-        result: {},
-        id: this.$route.params.id,
-        items: [{
-          text: 'Home',
-          to: '/english',
-        }, {
-          text: 'Sessions',
-          to: `/courses/${this.$route.params.id}`,
-        }, {
-          text: 'Read',
-          active: true
-        }],
-        track: {}
+    play () {
+      if (this.$refs.audio.paused === true) {
+        this.$refs.audio.play()
+      } else {
+        this.$refs.audio.pause()
       }
     },
-    computed: {
-      ...mapGetters(['read'])
+    next () {
+      this.$refs.audio.currentTime = this.$refs.audio.currentTime + 5
     },
-    async mounted () {
-      await this.getRead({ id: this.id })
-      this.ens = this.read.ens
-      this.vis = this.read.vis
-    },
-    methods: {
-      ...mapActions(['getRead']),
-      async submit () {
-        const params = {
-          sentences: this.ens,
-          meanings: this.vis,
-        }
-
-        const res = await FactoryService.request('TestService').read(this.$route.params.id, params)
-        this.$notify('info', 'Result test of you', `Score is ${res.score}/${res.result.length} `, {
-          duration: 1300,
-          permanent: false
-        })
-        this.result = res.result
-      },
-      play () {
-        if (this.$refs.audio.paused === true) {
-          this.$refs.audio.play()
-        } else {
-          this.$refs.audio.pause()
-        }
-      },
-      next () {
-        this.$refs.audio.currentTime = this.$refs.audio.currentTime + 5
-      },
-      back () {
-        this.$refs.audio.currentTime -= 5
-      }
+    back () {
+      this.$refs.audio.currentTime -= 5
     }
   }
+}
 </script>
 
 <style scoped>

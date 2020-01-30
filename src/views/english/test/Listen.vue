@@ -50,51 +50,51 @@
 </template>
 
 <script>
-  import Vuetable from 'vuetable-2/src/components/Vuetable'
-  import { mapGetters, mapMutations, mapActions } from 'vuex'
+import Vuetable from 'vuetable-2/src/components/Vuetable'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-  export default {
-    components: {
-      Vuetable
-    },
-    data () {
-      return {
-        id: this.$route.params.id,
-        items: [{
-          text: 'Home',
-          to: '/english',
-        }, {
-          text: 'Sessions',
-          to: `/courses/${this.$route.params.id}`,
-        }, {
-          text: 'Listen',
-          active: true
-        }],
-        sentences: [],
-        fields: [
-          {
-            name: 'sentence',
-            title: 'English',
-          },
-          {
-            name: 'meaning',
-            title: 'Vietnamese',
-          },
-          '__slot:actions'
-        ],
-      }
-    },
-    computed: {
-      ...mapGetters(['listen'])
-    },
-    async mounted () {
-      await this.getListen({ id: this.id })
-      this.sentences = this.listen.details
-    },
-    methods: {
-      ...mapActions(['getListen']),
+export default {
+  components: {
+    Vuetable
+  },
+  data () {
+    return {
+      id: this.$route.params.id,
+      items: [{
+        text: 'Home',
+        to: '/english'
+      }, {
+        text: 'Sessions',
+        to: `/courses/${this.$route.params.id}`
+      }, {
+        text: 'Listen',
+        active: true
+      }],
+      sentences: [],
+      fields: [
+        {
+          name: 'sentence',
+          title: 'English'
+        },
+        {
+          name: 'meaning',
+          title: 'Vietnamese'
+        },
+        '__slot:actions'
+      ]
     }
+  },
+  computed: {
+    ...mapGetters(['listen'])
+  },
+  async mounted () {
+    await this.getListen({ id: this.id })
+    this.sentences = this.listen.details
+  },
+  methods: {
+    ...mapActions(['getListen'])
   }
+}
 </script>
 
 <style scoped>

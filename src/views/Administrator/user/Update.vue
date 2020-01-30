@@ -49,68 +49,68 @@
 </template>
 
 <script>
-  import draggable from 'vuedraggable'
-  import { validationMixin } from 'vuelidate'
+import draggable from 'vuedraggable'
+import { validationMixin } from 'vuelidate'
+import FactoryService from '../../../services/FactoryService'
 
-  const { required, minLength } = require('vuelidate/lib/validators')
-  import FactoryService from '../../../services/FactoryService'
+const { required, minLength } = require('vuelidate/lib/validators')
 
-  export default {
-    components: {
-      draggable,
-    },
-    async mounted () {
-      this.form = await FactoryService.request('CourseService', 'admin').show(this.id)
-      console.log(this.form)
-    },
-    data () {
-      return {
-        id: this.$route.params.id,
-        items: [
-          {
-            text: 'Dashboard',
-            to: '/administrator/dashboard',
-          }, {
-            text: 'Courses',
-            to: '/administrator/lessons',
-          }, {
-            text: 'Update',
-            active: true
-          },
-        ],
-        form: {
-          name: '',
-          description: '',
-          img: '',
-          is_active: 1
+export default {
+  components: {
+    draggable
+  },
+  async mounted () {
+    this.form = await FactoryService.request('CourseService', 'admin').show(this.id)
+    console.log(this.form)
+  },
+  data () {
+    return {
+      id: this.$route.params.id,
+      items: [
+        {
+          text: 'Dashboard',
+          to: '/administrator/dashboard'
+        }, {
+          text: 'Courses',
+          to: '/administrator/lessons'
+        }, {
+          text: 'Update',
+          active: true
         }
-      }
-    },
-    mixins: [validationMixin],
-    validations: {
+      ],
       form: {
-        name: {
-          required,
-          minLength: minLength(2)
-        },
-        description: {
-          required,
-          minLength: minLength(4)
-        },
-      }
-    },
-    methods: {
-      addSentence () {
-        this.form.details.push(Object.assign({}, this.baseSentence))
-      },
-      removeSentence (key) {
-        this.form.details.splice(key, 1)
-      },
-      async submit () {
-        const res = await FactoryService.request('CourseService', 'admin').update(this.form)
+        name: '',
+        description: '',
+        img: '',
+        is_active: 1
       }
     }
+  },
+  mixins: [validationMixin],
+  validations: {
+    form: {
+      name: {
+        required,
+        minLength: minLength(2)
+      },
+      description: {
+        required,
+        minLength: minLength(4)
+      }
+    }
+  },
+  methods: {
+    addSentence () {
+      this.form.details.push(Object.assign({}, this.baseSentence))
+    },
+    removeSentence (key) {
+      this.form.details.splice(key, 1)
+    },
+    async submit () {
+      const res = await FactoryService.request('CourseService', 'admin').update(this.form)
+    }
   }
+}
 </script>
 
 <style scoped>

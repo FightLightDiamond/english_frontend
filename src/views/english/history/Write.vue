@@ -49,98 +49,98 @@
 </template>
 
 <script>
-  import Vuetable from 'vuetable-2/src/components/Vuetable'
-  import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
-  import draggable from 'vuedraggable'
-  import FactoryService from '../../../services/FactoryService'
+import Vuetable from 'vuetable-2/src/components/Vuetable'
+import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
+import draggable from 'vuedraggable'
+import FactoryService from '../../../services/FactoryService'
 
-  export default {
-    components: {
-      Vuetable,
-      VuetablePaginationBootstrap,
-      draggable,
-    },
-    data () {
-      return {
-        course_id: '',
-        lesson_id: '',
-        courses: [],
-        lessons: [],
-        items: [{
-          text: 'Home',
-          to: '/english',
-        }, {
-          text: 'History',
-          to: '/histories',
-        }, {
-          text: 'Read',
-          active: true
-        }],
-        history: {
-          fields: [
-            {
-              name: 'course',
-              title: 'Course',
-            },
-            {
-              name: 'lesson',
-              title: 'Lesson',
-            },
-            {
-              name: 'score',
-              sortField: 'score',
-              title: 'Score',
-            },
-            {
-              name: 'created_at',
-              sortField: 'created_at',
-              title: 'date',
-            }
-          ]
-        },
-      }
-    },
-    async mounted () {
-      this.getCourses()
-    },
-    watch: {
-      apiUrl (newVal, oldVal) {
-        this.$refs.vuetable.refresh()
-      }
-    },
-    methods: {
-      onPaginationData (paginationData) {
-        this.$refs.pagination.setPaginationData(paginationData)
-      },
-      onChangePage (page) {
-        this.$refs.vuetable.changePage(page)
-      },
-      async onChangeCourse () {
-        const params = {
-          crazy_course_id: this.course_id
-        }
-        this.lessons = await FactoryService.request('CrazyService').index(params)
-        this.lesson_id = ''
-        this.apiUrl = this.getApi()
-      },
-      async onChangeLesson () {
-        this.apiUrl = this.getApi()
-      },
-      getCourses () {
-        FactoryService.request('CourseService').index().then((res) => {
-          this.courses = res
-        })
-      },
-      getApi () {
-        const api = `/api/crazy-write-histories?crazy_course_id=${this.course_id}&crazy_id=${this.lesson_id}`
-        return FactoryService.request('BaseService')
-          .url(api)
-      },
-      async getData () {
-        return await FactoryService.request('HistoryService').read({})
+export default {
+  components: {
+    Vuetable,
+    VuetablePaginationBootstrap,
+    draggable
+  },
+  data () {
+    return {
+      course_id: '',
+      lesson_id: '',
+      courses: [],
+      lessons: [],
+      items: [{
+        text: 'Home',
+        to: '/english'
+      }, {
+        text: 'History',
+        to: '/histories'
+      }, {
+        text: 'Read',
+        active: true
+      }],
+      history: {
+        fields: [
+          {
+            name: 'course',
+            title: 'Course'
+          },
+          {
+            name: 'lesson',
+            title: 'Lesson'
+          },
+          {
+            name: 'score',
+            sortField: 'score',
+            title: 'Score'
+          },
+          {
+            name: 'created_at',
+            sortField: 'created_at',
+            title: 'date'
+          }
+        ]
       }
     }
+  },
+  async mounted () {
+    this.getCourses()
+  },
+  watch: {
+    apiUrl (newVal, oldVal) {
+      this.$refs.vuetable.refresh()
+    }
+  },
+  methods: {
+    onPaginationData (paginationData) {
+      this.$refs.pagination.setPaginationData(paginationData)
+    },
+    onChangePage (page) {
+      this.$refs.vuetable.changePage(page)
+    },
+    async onChangeCourse () {
+      const params = {
+        crazy_course_id: this.course_id
+      }
+      this.lessons = await FactoryService.request('CrazyService').index(params)
+      this.lesson_id = ''
+      this.apiUrl = this.getApi()
+    },
+    async onChangeLesson () {
+      this.apiUrl = this.getApi()
+    },
+    getCourses () {
+      FactoryService.request('CourseService').index().then((res) => {
+        this.courses = res
+      })
+    },
+    getApi () {
+      const api = `/api/crazy-write-histories?crazy_course_id=${this.course_id}&crazy_id=${this.lesson_id}`
+      return FactoryService.request('BaseService')
+        .url(api)
+    },
+    async getData () {
+      return await FactoryService.request('HistoryService').read({})
+    }
   }
+}
 </script>
 
 <style scoped>

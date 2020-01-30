@@ -42,34 +42,34 @@
     </b-row>
 </template>
 <script>
-  import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-  export default {
-    data () {
-      return {
-        form: {
-          name: 'Fight',
-          email: 'aa@gmail.com',
-          password: '123456',
-          password_confirmation: '123456'
-        }
+export default {
+  data () {
+    return {
+      form: {
+        name: 'Fight',
+        email: 'aa@gmail.com',
+        password: '123456',
+        password_confirmation: '123456'
       }
-    },
-    computed: {
-      ...mapGetters(['currentUser', 'processing', 'msgError'])
-    },
-    methods: {
-      ...mapActions(['register']),
-      async formSubmit () {
-        await this.register(this.form)
+    }
+  },
+  computed: {
+    ...mapGetters(['currentUser', 'processing', 'msgError'])
+  },
+  methods: {
+    ...mapActions(['register']),
+    async formSubmit () {
+      await this.register(this.form)
 
-        if (this.msgError === null) {
-          this.$notify('success', 'Register Success', `Hi, ${this.form.email} `, { duration: 1300, permanent: false })
-          this.$router.push('/login')
-        } else {
-          this.$notify('error', 'Register Fail', 'Server Error', { duration: 1300, permanent: false })
-        }
+      if (this.msgError === null) {
+        this.$notify('success', 'Register Success', `Hi, ${this.form.email} `, { duration: 1300, permanent: false })
+        this.$router.push('/login')
+      } else {
+        this.$notify('error', 'Register Fail', 'Server Error', { duration: 1300, permanent: false })
       }
     }
   }
+}
 </script>

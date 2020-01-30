@@ -58,83 +58,83 @@
 </template>
 
 <script>
-  import draggable from 'vuedraggable'
-  import { validationMixin } from 'vuelidate'
+import draggable from 'vuedraggable'
+import { validationMixin } from 'vuelidate'
+import FactoryService from '../../../services/FactoryService'
 
-  const { required, minLength } = require('vuelidate/lib/validators')
-  import FactoryService from '../../../services/FactoryService'
+const { required, minLength } = require('vuelidate/lib/validators')
 
-  export default {
-    components: {
-      draggable,
-    },
-    async mounted () {
-    },
-    data () {
-      return {
-        items: [
-          {
-            text: 'Dashboard',
-            to: '/administrator/dashboard',
-          }, {
-            text: 'Lessons',
-            to: '/administrator/lessons',
-          }, {
-            text: 'Create',
-            active: true
-          },
-        ],
-        form: {
-          name: '',
-          email: '',
-          password: '',
-          password_confirm: '',
-          is_active: 1
+export default {
+  components: {
+    draggable
+  },
+  async mounted () {
+  },
+  data () {
+    return {
+      items: [
+        {
+          text: 'Dashboard',
+          to: '/administrator/dashboard'
+        }, {
+          text: 'Lessons',
+          to: '/administrator/lessons'
+        }, {
+          text: 'Create',
+          active: true
         }
-      }
-    },
-    mixins: [validationMixin],
-    validations: {
+      ],
       form: {
-        name: {
-          required,
-          minLength: minLength(2)
-        },
-        email: {
-          required,
-          minLength: minLength(4)
-        },
-        password: {
-          required,
-        },
-        password_confirm: {
-          required,
-        },
+        name: '',
+        email: '',
+        password: '',
+        password_confirm: '',
+        is_active: 1
       }
+    }
+  },
+  mixins: [validationMixin],
+  validations: {
+    form: {
+      name: {
+        required,
+        minLength: minLength(2)
+      },
+      email: {
+        required,
+        minLength: minLength(4)
+      },
+      password: {
+        required
+      },
+      password_confirm: {
+        required
+      }
+    }
+  },
+  methods: {
+    addSentence () {
+      this.form.details.push(Object.assign({}, this.baseSentence))
     },
-    methods: {
-      addSentence () {
-        this.form.details.push(Object.assign({}, this.baseSentence))
-      },
-      removeSentence (key) {
-        this.form.details.splice(key, 1)
-      },
-      async submit () {
-        console.log(JSON.stringify(this.form))
-        try {
-          const res = await FactoryService.request('AdminService', 'admin').create(this.form)
-          this.form = {}
-          this.$notify('success', 'Create Success', `Add new administrator successfully`, {
-            duration: 1300,
-            permanent: false
-          })
-          this.$router.push('/administrator/users')
-        } catch (e) {
-          this.$notify('success', 'Create Fail', `Server Error`, { duration: 1300, permanent: false })
-        }
+    removeSentence (key) {
+      this.form.details.splice(key, 1)
+    },
+    async submit () {
+      console.log(JSON.stringify(this.form))
+      try {
+        const res = await FactoryService.request('AdminService', 'admin').create(this.form)
+        this.form = {}
+        this.$notify('success', 'Create Success', `Add new administrator successfully`, {
+          duration: 1300,
+          permanent: false
+        })
+        this.$router.push('/administrator/users')
+      } catch (e) {
+        this.$notify('success', 'Create Fail', `Server Error`, { duration: 1300, permanent: false })
       }
     }
   }
+}
 </script>
 
 <style scoped>

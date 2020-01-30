@@ -14,12 +14,13 @@ export default class ValidateDate {
   }
 
   isValidDateTime (dateTime) {
-    console.log('checkDateTimeFormat', this.checkDateTimeFormat(dateTime));
+    console.log('checkDateTimeFormat', this.checkDateTimeFormat(dateTime))
     console.log('checkDateTimeValue', this.checkDateTimeValue(dateTime))
     return this.checkDateTimeFormat(dateTime) && this.checkDateTimeValue(dateTime)
   }
 
   checkDateTimeFormat (dateTime) {
+    console.log('dateTime', dateTime)
     const reGoodDate = /^((19|20)?[0-9]{2}[- /.](0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])) (2[0-3]|[01][0-9]):(00|30)/
     return reGoodDate.test(dateTime)
   }

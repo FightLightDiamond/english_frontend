@@ -34,30 +34,30 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-  export default {
-    data () {
-      return {
-        items: [{
-          text: 'Home',
-          to: '/english',
-        }, {
-          text: 'Courses',
-          to: '/courses',
-        }, ]
-      }
-    },
-    computed: {
-      ...mapGetters(['courses'])
-    },
-    async mounted () {
-      await this.getCourses({type: 'getCourses'})
-    },
-    methods: {
-      ...mapActions(['getCourses']),
+export default {
+  data () {
+    return {
+      items: [{
+        text: 'Home',
+        to: '/english'
+      }, {
+        text: 'Courses',
+        to: '/courses'
+      } ]
     }
+  },
+  computed: {
+    ...mapGetters(['courses'])
+  },
+  async mounted () {
+    await this.getCourses({ type: 'getCourses' })
+  },
+  methods: {
+    ...mapActions(['getCourses'])
   }
+}
 </script>
 
 <style scoped>

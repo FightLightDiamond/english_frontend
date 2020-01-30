@@ -30,61 +30,61 @@
 </template>
 
 <script>
-  import FactoryService from '../../../services/FactoryService'
-  import Vuetable from 'vuetable-2/src/components/Vuetable'
-  import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
+import FactoryService from '../../../services/FactoryService'
+import Vuetable from 'vuetable-2/src/components/Vuetable'
+import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
 
-  export default {
-    components: {
-      Vuetable,
-      VuetablePaginationBootstrap
-    },
-    data () {
-      return {
-        items: [{
-          text: 'Dashboard',
-          to: '/administrator/dashboard',
-        }, {
-          text: 'Contracts',
-          to: '/administrator/contacts',
-        }, 
-        ],
-        fields: [
-          // '__slot:image',
-          {
-            name: 'email',
-            title: 'Email',
-          },
-          {
-            name: 'phone_number',
-            title: 'Phone number',
-          },
-          {
-            name: 'message',
-            title: 'Message',
-          },
-          {
-            name: 'created_at',
-            title: 'Created at',
-          },
-        ],
-        course: [],
+export default {
+  components: {
+    Vuetable,
+    VuetablePaginationBootstrap
+  },
+  data () {
+    return {
+      items: [{
+        text: 'Dashboard',
+        to: '/administrator/dashboard'
+      }, {
+        text: 'Contracts',
+        to: '/administrator/contacts'
       }
+      ],
+      fields: [
+        // '__slot:image',
+        {
+          name: 'email',
+          title: 'Email'
+        },
+        {
+          name: 'phone_number',
+          title: 'Phone number'
+        },
+        {
+          name: 'message',
+          title: 'Message'
+        },
+        {
+          name: 'created_at',
+          title: 'Created at'
+        }
+      ],
+      course: []
+    }
+  },
+  methods: {
+    onPaginationData (paginationData) {
+      this.$refs.pagination.setPaginationData(paginationData)
     },
-    methods: {
-      onPaginationData (paginationData) {
-        this.$refs.pagination.setPaginationData(paginationData)
-      },
-      onChangePage (page) {
-        this.$refs.vuetable.changePage(page)
-      },
-      getApi () {
-        const api = `/api/v1/admin/contacts`
-        return FactoryService.request('BaseService')
-          .url(api)
-      }
+    onChangePage (page) {
+      this.$refs.vuetable.changePage(page)
+    },
+    getApi () {
+      const api = `/api/v1/admin/contacts`
+      return FactoryService.request('BaseService')
+        .url(api)
     }
   }
+}
 </script>
 
 <style scoped>

@@ -2,13 +2,13 @@ import axios from 'axios'
 import FactoryService from '../../services/FactoryService'
 
 const state = {
-  isLoadContacts: false,
+  isLoadContacts: false
 }
 
 const getters = {
   isLoadContacts: state => state.isLoadContacts,
   isLoadConversations: state => state.isLoadConversations,
-  error: state => state.error,
+  error: state => state.error
 }
 
 const mutations = {

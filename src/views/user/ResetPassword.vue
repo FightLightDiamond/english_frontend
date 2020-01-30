@@ -31,30 +31,30 @@
   </b-row>
 </template>
 <script>
-  import { mapGetters, mapMutations, mapActions } from 'vuex'
-  import FactoryService from '../../services/FactoryService'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
+import FactoryService from '../../services/FactoryService'
 
-  export default {
-    data () {
-      return {
-        form: {
-          token: '04aedc70c5c64bbd796a44d81501ffdb830aac8fc219ab724e80737df45740bc',
-          email: 'i.am.m.cuong@gmail.com',
-          password: 'PMC1704bnfrv',
-          password_confirmation: 'PMC1704bnfrv'
-        }
-      }
-    },
-    methods: {
-      async formSubmit () {
-        try {
-          const res = await FactoryService.request('AuthService').resetPass(this.form)
-          console.log(res)
-        } catch (e) {
-          console.log(e)
-        }
-        // this.$router.push('/')
+export default {
+  data () {
+    return {
+      form: {
+        token: '04aedc70c5c64bbd796a44d81501ffdb830aac8fc219ab724e80737df45740bc',
+        email: 'i.am.m.cuong@gmail.com',
+        password: 'PMC1704bnfrv',
+        password_confirmation: 'PMC1704bnfrv'
       }
     }
+  },
+  methods: {
+    async formSubmit () {
+      try {
+        const res = await FactoryService.request('AuthService').resetPass(this.form)
+        console.log(res)
+      } catch (e) {
+        console.log(e)
+      }
+      // this.$router.push('/')
+    }
   }
+}
 </script>

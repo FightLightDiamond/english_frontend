@@ -34,37 +34,37 @@
 </template>
 <script>
 
-  import Auth from '../../../config/Auth'
-  import FactoryService from '../../../services/FactoryService'
+import Auth from '../../../config/Auth'
+import FactoryService from '../../../services/FactoryService'
 
-  export default {
-    data () {
-      return {
-        email: 'vincent@admin.vn',
-        password: 'PMC1704bn',
-        processing: false
+export default {
+  data () {
+    return {
+      email: 'vincent@admin.vn',
+      password: 'PMC1704bn',
+      processing: false
+    }
+  },
+  methods: {
+    async formSubmit () {
+      this.processing = true
+      let auth = Auth.passpost('admins')
+
+      auth.username = this.email
+      auth.password = this.password
+      try {
+        const res = await FactoryService.request('AuthService').login(auth)
+
+        localStorage.setItem('admin', JSON.stringify(res))
+        console.log(res)
+
+        this.$notify('success', 'Login Success', `Hi, ${this.email} `, { duration: 1300, permanent: false })
+        this.$router.push('/administrator/dashboard')
+      } catch (e) {
+        this.$notify('error', 'Login Error', 'Login Fail', { duration: 1300, permanent: false })
+        this.processing = false
       }
-    },
-    methods: {
-      async formSubmit () {
-        this.processing = true
-        let auth = Auth.passpost('admins')
-
-        auth.username = this.email
-        auth.password = this.password
-        try {
-          const res = await FactoryService.request('AuthService').login(auth)
-
-          localStorage.setItem('admin', JSON.stringify(res))
-          console.log(res)
-
-          this.$notify('success', 'Login Success', `Hi, ${this.email} `, { duration: 1300, permanent: false })
-          this.$router.push('/administrator/dashboard')
-        } catch (e) {
-          this.$notify('error', 'Login Error', 'Login Fail', { duration: 1300, permanent: false })
-          this.processing = false
-        }
-      }
-    },
+    }
   }
+}
 </script>

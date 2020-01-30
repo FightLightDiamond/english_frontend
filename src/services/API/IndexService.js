@@ -9,13 +9,13 @@ import TestService from './TestService'
 import UserService from './UserService'
 
 export default {
-    AuthService,
-    BaseService,
-    CourseService,
-    ContactService,
-    CrazyService,
-    HistoryService,
-    RemindService,
-    TestService,
-    UserService
+  AuthService,
+  BaseService,
+  CourseService,
+  ContactService,
+  CrazyService,
+  HistoryService,
+  RemindService,
+  TestService,
+  UserService
 }

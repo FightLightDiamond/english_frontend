@@ -49,74 +49,74 @@
 </template>
 
 <script>
-  import draggable from 'vuedraggable'
-  import { validationMixin } from 'vuelidate'
+import draggable from 'vuedraggable'
+import { validationMixin } from 'vuelidate'
+import FactoryService from '../../../services/FactoryService'
 
-  const { required, minLength } = require('vuelidate/lib/validators')
-  import FactoryService from '../../../services/FactoryService'
+const { required, minLength } = require('vuelidate/lib/validators')
 
-  export default {
-    components: {
-      draggable,
-    },
-    async mounted () {
-      this.form = await FactoryService.request('CourseService', 'admin').show(this.id)
-      console.log(this.form)
-    },
-    data () {
-      return {
-        id: this.$route.params.id,
-        items: [
-          {
-            text: 'Dashboard',
-            to: '/administrator/dashboard',
-          }, {
-            text: 'Courses',
-            to: '/administrator/lessons',
-          }, {
-            text: 'Update',
-            active: true
-          },
-        ],
-        form: {
-          name: '',
-          description: '',
-          img: '',
-          is_active: 1
+export default {
+  components: {
+    draggable
+  },
+  async mounted () {
+    this.form = await FactoryService.request('CourseService', 'admin').show(this.id)
+    console.log(this.form)
+  },
+  data () {
+    return {
+      id: this.$route.params.id,
+      items: [
+        {
+          text: 'Dashboard',
+          to: '/administrator/dashboard'
+        }, {
+          text: 'Courses',
+          to: '/administrator/lessons'
+        }, {
+          text: 'Update',
+          active: true
         }
-      }
-    },
-    mixins: [validationMixin],
-    validations: {
+      ],
       form: {
-        name: {
-          required,
-          minLength: minLength(2)
-        },
-        description: {
-          required,
-          minLength: minLength(4)
-        },
+        name: '',
+        description: '',
+        img: '',
+        is_active: 1
       }
+    }
+  },
+  mixins: [validationMixin],
+  validations: {
+    form: {
+      name: {
+        required,
+        minLength: minLength(2)
+      },
+      description: {
+        required,
+        minLength: minLength(4)
+      }
+    }
+  },
+  methods: {
+    addSentence () {
+      this.form.details.push(Object.assign({}, this.baseSentence))
     },
-    methods: {
-      addSentence () {
-        this.form.details.push(Object.assign({}, this.baseSentence))
-      },
-      removeSentence (key) {
-        this.form.details.splice(key, 1)
-      },
-      async submit () {
-        try {
-          const res = await FactoryService.request('CourseService', 'admin').update(this.form)
-          this.$notify('success', 'Success', `Update successfully`, { duration: 1300, permanent: false })
-          this.$router.push('/administrator/admins')
-        } catch (e) {
-          this.$notify('error', 'Fail', `Update fail`, { duration: 1300, permanent: false })
-        }
+    removeSentence (key) {
+      this.form.details.splice(key, 1)
+    },
+    async submit () {
+      try {
+        const res = await FactoryService.request('CourseService', 'admin').update(this.form)
+        this.$notify('success', 'Success', `Update successfully`, { duration: 1300, permanent: false })
+        this.$router.push('/administrator/admins')
+      } catch (e) {
+        this.$notify('error', 'Fail', `Update fail`, { duration: 1300, permanent: false })
       }
     }
   }
+}
 </script>
 
 <style scoped>

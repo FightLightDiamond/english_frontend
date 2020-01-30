@@ -48,45 +48,45 @@
 </template>
 
 <script>
-  import 'swiper/dist/css/swiper.css'
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import FactoryService from '../../services/FactoryService'
-  import IconCard from '@/components/Cards/IconCard'
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import FactoryService from '../../services/FactoryService'
+import IconCard from '@/components/Cards/IconCard'
 
-  export default {
-    components: {
-      swiper,
-      swiperSlide,
-      IconCard,
-    },
-    data () {
-      return {
-        form: {},
-        items: [{
-          text: 'Home',
-          to: '/english',
-        }, {
-          text: 'Contact',
-          active: true
-        }],
-      }
-    },
-    async mounted () {
+export default {
+  components: {
+    swiper,
+    swiperSlide,
+    IconCard
+  },
+  data () {
+    return {
+      form: {},
+      items: [{
+        text: 'Home',
+        to: '/english'
+      }, {
+        text: 'Contact',
+        active: true
+      }]
+    }
+  },
+  async mounted () {
 
-    },
-    methods: {
-      async submit () {
-        console.log(this.form)
-        try {
-          const res = await FactoryService.request('ContactService').create(this.form)
-          this.form = {}
-          this.$notify('success', 'Contact Success', `We will contact you soon`, { duration: 1300, permanent: false })
-        } catch (e) {
-          this.$notify('error', 'Contact Fail', `Server error`, { duration: 1300, permanent: false })
-        }
+  },
+  methods: {
+    async submit () {
+      console.log(this.form)
+      try {
+        const res = await FactoryService.request('ContactService').create(this.form)
+        this.form = {}
+        this.$notify('success', 'Contact Success', `We will contact you soon`, { duration: 1300, permanent: false })
+      } catch (e) {
+        this.$notify('error', 'Contact Fail', `Server error`, { duration: 1300, permanent: false })
       }
     }
   }
+}
 </script>
 
 <style scoped>

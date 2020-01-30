@@ -28,17 +28,17 @@
   </div>
 </template>
 <script>
-  export default {
-    methods: {
-      goBack () {
-        this.$router.push('/')
-      }
-    },
-    mounted () {
-      document.body.classList.add('background')
-    },
-    beforeDestroy () {
-      document.body.classList.remove('background')
+export default {
+  methods: {
+    goBack () {
+      this.$router.push('/')
     }
+  },
+  mounted () {
+    document.body.classList.add('background')
+  },
+  beforeDestroy () {
+    document.body.classList.remove('background')
   }
+}
 </script>

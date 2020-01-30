@@ -61,55 +61,55 @@
 </template>
 
 <script>
-  import Vuetable from 'vuetable-2/src/components/Vuetable'
-  import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
-  import { mapGetters, mapMutations, mapActions } from 'vuex'
+import Vuetable from 'vuetable-2/src/components/Vuetable'
+import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-  export default {
-    components: {
-      Vuetable,
-      VuetablePaginationBootstrap
+export default {
+  components: {
+    Vuetable,
+    VuetablePaginationBootstrap
+  },
+  data () {
+    return {
+      items: [{
+        text: 'Home',
+        to: '/'
+      }, {
+        text: 'Sessions',
+        to: '/courses'
+      }, {
+        text: 'Lessons',
+        active: true
+      }],
+      id: this.$route.params.id,
+      lessons: [],
+      fields: [
+        {
+          name: 'name',
+          title: '<span class="orange glyphicon glyphicon-user"></span> Lesson'
+        },
+        '__slot:actions'
+      ]
+    }
+  },
+  computed: {
+    ...mapGetters(['course'])
+  },
+  async mounted () {
+    await this.getCourse({ id: this.id })
+    this.lessons = this.course.crazies
+  },
+  methods: {
+    ...mapActions(['getCourse']),
+    onPaginationData (paginationData) {
+      this.$refs.pagination.setPaginationData(paginationData)
     },
-    data () {
-      return {
-        items: [{
-          text: 'Home',
-          to: '/',
-        }, {
-          text: 'Sessions',
-          to: '/courses',
-        }, {
-          text: 'Lessons',
-          active: true
-        },],
-        id: this.$route.params.id,
-        lessons: [],
-        fields: [
-          {
-            name: 'name',
-            title: '<span class="orange glyphicon glyphicon-user"></span> Lesson',
-          },
-          '__slot:actions'
-        ],
-      }
-    },
-    computed: {
-      ...mapGetters(['course'])
-    },
-    async mounted () {
-      await this.getCourse({ id: this.id })
-      this.lessons = this.course.crazies
-    },
-    methods: {
-      ...mapActions(['getCourse']),
-      onPaginationData (paginationData) {
-        this.$refs.pagination.setPaginationData(paginationData)
-      },
-      onChangePage (page) {
-        this.$refs.vuetable.changePage(page)
-      },
+    onChangePage (page) {
+      this.$refs.vuetable.changePage(page)
     }
   }
+}
 </script>
 
 <style scoped>

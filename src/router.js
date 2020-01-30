@@ -20,7 +20,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "user" */ './views/user'),
     redirect: '/admin/login',
     children: [
-      { path: 'login', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/auth/Login') },
+      { path: 'login', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/auth/Login') }
     ]
   },
   {
@@ -41,7 +41,7 @@ const routes = [
       { path: '/administrator/lessons', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/lesson/Index') },
       { path: '/administrator/lessons/create', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/lesson/Create') },
       { path: '/administrator/lessons/:id/update', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/lesson/Update') },
-      { path: '/administrator/contacts', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/contact/Index') },
+      { path: '/administrator/contacts', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/contact/Index') }
     ]
   },
   {
@@ -78,7 +78,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "english" */ './views/train'),
     redirect: '/train/re',
     children: [
-      { path: '/re', component: () => import(/* webpackChunkName: "english" */ './views/train/Register') },
+      { path: '/re', component: () => import(/* webpackChunkName: "english" */ './views/train/Register') }
     ]
   },
   { path: '/error', component: () => import(/* webpackChunkName: "error" */ './views/Error') },

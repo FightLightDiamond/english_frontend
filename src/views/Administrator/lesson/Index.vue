@@ -75,75 +75,74 @@
 </template>
 
 <script>
-  import FactoryService from '../../../services/FactoryService'
-  import Vuetable from 'vuetable-2/src/components/Vuetable'
-  import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
+import FactoryService from '../../../services/FactoryService'
+import Vuetable from 'vuetable-2/src/components/Vuetable'
+import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
 
-  export default {
-    components: {
-      Vuetable,
-      VuetablePaginationBootstrap
+export default {
+  components: {
+    Vuetable,
+    VuetablePaginationBootstrap
+  },
+  data () {
+    return {
+      apiUrl: '',
+      form: {
+        crazy_course_id: null
+      },
+      items: [{
+        text: 'Dashboard',
+        to: '/administrator/dashboard'
+      }, {
+        text: 'Lessons',
+        to: '/administrator/lessons'
+      } ],
+      fields: [
+        '__slot:image',
+        '__slot:actions'
+      ],
+      courses: []
+    }
+  },
+  async mounted () {
+    this.courses = await FactoryService.request('CourseService', 'admin').index()
+    this.apiUrl = this.getApi()
+    console.log(this.courses)
+  },
+  methods: {
+    onPaginationData (paginationData) {
+      this.$refs.pagination.setPaginationData(paginationData)
     },
-    data () {
-      return {
-        apiUrl: '',
-        form: {
-          crazy_course_id: null
-        },
-        items: [{
-          text: 'Dashboard',
-          to: '/administrator/dashboard',
-        }, {
-          text: 'Lessons',
-          to: '/administrator/lessons',
-        }, ],
-        fields: [
-          '__slot:image',
-          '__slot:actions'
-        ],
-        courses: [],
+    onChangePage (page) {
+      this.$refs.vuetable.changePage(page)
+    },
+    getApi (params = '') {
+      const api = `/api/v1/admin/crazies/${params}`
+      return FactoryService.request('BaseService')
+        .url(api)
+    },
+    async destroy (id) {
+      let options = {
+        okText: 'Yes',
+        cancelText: 'No'
       }
+      this.$dialog
+        .confirm('Are you sure?', options)
+        .then(async (dialog) => {
+          try {
+            await FactoryService.request('CrazyService', 'admin').destroy(id)
+            this.$notify('success', 'Success', `Delete successfully`, { duration: 1300, permanent: false })
+            this.$refs.vuetable.refresh()
+          } catch (e) {
+            this.$notify('error', 'Success', `Delete fail`, { duration: 1300, permanent: false })
+          }
+        })
     },
-    async mounted () {
-      this.courses = await FactoryService.request('CourseService', 'admin').index();
-      this.apiUrl = this.getApi();
-      console.log(this.courses)
-    },
-    methods: {
-      onPaginationData (paginationData) {
-        this.$refs.pagination.setPaginationData(paginationData)
-      },
-      onChangePage (page) {
-        this.$refs.vuetable.changePage(page)
-      },
-      getApi (params = '') {
-        const api = `/api/v1/admin/crazies/${params}`
-        return FactoryService.request('BaseService')
-          .url(api)
-      },
-      async destroy (id) {
-        let options = {
-          okText: 'Yes',
-          cancelText: 'No',
-        }
-        this.$dialog
-          .confirm('Are you sure?', options)
-          .then(async (dialog) => {
-            try {
-              await FactoryService.request('CrazyService', 'admin').destroy(id)
-              this.$notify('success', 'Success', `Delete successfully`, { duration: 1300, permanent: false })
-              this.$refs.vuetable.refresh()
-            } catch (e) {
-              this.$notify('error', 'Success', `Delete fail`, { duration: 1300, permanent: false })
-            }
-          })
-      },
-      changeCourse ()
-      {
-        this.apiUrl = this.getApi(`?crazy_course_id=${this.form.crazy_course_id}`);
-      }
+    changeCourse () {
+      this.apiUrl = this.getApi(`?crazy_course_id=${this.form.crazy_course_id}`)
     }
   }
+}
 </script>
 
 <style scoped>

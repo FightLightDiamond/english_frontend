@@ -49,75 +49,75 @@
 </template>
 
 <script>
-  import draggable from 'vuedraggable'
-  import { validationMixin } from 'vuelidate'
+import draggable from 'vuedraggable'
+import { validationMixin } from 'vuelidate'
+import FactoryService from '../../../services/FactoryService'
 
-  const { required, minLength } = require('vuelidate/lib/validators')
-  import FactoryService from '../../../services/FactoryService'
+const { required, minLength } = require('vuelidate/lib/validators')
 
-  export default {
-    components: {
-      draggable,
-    },
-    async mounted () {
-      this.courses = await FactoryService.request('CourseService', 'admin').index()
-      console.log(this.courses)
-    },
-    data () {
-      return {
-        items: [
-          {
-            text: 'Dashboard',
-            to: '/administrator/dashboard',
-          }, {
-            text: 'Courses',
-            to: '/administrator/courses',
-          }, {
-            text: 'Create',
-            active: true
-          },
-        ],
-        form: {
-          name: '',
-          description: '',
-          img: '',
-          is_active: 1
+export default {
+  components: {
+    draggable
+  },
+  async mounted () {
+    this.courses = await FactoryService.request('CourseService', 'admin').index()
+    console.log(this.courses)
+  },
+  data () {
+    return {
+      items: [
+        {
+          text: 'Dashboard',
+          to: '/administrator/dashboard'
+        }, {
+          text: 'Courses',
+          to: '/administrator/courses'
+        }, {
+          text: 'Create',
+          active: true
         }
-      }
-    },
-    mixins: [validationMixin],
-    validations: {
+      ],
       form: {
-        name: {
-          required,
-          minLength: minLength(2)
-        },
-        description: {
-          required,
-          minLength: minLength(4)
-        },
-        img: {
-          required,
-        },
+        name: '',
+        description: '',
+        img: '',
+        is_active: 1
       }
-    },
-    methods: {
-      async submit () {
-        let formData = new FormData()
-        for (let key in this.form) {
-          formData.append(key, this.form[key])
-        }
+    }
+  },
+  mixins: [validationMixin],
+  validations: {
+    form: {
+      name: {
+        required,
+        minLength: minLength(2)
+      },
+      description: {
+        required,
+        minLength: minLength(4)
+      },
+      img: {
+        required
+      }
+    }
+  },
+  methods: {
+    async submit () {
+      let formData = new FormData()
+      for (let key in this.form) {
+        formData.append(key, this.form[key])
+      }
 
-        try {
-          const res = await FactoryService.request('CourseService', 'admin').create(formData)
-          this.$notify('success', 'Success', `Create successfully`, { duration: 1300, permanent: false })
-          this.$router.push('/administrator/courses')
-        } catch (e) {
-          this.$notify('error', 'Fail', `Create fail`, { duration: 1300, permanent: false })
-        }
+      try {
+        const res = await FactoryService.request('CourseService', 'admin').create(formData)
+        this.$notify('success', 'Success', `Create successfully`, { duration: 1300, permanent: false })
+        this.$router.push('/administrator/courses')
+      } catch (e) {
+        this.$notify('error', 'Fail', `Create fail`, { duration: 1300, permanent: false })
       }
     }
   }
+}
 </script>
 
 <style scoped>

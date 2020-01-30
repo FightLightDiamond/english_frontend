@@ -104,123 +104,123 @@
   </nav>
 </template>
 <script>
-  import { mapGetters, mapMutations, mapActions } from 'vuex'
-  import { MenuIcon, MobileMenuIcon } from '@/components/Svg'
-  import Switches from 'vue-switches'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { MenuIcon, MobileMenuIcon } from '@/components/Svg'
+import Switches from 'vue-switches'
 
-  import notifications from '@/data/notifications'
-  import {
-    searchPath,
-    menuHiddenBreakpoint,
-    localeOptions,
-    buyUrl,
-    defaultColor
-  } from '@/constants/config'
-  import { getDirection, setDirection } from '@/utils'
+import notifications from '@/data/notifications'
+import {
+  searchPath,
+  menuHiddenBreakpoint,
+  localeOptions,
+  buyUrl,
+  defaultColor
+} from '@/constants/config'
+import { getDirection, setDirection } from '@/utils'
 
-  export default {
-    components: {
-      MenuIcon,
-      MobileMenuIcon,
-      Switches
-    },
-    data () {
-      return {
-        selectedParentMenu: '',
-        searchKeyword: '',
-        isMobileSearch: false,
-        isSearchOver: false,
-        fullScreen: false,
-        menuHiddenBreakpoint,
-        searchPath,
-        localeOptions,
-        buyUrl,
-        notifications,
-        user: {}
+export default {
+  components: {
+    MenuIcon,
+    MobileMenuIcon,
+    Switches
+  },
+  data () {
+    return {
+      selectedParentMenu: '',
+      searchKeyword: '',
+      isMobileSearch: false,
+      isSearchOver: false,
+      fullScreen: false,
+      menuHiddenBreakpoint,
+      searchPath,
+      localeOptions,
+      buyUrl,
+      notifications,
+      user: {}
+    }
+  },
+  methods: {
+    ...mapMutations(['changeSideMenuStatus', 'changeSideMenuForMobile']),
+    ...mapActions(['setLang', 'signOut']),
+
+    changeLocale (locale, direction) {
+      const currentDirection = getDirection().direction
+      if (direction !== currentDirection) {
+        setDirection(direction)
       }
+
+      this.setLang(locale)
     },
-    methods: {
-      ...mapMutations(['changeSideMenuStatus', 'changeSideMenuForMobile']),
-      ...mapActions(['setLang', 'signOut']),
+    logout () {
+      this.signOut().then(() => {
+        this.$router.push('/login')
+      })
+    },
 
-      changeLocale (locale, direction) {
-        const currentDirection = getDirection().direction
-        if (direction !== currentDirection) {
-          setDirection(direction)
+    toggleFullScreen () {
+      const isInFullScreen = this.isInFullScreen()
+
+      var docElm = document.documentElement
+      if (!isInFullScreen) {
+        if (docElm.requestFullscreen) {
+          docElm.requestFullscreen()
+        } else if (docElm.mozRequestFullScreen) {
+          docElm.mozRequestFullScreen()
+        } else if (docElm.webkitRequestFullScreen) {
+          docElm.webkitRequestFullScreen()
+        } else if (docElm.msRequestFullscreen) {
+          docElm.msRequestFullscreen()
         }
-
-        this.setLang(locale)
-      },
-      logout () {
-        this.signOut().then(() => {
-          this.$router.push('/login')
-        })
-      },
-
-      toggleFullScreen () {
-        const isInFullScreen = this.isInFullScreen()
-
-        var docElm = document.documentElement
-        if (!isInFullScreen) {
-          if (docElm.requestFullscreen) {
-            docElm.requestFullscreen()
-          } else if (docElm.mozRequestFullScreen) {
-            docElm.mozRequestFullScreen()
-          } else if (docElm.webkitRequestFullScreen) {
-            docElm.webkitRequestFullScreen()
-          } else if (docElm.msRequestFullscreen) {
-            docElm.msRequestFullscreen()
-          }
-        } else {
-          if (document.exitFullscreen) {
-            document.exitFullscreen()
-          } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen()
-          } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen()
-          } else if (document.msExitFullscreen) {
-            document.msExitFullscreen()
-          }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen()
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen()
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen()
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen()
         }
-        this.fullScreen = !isInFullScreen
-      },
-      getThemeColor () {
-        return localStorage.getItem('themeColor')
-          ? localStorage.getItem('themeColor')
-          : defaultColor
-      },
-      isInFullScreen () {
-        return (
-          (document.fullscreenElement && document.fullscreenElement !== null) ||
+      }
+      this.fullScreen = !isInFullScreen
+    },
+    getThemeColor () {
+      return localStorage.getItem('themeColor')
+        ? localStorage.getItem('themeColor')
+        : defaultColor
+    },
+    isInFullScreen () {
+      return (
+        (document.fullscreenElement && document.fullscreenElement !== null) ||
           (document.webkitFullscreenElement &&
             document.webkitFullscreenElement !== null) ||
           (document.mozFullScreenElement &&
             document.mozFullScreenElement !== null) ||
           (document.msFullscreenElement && document.msFullscreenElement !== null)
-        )
-      }
-    },
-    computed: {
-      ...mapGetters({
-        currentUser: 'currentUser',
-        menuType: 'getMenuType',
-        menuClickCount: 'getMenuClickCount'
-      })
-    },
-    beforeDestroy () {
-      document.removeEventListener('click', this.handleDocumentforMobileSearch)
-    },
-    created () {
-      const color = this.getThemeColor()
-      this.user = JSON.parse(localStorage.getItem('user'))
-    },
-    watch: {
-      '$i18n.locale' (to, from) {
-        if (from !== to) {
-          this.$router.go(this.$route.path)
-        }
-      },
-
+      )
     }
+  },
+  computed: {
+    ...mapGetters({
+      currentUser: 'currentUser',
+      menuType: 'getMenuType',
+      menuClickCount: 'getMenuClickCount'
+    })
+  },
+  beforeDestroy () {
+    document.removeEventListener('click', this.handleDocumentforMobileSearch)
+  },
+  created () {
+    const color = this.getThemeColor()
+    this.user = JSON.parse(localStorage.getItem('user'))
+  },
+  watch: {
+    '$i18n.locale' (to, from) {
+      if (from !== to) {
+        this.$router.go(this.$route.path)
+      }
+    }
+
   }
+}
 </script>

@@ -63,56 +63,56 @@
 </template>
 
 <script>
-  import { ResizeObserver } from 'vue-resize'
+import { ResizeObserver } from 'vue-resize'
 
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 
-  import vSelect from 'vue-select'
-  import 'vue-select/dist/vue-select.css'
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css'
 
-  import Vuetable from 'vuetable-2/src/components/Vuetable'
-  import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
+import Vuetable from 'vuetable-2/src/components/Vuetable'
+import VuetablePaginationBootstrap from '@/components/Common/VuetablePaginationBootstrap'
 
-  import IconCard from '@/components/Cards/IconCard'
-  import GradientWithRadialProgressCard from '@/components/Cards/GradientWithRadialProgressCard'
-  import AreaShadowChart from '@/components/Charts/AreaShadow'
-  import TwoColumnList from '@/components/Listing/TwoColumnList'
-  import ListWithUserItem from '@/components/Listing/ListWithUserItem'
+import IconCard from '@/components/Cards/IconCard'
+import GradientWithRadialProgressCard from '@/components/Cards/GradientWithRadialProgressCard'
+import AreaShadowChart from '@/components/Charts/AreaShadow'
+import TwoColumnList from '@/components/Listing/TwoColumnList'
+import ListWithUserItem from '@/components/Listing/ListWithUserItem'
 
-  import FactoryService from '../../services/FactoryService'
+import FactoryService from '../../services/FactoryService'
 
-  export default {
-    data () {
-      return {
-        data: {
-          user: 0,
-          course: 0,
-          lesson: 0,
-          read_history: 0,
-          write_history: 0,
-          contact: 0
-        }
+export default {
+  data () {
+    return {
+      data: {
+        user: 0,
+        course: 0,
+        lesson: 0,
+        read_history: 0,
+        write_history: 0,
+        contact: 0
       }
-    },
-    async mounted () {
-      this.data = await FactoryService.request('DashboardService', 'admin').index()
-      console.log(this.data)
-    },
-    components: {
-      IconCard,
-      swiper,
-      swiperSlide,
-      ResizeObserver,
-      vSelect,
-      Vuetable,
-      VuetablePaginationBootstrap,
-      TwoColumnList,
-      ListWithUserItem,
-      AreaShadowChart,
-      GradientWithRadialProgressCard
     }
+  },
+  async mounted () {
+    this.data = await FactoryService.request('DashboardService', 'admin').index()
+    console.log(this.data)
+  },
+  components: {
+    IconCard,
+    swiper,
+    swiperSlide,
+    ResizeObserver,
+    vSelect,
+    Vuetable,
+    VuetablePaginationBootstrap,
+    TwoColumnList,
+    ListWithUserItem,
+    AreaShadowChart,
+    GradientWithRadialProgressCard
   }
+}
 </script>
 
 <style scoped>

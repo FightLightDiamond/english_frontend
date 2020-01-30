@@ -31,22 +31,23 @@ import 'firebase/auth'
 // import AudioPlayer from '@liripeng/vue-audio-player'
 import AudioRecorder from 'vue-audio-recorder'
 
-import VuejsDialog from 'vuejs-dialog';
-import VuejsDialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js'; // only needed in custom components
+import VuejsDialog from 'vuejs-dialog'
+import VuejsDialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js' // only needed in custom components
 
 // include the default style
-import 'vuejs-dialog/dist/vuejs-dialog.min.css';
+import 'vuejs-dialog/dist/vuejs-dialog.min.css'
 
+import Vuelidate from 'vuelidate'
+
+import moment from 'moment'
 
 // Tell Vue to install the plugin.
-Vue.use(VuejsDialog);
+Vue.use(VuejsDialog)
 // Vue.use(AudioPlayer)
 Vue.use(AudioRecorder)
 
 Vue.use(BootstrapVue)
 Vue.use(VueI18n)
-
-import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
 
 const messages = { en: en, es: es }
@@ -84,12 +85,9 @@ Vue.use(require('vue-shortkey'))
 
 firebase.initializeApp(firebaseConfig)
 
+Vue.use(require('vue-moment'))
 
-Vue.use(require('vue-moment'));
-
-import moment from 'moment';
-
-Vue.prototype.moment = moment;
+Vue.prototype.moment = moment
 Vue.use(require('v-validate'))
 
 export default new Vue({
@@ -99,8 +97,3 @@ export default new Vue({
   store,
   render: h => h(App)
 })
-
-
-
-
-

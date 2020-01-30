@@ -119,43 +119,43 @@
 </template>
 
 <script>
-  import 'swiper/dist/css/swiper.css'
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import IconCard from '@/components/Cards/IconCard'
-  import GradientCard from '@/components/Cards/GradientCard'
-  import { mapGetters, mapMutations, mapActions } from 'vuex'
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import IconCard from '@/components/Cards/IconCard'
+import GradientCard from '@/components/Cards/GradientCard'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-  export default {
-    components: {
-      GradientCard,
-      swiper,
-      swiperSlide,
-      IconCard,
-    },
-    data () {
-      return {
-        form: {},
-      }
-    },
-    computed: {
-      ...mapGetters(['swiperInfiniteOption', 'swiperOption', 'courses'])
-    },
-    async mounted () {
-     await this.getCourses({type: 'getCourses'})
-    },
-    methods: {
-      ...mapActions(['getCourses', 'createContact']),
-      async submit () {
-        try {
-          const res = await this.createContact(this.form)
-          this.form = {}
-          this.$notify('success', 'Contact Success', `We will contact you soon`, { duration: 1300, permanent: false })
-        } catch (e) {
-          this.$notify('error', 'Contact Fail', `Server error`, { duration: 1300, permanent: false })
-        }
+export default {
+  components: {
+    GradientCard,
+    swiper,
+    swiperSlide,
+    IconCard
+  },
+  data () {
+    return {
+      form: {}
+    }
+  },
+  computed: {
+    ...mapGetters(['swiperInfiniteOption', 'swiperOption', 'courses'])
+  },
+  async mounted () {
+    await this.getCourses({ type: 'getCourses' })
+  },
+  methods: {
+    ...mapActions(['getCourses', 'createContact']),
+    async submit () {
+      try {
+        const res = await this.createContact(this.form)
+        this.form = {}
+        this.$notify('success', 'Contact Success', `We will contact you soon`, { duration: 1300, permanent: false })
+      } catch (e) {
+        this.$notify('error', 'Contact Fail', `Server error`, { duration: 1300, permanent: false })
       }
     }
   }
+}
 </script>
 
 <style scoped>

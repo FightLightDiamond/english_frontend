@@ -46,47 +46,47 @@
 </template>
 
 <script>
-  import FactoryService from '../../../services/FactoryService'
+import FactoryService from '../../../services/FactoryService'
 
-  export default {
-    components: {},
-    data () {
-      return {
-        id: JSON.parse(localStorage.getItem('user')).id,
-        form: {},
-        courses: [],
-        items: [{
-          text: 'Home',
-          to: '/english',
-        }],
+export default {
+  components: {},
+  data () {
+    return {
+      id: JSON.parse(localStorage.getItem('user')).id,
+      form: {},
+      courses: [],
+      items: [{
+        text: 'Home',
+        to: '/english'
+      }]
+    }
+  },
+  async mounted () {
+    this.form = await FactoryService.request('UserService').show(this.id)
+    console.log(this.form)
+  },
+  methods: {
+    async submit () {
+      const formData = new FormData()
+
+      for (let en in this.form) {
+        if (this.form[en]) {
+          formData.append(en, this.form[en])
+        }
       }
-    },
-    async mounted () {
-      this.form = await FactoryService.request('UserService').show(this.id)
-      console.log(this.form)
-    },
-    methods: {
-      async submit () {
-        const formData = new FormData()
+      formData.append('_method', 'PATCH')
+      console.log(formData)
 
-        for (let en in this.form) {
-          if (this.form[en]) {
-            formData.append(en, this.form[en])
-          }
-        }
-        formData.append('_method', 'PATCH')
-        console.log(formData)
+      try {
+        await FactoryService.request('UserService').update(this.id, formData)
 
-        try {
-          await FactoryService.request('UserService').update(this.id, formData)
-
-          this.$notify('success', 'Success', `Update successfully`, { duration: 1300, permanent: false })
-        } catch (e) {
-          this.$notify('error', 'Error', `Update fail`, { duration: 1300, permanent: false })
-        }
+        this.$notify('success', 'Success', `Update successfully`, { duration: 1300, permanent: false })
+      } catch (e) {
+        this.$notify('error', 'Error', `Update fail`, { duration: 1300, permanent: false })
       }
     }
   }
+}
 </script>
 
 <style scoped>

@@ -15,10 +15,8 @@ const mutations = {
   },
   convertDateTime (datetime, format = null) {
     return this.moment(datetime).format(format)
-  },
+  }
 }
-
-
 
 export default {
   state,

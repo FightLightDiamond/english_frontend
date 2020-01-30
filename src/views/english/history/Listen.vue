@@ -50,46 +50,46 @@
 </template>
 
 <script>
-  import testService from '../../../services/API/TestService'
-  import Vuetable from 'vuetable-2/src/components/Vuetable'
+import testService from '../../../services/API/TestService'
+import Vuetable from 'vuetable-2/src/components/Vuetable'
 
-  export default {
-    components: {
-      Vuetable
-    },
-    data () {
-      return {
-        lesson: [],
-        items: [{
-          text: 'Home',
-          to: '/english',
-        }, {
-          text: 'Sessions',
-          to: '/english/lesson',
-        }, {
-          text: 'Lesson',
-          active: true
-        }],
-        sentences: [],
-        fields: [
-          {
-            name: 'sentence',
-            title: 'English',
-          },
-          {
-            name: 'meaning',
-            title: 'Vietnamese',
-          },
-          '__slot:actions'
-        ],
-      }
-    },
-    async mounted () {
-      const res = await testService.listen(this.$route.params.id)
-      this.lesson = res
-      this.sentences = res.details
-    },
+export default {
+  components: {
+    Vuetable
+  },
+  data () {
+    return {
+      lesson: [],
+      items: [{
+        text: 'Home',
+        to: '/english'
+      }, {
+        text: 'Sessions',
+        to: '/english/lesson'
+      }, {
+        text: 'Lesson',
+        active: true
+      }],
+      sentences: [],
+      fields: [
+        {
+          name: 'sentence',
+          title: 'English'
+        },
+        {
+          name: 'meaning',
+          title: 'Vietnamese'
+        },
+        '__slot:actions'
+      ]
+    }
+  },
+  async mounted () {
+    const res = await testService.listen(this.$route.params.id)
+    this.lesson = res
+    this.sentences = res.details
   }
+}
 </script>
 
 <style scoped>
