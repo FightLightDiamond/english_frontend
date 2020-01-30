@@ -24,11 +24,10 @@ export default class BaseService {
 
   async get (uri, params = {}) {
     try {
-      console.log(domain + uri)
       const res = await axios.get(domain + uri, { params: params })
       return res.data
     } catch (e) {
-      this.errorMsg(e)
+      return this.errorMsg(e)
     }
   }
 
@@ -37,7 +36,7 @@ export default class BaseService {
       const res = await axios.post(domain + uri, params)
       return res.data
     } catch (e) {
-      this.errorMsg(e)
+      return this.errorMsg(e)
     }
   }
 
@@ -46,7 +45,7 @@ export default class BaseService {
       const res = await axios.put(domain + uri, params)
       return res.data
     } catch (e) {
-      this.errorMsg(e)
+      return this.errorMsg(e)
     }
   }
 
@@ -55,7 +54,7 @@ export default class BaseService {
       const res = await axios.patch(domain + uri, params)
       return res.data
     } catch (e) {
-      this.errorMsg(e)
+      return this.errorMsg(e)
     }
   }
 
@@ -64,7 +63,7 @@ export default class BaseService {
       const res = await axios.get(domain + uri)
       return res.data
     } catch (e) {
-      this.errorMsg(e)
+      return this.errorMsg(e)
     }
   }
 
@@ -73,7 +72,7 @@ export default class BaseService {
       const res = await axios.delete(domain + uri)
       return res.data
     } catch (e) {
-      this.errorMsg(e)
+      return  this.errorMsg(e)
     }
   }
 
@@ -82,7 +81,6 @@ export default class BaseService {
   }
 
   errorMsg (e) {
-    console.log(e.response)
     let validationErrors = ''
     if (e.response.status === 422) {
       const errors = e.response.data.errors
@@ -96,5 +94,7 @@ export default class BaseService {
     }
 
     Vue.$notify('error', e.response.statusText, validationErrors, { duration: 1300, permanent: false })
+
+    return { data: e.response }
   }
 }
