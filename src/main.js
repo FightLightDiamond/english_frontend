@@ -41,6 +41,23 @@ import Vuelidate from 'vuelidate'
 
 import moment from 'moment'
 
+import Echo from 'laravel-echo';
+window.io = require('socket.io-client');
+
+const user = JSON.parse(localStorage.getItem('user'))
+
+if (user) {
+  const bearerToken = `Bearer ${user.access_token}`
+  window.Echo = new Echo({
+    broadcaster: 'socket.io',
+    host: window.location.hostname + ':60001',
+    auth: {headers: {Authorization: bearerToken}}
+  });
+}
+
+window._ = require('lodash');
+window.axios = require('axios');
+
 // Tell Vue to install the plugin.
 Vue.use(VuejsDialog)
 // Vue.use(AudioPlayer)

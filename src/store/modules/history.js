@@ -2,7 +2,9 @@ import axios from 'axios'
 import FactoryService from '../../services/FactoryService'
 
 const state = {
-  isLoadContacts: false
+  isLoadContacts: false,
+  isLoadConversations: false,
+  error: false
 }
 
 const getters = {

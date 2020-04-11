@@ -1,4 +1,4 @@
-/* Piaf Main Style 
+/* Piaf Main Style
 
 Table of Contents
 
@@ -1687,8 +1687,8 @@ button {
 /* 09.Navbar*/
 .navbar {
   background: $foreground-color;
-  height: $navbar-height;
-  padding: 1.5rem 0 1.5rem 0;
+  //height: $navbar-height;
+  //padding: 1.5rem 0 1.5rem 0;
   @include depth(1);
 
   #tool-mode-switch {

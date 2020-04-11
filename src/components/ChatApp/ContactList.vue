@@ -7,7 +7,7 @@
                 <div class="d-flex flex-grow-1 min-width-zero">
                     <div class="pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
                         <div class="min-width-zero">
-                            <p class=" mb-0 truncate">{{contact.title}}</p>
+                            <p class=" mb-0 truncate">{{contact.email}}</p>
                         </div>
                     </div>
                 </div>

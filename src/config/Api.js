@@ -1,5 +1,5 @@
 export default {
   domain () {
-    return 'http://localhost:8000'
+    return 'http://localhost:8006'
   }
 }

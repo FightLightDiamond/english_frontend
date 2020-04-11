@@ -1,4 +1,3 @@
-import { currentUser } from '@/constants/config'
 import FactoryService from '../../services/FactoryService'
 import Auth from '../../config/Auth'
 
@@ -46,10 +45,11 @@ export default {
       auth.password = payload.password
 
       const res = await FactoryService.request('AuthService').login(auth)
-      console.log('FactoryService', res)
-      if (!(res.status < 200 || res.status > 300)) {
-        localStorage.setItem('user', JSON.stringify(res))
-        commit('setUser', res)
+
+      if (res.status >= 200 && res.status < 300) {
+        const userData = res.data
+        localStorage.setItem('user', JSON.stringify(userData))
+        commit('setUser', userData)
         commit('clearError')
       } else {
         localStorage.removeItem('user')
@@ -71,7 +71,7 @@ export default {
       commit('setProcessing', false)
     },
 
-    async forgotPassword({commit}, payload) {
+    async forgotPassword ({ commit }, payload) {
       commit('setProcessing', true)
       const res = await FactoryService.request('AuthService').forgetPass(payload)
 
@@ -83,6 +83,7 @@ export default {
       commit('setProcessing', false)
 
     },
+
     signOut ({ commit }) {
       localStorage.removeItem('user')
       commit('setLogout')

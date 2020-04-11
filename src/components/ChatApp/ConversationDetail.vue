@@ -3,8 +3,8 @@
     <div class="d-flex flex-row chat-heading">
       <div class="d-flex">
         <img
-          :alt="otherUser.title"
-          :src="otherUser.img"
+          :alt="otherUser.email"
+          :src="otherUser.avatar"
           class="img-thumbnail border-0 rounded-circle ml-0 mr-4 list-thumbnail align-self-center small"
         >
       </div>
@@ -14,9 +14,9 @@
         >
           <div class="min-width-zero">
             <div>
-              <p class="list-item-heading mb-1 truncate">{{otherUser.title}}</p>
+              <p class="list-item-heading mb-1 truncate">{{otherUser.email}}</p>
             </div>
-            <p class="mb-0 text-muted text-small">{{otherUser.date}}</p>
+            <p class="mb-0 text-muted text-small">{{otherUser.created_at}}</p>
           </div>
         </div>
       </div>
@@ -33,29 +33,29 @@
           :class="{'d-inline-block mb-3' : true, 'float-left':message.sender==otherUser.id, 'float-right':message.sender==currentUser.id}"
         >
           <div class="position-absolute pt-1 pr-2 r-0">
-            <span class="text-extra-small text-muted">{{message.time}}</span>
+            <span class="text-extra-small text-muted">{{message.created_at}}</span>
           </div>
           <b-card-body>
             <div class="d-flex flex-row pb-1" v-if="message.sender==currentUser.id">
-              <img
-                :alt="currentUser.title"
-                :src="currentUser.img"
-                class="img-thumbnail border-0 rounded-circle mr-3 list-thumbnail align-self-center xsmall"
-              >
+<!--              <img-->
+<!--                :alt="currentUser.email"-->
+<!--                :src="currentUser.avatar"-->
+<!--                class="img-thumbnail border-0 rounded-circle mr-3 list-thumbnail align-self-center xsmall"-->
+<!--              >-->
               <div class="d-flex flex-grow-1 min-width-zero">
                 <div
                   class="m-2 pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero"
                 >
                   <div class="min-width-zero">
-                    <p class="mb-0 truncate list-item-heading">{{currentUser.title}}</p>
+                    <p class="mb-0 truncate list-item-heading">{{currentUser.email}}</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="d-flex flex-row pb-1" v-else>
               <img
-                :alt="otherUser.title"
-                :src="otherUser.img"
+                :alt="otherUser.email"
+                :src="otherUser.avatar"
                 class="img-thumbnail border-0 rounded-circle mr-3 list-thumbnail align-self-center xsmall"
               >
               <div class="d-flex flex-grow-1 min-width-zero">
@@ -63,13 +63,13 @@
                   class="m-2 pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero"
                 >
                   <div class="min-width-zero">
-                    <p class="mb-0 truncate list-item-heading">{{otherUser.title}}</p>
+                    <p class="mb-0 truncate list-item-heading">{{otherUser.email}}</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="chat-text-left">
-              <p class="mb-0 text-semi-muted">{{message.text}}</p>
+              <p class="mb-0 text-semi-muted">{{message.content}}</p>
             </div>
           </b-card-body>
         </b-card>

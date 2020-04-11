@@ -10,17 +10,18 @@
         :key="`conversation${index}`"
       >
         <a class="d-flex" href="#" @click.prevent="selectConversation(conversation)">
-          <img
-            :alt="otherUser(conversation.users).title"
-            :src="otherUser(conversation.users).img"
-            class="img-thumbnail border-0 rounded-circle mr-3 list-thumbnail align-self-center xsmall"
-          >
+<!--          <img-->
+<!--            :alt="otherUser(conversation.users).title"-->
+<!--            :src="otherUser(conversation.users).img"-->
+<!--            class="img-thumbnail border-0 rounded-circle mr-3 list-thumbnail align-self-center xsmall"-->
+<!--          >-->
           <div class="d-flex flex-grow-1 min-width-zero">
             <div
               class="pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero"
             >
               <div class="min-width-zero">
-                <p class="mb-0 truncate">{{otherUser(conversation.users).title}}</p>
+<!--                <p class="mb-0 truncate">{{otherUser(conversation.users).title}}</p>-->
+                <p class="mb-0 truncate">{{conversation}}</p>
                 <p class="mb-1 text-muted text-small">{{conversation.lastMessageTime}}</p>
               </div>
             </div>

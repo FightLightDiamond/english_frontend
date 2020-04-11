@@ -1,10 +1,10 @@
 <template>
   <div id="app-container" :class="getMenuType">
     <english-nav/>
-    <div class="container" style="padding-top: 155px">
+    <div class="container" style="padding-top: 80px" >
       <router-view/>
 
-      <b-card style="background-image: linear-gradient(to right top, #104978, #3582b2, #3693ce)">
+      <b-card style="background-image: linear-gradient(to right top, #104978, #3582b2, #3693ce)" class="footer">
         <b-row>
           <b-colxx class="mb-3">
             <h3 class="text-white">Crazy English</h3>

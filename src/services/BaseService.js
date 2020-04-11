@@ -14,6 +14,7 @@ export default class BaseService {
   setAuth (auth) {
     axios.interceptors.request.use(function (config) {
       const user = JSON.parse(localStorage.getItem(auth))
+
       if (user) {
         config.headers.Authorization = `Bearer ${user.access_token}`
       }
@@ -24,8 +25,7 @@ export default class BaseService {
 
   async get (uri, params = {}) {
     try {
-      const res = await axios.get(domain + uri, { params: params })
-      return res.data
+      return await axios.get(domain + uri, { params: params })
     } catch (e) {
       return this.errorMsg(e)
     }
@@ -33,8 +33,7 @@ export default class BaseService {
 
   async post (uri, params = {}) {
     try {
-      const res = await axios.post(domain + uri, params)
-      return res.data
+      return await axios.post(domain + uri, params)
     } catch (e) {
       return this.errorMsg(e)
     }
@@ -42,8 +41,7 @@ export default class BaseService {
 
   async put (uri, params = {}) {
     try {
-      const res = await axios.put(domain + uri, params)
-      return res.data
+      return await axios.put(domain + uri, params)
     } catch (e) {
       return this.errorMsg(e)
     }
@@ -51,8 +49,7 @@ export default class BaseService {
 
   async patch (uri, params = {}) {
     try {
-      const res = await axios.patch(domain + uri, params)
-      return res.data
+      return await axios.patch(domain + uri, params)
     } catch (e) {
       return this.errorMsg(e)
     }
@@ -60,8 +57,7 @@ export default class BaseService {
 
   async show (uri) {
     try {
-      const res = await axios.get(domain + uri)
-      return res.data
+      return await axios.get(domain + uri)
     } catch (e) {
       return this.errorMsg(e)
     }
@@ -69,10 +65,9 @@ export default class BaseService {
 
   async delete (uri) {
     try {
-      const res = await axios.delete(domain + uri)
-      return res.data
+      return await axios.delete(domain + uri)
     } catch (e) {
-      return  this.errorMsg(e)
+      return this.errorMsg(e)
     }
   }
 
@@ -81,6 +76,13 @@ export default class BaseService {
   }
 
   errorMsg (e) {
+    console.log(e)
+    if (e.response === undefined) {
+      e.status = 0
+      e.statusText = e.message
+      return { data: e }
+    }
+
     let validationErrors = ''
     if (e.response.status === 422) {
       const errors = e.response.data.errors
@@ -89,11 +91,11 @@ export default class BaseService {
       }
     }
 
-    if (e.response.status === 500) {
-      validationErrors = e.response.data.message
+    if (e.response.status !== 422) {
+      validationErrors = e.response.data
     }
 
-    Vue.$notify('error', e.response.statusText, validationErrors, { duration: 1300, permanent: false })
+    Vue.$notify('error', e.response.statusText, validationErrors, { duration: 5000, permanent: false })
 
     return { data: e.response }
   }

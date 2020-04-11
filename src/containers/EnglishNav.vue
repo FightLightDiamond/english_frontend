@@ -28,6 +28,11 @@
           <i class="simple-icon-clock"></i> {{$t('Remind')}}
         </a>
       </div>
+      <div class="d-inline-block">
+        <a class=" btn-sm ml-2" target="_top" href="/chat">
+          <i class="simple-icon-clock"></i> {{$t('Chat')}}
+        </a>
+      </div>
     </div>
     <router-link class="" style="min-width: 200px" to='/english'>
       <h2 style="color: #145388"><big>Crazy English</big></h2>

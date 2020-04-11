@@ -59,7 +59,6 @@ const routes = [
       { path: '/contact', component: () => import(/* webpackChunkName: "english" */ './views/english/Contact') },
 
       { path: 'courses', component: () => import(/* webpackChunkName: "english" */ './views/english/course/List') },
-
       { path: 'histories', component: () => import(/* webpackChunkName: "english" */ './views/english/history/History') },
       { path: 'histories/listen', component: () => import(/* webpackChunkName: "english" */ './views/english/history/Listen') },
       { path: 'histories/read', component: () => import(/* webpackChunkName: "english" */ './views/english/history/Read') },
@@ -71,6 +70,20 @@ const routes = [
       { path: 'read/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Read') },
       { path: 'write/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Write') },
       { path: 'speak/:id', component: () => import(/* webpackChunkName: "english" */ './views/english/test/Speak') }
+    ]
+  },
+  {
+    path: '/chat',
+    component: () => import(/* webpackChunkName: "english" */ './views/messages'),
+    children: [
+      { path: '/', component: () => import(/* webpackChunkName: "english" */ './views/messages/ChatApp') }
+    ]
+  },
+  {
+    path: '/blog',
+    component: () => import(/* webpackChunkName: "english" */ './views/messages'),
+    children: [
+      { path: 'detail/:id', component: () => import(/* webpackChunkName: "english" */ './views/blog/BlogDetail') },
     ]
   },
   {

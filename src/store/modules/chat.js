@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { apiUrl } from '@/constants/config'
+import FactoryService from '../../services/FactoryService'
 
 const state = {
   isLoadContacts: false,
@@ -44,45 +43,36 @@ const mutations = {
 }
 
 const actions = {
-  searchContacts ({ commit, state }, { userId, searchKey }) {
+  async searchContacts ({ commit, state }, { userId, searchKey }) {
     if (searchKey.length > 0) {
-      axios
-        .get(`${apiUrl}/contacts?search=${searchKey}`)
-        .then(r => r.data)
-        .then(res => {
-          if (res.status) {
-            commit('getContactsSearchSuccess', { contacts: res.data, userId: userId })
-          } else {
-            commit('getContactsError', 'error:getContacts')
-          }
-        })
+      const res = await FactoryService.request('ChatService').contacts()
+      if (res.status) {
+        commit('getContactsSearchSuccess', { contacts: res.data, userId: userId })
+      } else {
+        commit('getContactsError', 'error:getContacts')
+      }
     } else {
       commit('getContactsSearchSuccess', { contacts: state.contacts, userId: userId })
     }
   },
-  getContacts ({ commit }, userId) {
-    axios
-      .get(`${apiUrl}/contacts`)
-      .then(r => r.data)
-      .then(res => {
-        if (res.status) {
-          commit('getContactsSuccess', { contacts: res.data, userId: userId })
-        } else {
-          commit('getContactsError', 'error:getContacts')
-        }
-      })
+  async getContacts ({ commit }, userId) {
+    const res = await FactoryService.request('ChatService').contacts()
+
+    if (res.status) {
+      commit('getContactsSuccess', { contacts: res.data, userId: userId })
+    } else {
+      commit('getContactsError', 'error:getContacts')
+    }
   },
-  getConversations ({ commit }, userId) {
-    axios
-      .get(`${apiUrl}/conversations`)
-      .then(r => r.data)
-      .then(res => {
-        if (res.status) {
-          commit('getConversationsSuccess', { conversations: res.data, userId: userId })
-        } else {
-          commit('getConversationsError', 'error:getConversations')
-        }
-      })
+  async getConversations ({ commit }, userId) {
+    if (userId) {
+      const res = await FactoryService.request('ChatService').conversation(userId)
+      if (res.status) {
+        commit('getConversationsSuccess', { conversations: res.data, userId: userId })
+      } else {
+        commit('getConversationsError', 'error:getConversations')
+      }
+    }
   }
 }
 

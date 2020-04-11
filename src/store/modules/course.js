@@ -41,19 +41,6 @@ const actions = {
       commit('getCoursesError', 'error:getCourses')
     })
   },
-  getConversations ({ commit }, payload) {
-    axios.get(`${apiUrl}/conversations`)
-      .then(r => r.data)
-      .then(res => {
-        if (res.status) {
-          commit('getConversationsSuccess', { conversations: res.data, userId: payload })
-          return res
-        } else {
-          commit('getConversationsError', 'error:getConversations')
-          return res
-        }
-      })
-  },
   async createContact ({ commit }, payload) {
     const res = await FactoryService.request('ContactService').create(payload)
   },
