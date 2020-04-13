@@ -15,7 +15,7 @@
 
     <b-colxx xxs="4" offset="4">
       <b-card class="mb-3" title="Set time">
-        <p>Remind to study crazy english per day. Please set time to learn</p>
+        <p>Remind to study Classes per day. Please set time to learn</p>
         <b-row class="form-group">
           <b-colxx xxs="6" class="form-group">
             <label>Hour</label>

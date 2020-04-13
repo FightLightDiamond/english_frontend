@@ -7,8 +7,8 @@
       <b-card style="background-image: linear-gradient(to right top, #104978, #3582b2, #3693ce)" class="footer">
         <b-row>
           <b-colxx class="mb-3">
-            <h3 class="text-white">Crazy English</h3>
-            <p class="text-white">Phương pháp học tiếng Anh cuồng nhiệt (Crazy English) là phương pháp do một giáo viên
+            <h3 class="text-white">Classes</h3>
+            <p class="text-white">Phương pháp học tiếng Anh cuồng nhiệt (Classes) là phương pháp do một giáo viên
               người tên là Lý Dương khởi xướng ra. </p>
             <p class="text-white"> Một trong nhưng phương pháp học tiếng anh tốt nhất hiện nay. </p>
           </b-colxx>
@@ -21,10 +21,10 @@
           </b-colxx>
           <b-colxx class="mb-3">
             <h3 class="text-white">Social network</h3>
-            <p class="text-white"><i class="simple-icon-social-facebook"></i> Crazy English Fanpage</p>
-            <p class="text-white"><i class="simple-icon-social-twitter"></i> Crazy English Group</p>
-            <p class="text-white"><i class="simple-icon-social-google"></i> Crazy English Group</p>
-            <p class="text-white"><i class="simple-icon-social-youtube"></i> Crazy English Video</p>
+            <p class="text-white"><i class="simple-icon-social-facebook"></i> Classes Fanpage</p>
+            <p class="text-white"><i class="simple-icon-social-twitter"></i> Classes Group</p>
+            <p class="text-white"><i class="simple-icon-social-google"></i> Classes Group</p>
+            <p class="text-white"><i class="simple-icon-social-youtube"></i> Classes Video</p>
           </b-colxx>
           <b-colxx class="mb-3">
             <h3 class="text-white">About us</h3>
@@ -36,7 +36,7 @@
         </b-row>
         <b-row>
           <b-colxx class="mb-12 text-center">
-            <p class="text-white">@ Copyright Crazy English</p>
+            <p class="text-white">@ Copyright Classes</p>
           </b-colxx>
         </b-row>
       </b-card>

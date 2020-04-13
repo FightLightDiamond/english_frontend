@@ -1,58 +1,62 @@
 import FactoryService from '../../services/FactoryService'
 
 const state = {
-  index: [],
-  show: {},
-  create: {},
-  update: {},
+  lesson: {
+    'title': '', 'intro': '', 'content': '', 'section_id': '', 'views': '',
+    'last_view': '', 'created_by': '', 'updated_by': '', 'is_active': '', 'no': ''
+  },
+  lessons: [],
 }
 
 const getters = {
-  index: state => state.index,
-  show: state => state.show,
-  create: state => state.create,
-  update: state => state.update,
-  destroy: state => state.destroy,
+  lesson: state => state.lesson,
+  lessons: state => state.lessons,
 }
 
 const mutations = {
-  index (state, payload) {
-    state.index = payload
+  getLessons (state, payload) {
+    state.lessons = payload
   },
-  show (state, payload) {
-    state.show = payload
+  getLesson (state, payload) {
+    state.lesson = payload
   },
-  create (state, payload) {
-    state.create = payload
+  createLesson (state, payload) {
+    state.lesson = payload
   },
-  update (state, payload) {
-    state.update = payload
+  updateLesson (state, payload) {
+    state.lesson = payload
   },
-  destroy (state, payload) {
-    state.destroy = payload
+  destroyLesson (state, payload) {
+    state.lesson = payload
   }
 }
 
 const actions = {
-  async index ({ commit }, payload) {
+  async getLessons ({ commit }, payload) {
     const res = await FactoryService.request('LessonService').index(payload)
-    commit('index', res)
+    if(res.status >= 200 && res.status < 300)
+    commit('getLessons', res.data)
   },
-  async show ({ commit }, payload) {
-    const res = await FactoryService.request('LessonService').show(payload.id)
-    commit('show', res)
+  async getLesson ({ commit }, payload) {
+    const res = await FactoryService.request('LessonService').show(payload)
+    console.log(res);
+    if(res.status >= 200 && res.status < 300)
+    commit('getLesson', res.data)
   },
-  async create ({ commit }, payload) {
+  async createLesson ({ commit }, payload) {
     const res = await FactoryService.request('LessonService').create(payload)
-    commit('create', res)
+    if(res.status >= 200 && res.status < 300)
+    commit('createLesson', res.data)
   },
-  async update ({ commit }, payload) {
+  async updateLesson ({ commit }, payload) {
     const res = await FactoryService.request('LessonService').update(payload.id, payload)
-    commit('update', res)
+    if(res.status >= 200 && res.status < 300)
+    commit('updateLesson', res.data)
   },
-  async destroy ({ commit }, payload) {
+  async destroyLesson ({ commit }, payload) {
     const res = await FactoryService.request('LessonService').destroy(payload.id)
-    commit('destroy', res)
+    if(res.status >= 200 && res.status < 300)
+    commit('destroyLesson', res.data)
   }
 }
 

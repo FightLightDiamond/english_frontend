@@ -3,7 +3,7 @@
         <b-colxx xxs="12" md=10 class="mx-auto my-auto">
             <b-card class="auth-card" no-body>
                 <div class="position-relative image-side ">
-                    <p class=" text-white h2">{{ $t('Crazy English') }}</p>
+                    <p class=" text-white h2">{{ $t('Cuong PM') }}</p>
                     <p class="white mb-0">Please use your credentials to login.<br>If you are not a member, please
                         <router-link tag="a" to="/user/register" class="white">register</router-link>
                         .

@@ -1,7 +1,3 @@
-import { currentUser } from '@/constants/config'
-import FactoryService from '../../services/FactoryService'
-import Auth from '../../config/Auth'
-
 export default {
   state: {
     swiperInfiniteOption: {

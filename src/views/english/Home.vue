@@ -1,43 +1,24 @@
 <template>
     <div>
-        <!--    <b-row>-->
-        <!--      <b-colxx xxs="12" class="form-group">-->
-        <!--        <swiper :options="swiperOption">-->
-        <!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
-        <!--          </swiper-slide>-->
-        <!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
-        <!--          </swiper-slide>-->
-        <!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
-        <!--          </swiper-slide>-->
-        <!--          <swiper-slide><img src="https://awesome.edu.my/wp-content/uploads/2017/01/banner-main-page-07.jpg"/>-->
-        <!--          </swiper-slide>-->
-
-        <!--          <div class="swiper-pagination" slot="pagination"></div>-->
-        <!--          <div class="swiper-button-prev" slot="button-prev"></div>-->
-        <!--          <div class="swiper-button-next" slot="button-next"></div>-->
-        <!--        </swiper>-->
-        <!--      </b-colxx>-->
-        <!--    </b-row>-->
-
         <b-row>
             <b-colxx xxs="12">
                 <b-card class="mb-4">
-                    <b-jumbotron :header="$t('Crazy English')" :lead="$t('Bạn đang học tiếng Anh giao tiếp?')"
+                    <b-jumbotron :header="$t('Classes')" :lead="$t('Bạn đang học tiếng Anh giao tiếp?')"
                                  header-level="4">
                         <hr class="my-4">
                         <p>
-                            Phương pháp học tiếng Anh cuồng nhiệt (Crazy English) là phương pháp do một giáo viên người
+                            Phương pháp học tiếng Anh cuồng nhiệt (Classes) là phương pháp do một giáo viên người
                             tên là Lý
-                            Dương khởi xướng ra. Lúc đầu, phương pháp Crazy English không được ủng hộ bởi nó đi ngược
+                            Dương khởi xướng ra. Lúc đầu, phương pháp Classes không được ủng hộ bởi nó đi ngược
                             lại các mô hình
-                            và khái niệm giảng dạy truyền thống. Không những thế, Crazy English còn phải chịu sự khinh
+                            và khái niệm giảng dạy truyền thống. Không những thế, Classes còn phải chịu sự khinh
                             miệt và ghê tởm
                             của nhiều người châu Á truyền thống, những người luôn yêu mến bản sắc phương Đông về sự kiềm
                             chế, khiêm
                             tốn và điều độ. Nhưng Lý Dương vẫn không bỏ cuộc, ông kiên trì phát triển, tuyên truyền
                             phương pháp này
                             qua các học trò của mình, và dần thu được những thành công cực kỳ to lớn. Cho đến bây giờ,
-                            Crazy English
+                            Classes
                             đã trở thành phương pháp học tiếng Anh của hàng trăm triệu người ở Việt Nam, Nhật Bản,Trung
                             Quốc, Hàn
                             Quốc/

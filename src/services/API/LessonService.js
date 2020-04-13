@@ -10,11 +10,11 @@ export default class UserService extends BaseService {
   }
 
   async update (id, params = {}) {
-    return await this.post(`/api/v1/lessons/${id}`, params)
+    return await this.put(`/api/v1/lessons/${id}`, params)
   }
 
-  async show (id, params = {}) {
-    return await this.get(`/api/v1/lessons/${id}`, params)
+  async show (id) {
+    return await this.get(`/api/v1/lessons/${id}`)
   }
 
   async destroy (id) {

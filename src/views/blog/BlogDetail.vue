@@ -1,116 +1,179 @@
 <template>
-<div>
+  <div>
     <b-row>
-        <b-colxx xxs="12">
-            <piaf-breadcrumb :heading="$t('menu.blog-detail')" />
-            <div class="separator mb-5"></div>
-        </b-colxx>
+      <b-colxx xxs="12">
+        <piaf-breadcrumb :heading="$t('menu.blog-detail')"/>
+        <div class="separator mb-5"></div>
+      </b-colxx>
     </b-row>
 
     <b-row>
-        <b-colxx xxs="12" md="12" xl="8" class="col-left">
-            <b-card class="mb-4" no-body>
-                <single-lightbox thumb="/assets/img/detail-5.jpg" large="/assets/img/detail-5.jpg" class-name="responsive border-0 card-img-top mb-3" />
-                <b-card-body>
-                    <div class="mb-5">
-                        <h5 class="card-title">Game Changing Features</h5>
-                        <p>
-                            Blended value human-centered social innovation resist scale and impact issueoutcomesbandwidth efficient. A; social return on investment, change-makers, support a,co-createcommitment because sustainable. Rubric when vibrant black lives matter benefitcorporation human-centered. Save the world, problem-solvers support silo massincarceration. Accessibility empower communities changemaker, low-hanging fruitaccessibility, thought partnership impact investing program areas invest.Contextualizeoptimism unprecedented challenge, empower inclusive. Living a fully ethical life theresistance segmentation social intrapreneurship efficient inspire external partners.Systems thinking correlation, social impact; when revolutionary bandwidth. Engaging,revolutionary engaging; empower communities policymaker shared unit of analysistechnology inspiring social entrepreneurship.
-                        </p>
-                        <p>
-                            Mass incarceration, preliminary thinking systems thinking vibrant thought leadershipcorporate social responsibility. Green space global, policymaker; shared valuedisruptsegmentation social capital. Thought partnership, optimism citizen-centeredcommitment,relief scale and impact the empower communities circular. Contextualize boots on theground; uplift big data, co-creation co-create segmentation youth inspire. Innovateinnovate overcome injustice.
-                        </p>
-                    </div>
-                    <div class="mb-5">
-                        <h5 class="card-title">Unprecedented Challenge</h5>
-                        <ul class="list-unstyled">
-                            <li>Preliminary thinking systems</li>
-                            <li>Bandwidth efficient</li>
-                            <li>Green space</li>
-                            <li>Social impact</li>
-                            <li>Thought partnership</li>
-                            <li>Fully ethical life</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5 class="card-title">Revolutionary Bandwidth</h5>
-                        <p>
-                            Blended value human-centered social innovation resist scale and impact issueoutcomes bandwidth efficient. A; social return on investment, change-makers, supporta, co-create commitment because sustainable. Rubric when vibrant black lives matterbenefit corporation human-centered. Save the world, problem-solvers support silomass incarceration. Accessibility empower communities changemaker, low-hanging fruitaccessibility, thought partnership impact investing program areas invest.Contextualize optimism unprecedented challenge, empower inclusive. Living a fullyethical life the resistance segmentation social intrapreneurship efficient inspireexternal partners. Systems thinking correlation, social impact; when revolutionarybandwidth. Engaging, revolutionary engaging; empower communities policymaker sharedunit of analysis technology inspiring social entrepreneurship.Mass incarceration,preliminary thinking systems thinking vibrant thought leadership corporate socialresponsibility. Green space global, policymaker; shared value disrupt segmentationsocial capital. Thought partnership, optimism citizen-centered commitment, reliefscale and impact the empower communities circular. Contextualize boots on theground; uplift big data, co-creation co-create segmentation youth inspire. Innovateinnovate overcome injustice.
-                        </p>
-                        <p>
-                            Systems thinking correlation, social impact; when revolutionary bandwidth. Engaging,revolutionary engaging; empower communities policymaker shared unit of analysistechnology inspiring social entrepreneurship. Thought partnership, optimismcitizen-centeredcommitment,relief scale and impact the empower communities circular. Contextualize boots on theground; uplift big data, co-creation co-create segmentation youth inspire. Innovateinnovate overcome injustice.
-                        </p>
-                    </div>
-                </b-card-body>
-            </b-card>
-        </b-colxx>
+      <b-colxx md="12" xl="12" class="col-left">
+        <b-card class="mb-4" no-body>
+          <b-card-body>
+            <div class="mb-5">
+              <h2 class="card-title">{{lesson.title}}</h2>
+              <viewer v-if="lesson.intro"
+                      :initialValue="lesson.intro"
+                      :value="lesson.intro"
+              />
+              <viewer v-if="lesson.content"
+                      :initialValue="lesson.content"
+                      :value="lesson.content"
+              />
 
-        <b-colxx xxs="12" md="12" xl="4" class="col-left">
-            <b-card class="mb-4" no-body>
-                <b-card-body class="p-0">
-                        <video-player class-name="video-js side-bar-video card-img-top"
-                        :autoplay="false" :controls="true"
-                        :controlBar="{pictureInPictureToggle: false}"
-                        poster="/assets/img/detail-1.jpg"
-                        :sources="[{ src: 'http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4', type: 'video/mp4'}]" />
-                </b-card-body>
-                <b-card-body>
-                    <p class="list-item-heading mb-4">Homemade Cheesecake with Fresh Berries and Mint</p>
-                    <footer>
-                        <p class="text-muted text-small mb-0 font-weight-light">09.04.2018</p>
-                    </footer>
-                </b-card-body>
-            </b-card>
-            <b-card class="mb-4" no-body>
-                <b-card-body>
-                    <b-card-title>{{$t('pages.recent-posts')}} </b-card-title>
-                    <div class="remove-last-border remove-last-margin remove-last-padding">
-                        <recent-post v-for="(post,postIndex) in recentPosts" :data="post" :key="`recent_post_${postIndex}`" />
-                    </div>
-                </b-card-body>
-            </b-card>
-            <b-card class="mb-4" no-body>
-                <b-card-body>
-                    <b-card-title>{{$t('todo.categories')}} </b-card-title>
-                    <div v-for="(categoryItem,cIndex) in blogCategories" :key="`category_${cIndex}`" class="d-flex flex-row align-items-center mb-3">
-                        <router-link :to="categoryItem.link">
-                            <i :class="`large-icon initial-height ${categoryItem.icon}`"></i>
-                        </router-link>
-                        <div class="pl-3 pt-2 pr-2 pb-2">
-                            <router-link :to="categoryItem.link">
-                                <p class="list-item-heading mb-1">{{categoryItem.title}}</p>
-                            </router-link>
-                        </div>
-                    </div>
-                </b-card-body>
-            </b-card>
-        </b-colxx>
+              <p>Lượt xem: {{lesson.views}}</p>
+              <p>Viết ngày: {{lesson.created_at}}</p>
+
+              <hr>
+              <div class="form-group">
+                <lable>Title</lable>
+                <input class="form-control">
+              </div>
+              <b-row>
+                <b-colxx class="form-group" md="6">
+                  <lable>Tutorial</lable>
+                  <select class="form-control"></select>
+                </b-colxx>
+
+                <b-colxx class="form-group" md="6">
+                  <lable>Section</lable>
+                  <select class="form-control"></select>
+                </b-colxx>
+              </b-row>
+              <div class="form-group">
+                <label>Intro</label>
+                <editor
+                  ref="intro"
+                />
+              </div>
+
+              <div class="form-group">
+                <label>Content</label>
+                <editor
+                  ref="content"
+                  @change="onEditorChange"
+                  :value="editorText"
+                  :options="editorOptions"
+                  :html="editorHtml"
+                  :visible="editorVisible"
+                  previewStyle="vertical"
+                  height="500px"
+                  mode="wysiwyg"
+                />
+              </div>
+
+              <button class="btn btn-primary">Save</button>
+            </div>
+          </b-card-body>
+        </b-card>
+      </b-colxx>
     </b-row>
-</div>
+  </div>
 </template>
 
 <script>
-import SingleLightbox from "../../components/Pages/SingleLightbox";
-import VideoPlayer from "../../components/Common/VideoPlayer";
-import RecentPost from "../../components/Common/RecentPost";
-import {
+  import SingleLightbox from '../../components/Pages/SingleLightbox'
+  import VideoPlayer from '../../components/Common/VideoPlayer'
+  import RecentPost from '../../components/Common/RecentPost'
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
+
+  import {
     blogData,
     blogCategories
-} from "../../data/blog"
+  } from '../../data/blog'
 
-export default {
+  import 'codemirror/lib/codemirror.css'
+  import '@toast-ui/editor/dist/toastui-editor.css'
+  import 'tui-editor/dist/tui-editor.css'
+
+  import 'tui-editor/dist/tui-editor-contents.css'
+  import 'highlight.js/styles/github.css'
+
+  import { Editor } from '@toast-ui/vue-editor'
+  import Viewer from '@toast-ui/vue-editor/src/Viewer.vue'
+
+  export default {
     components: {
-        "single-lightbox": SingleLightbox,
-        "video-player":VideoPlayer,
-        "recent-post": RecentPost,
+      'single-lightbox': SingleLightbox,
+      'video-player': VideoPlayer,
+      'recent-post': RecentPost,
+      'editor': Editor,
+      'viewer': Viewer
     },
-    data() {
-        return {
-            recentPosts: blogData.slice(5),
-            blogCategories
-        };
+    data () {
+      return {
+        recentPosts: blogData.slice(5),
+        blogCategories,
+        editorText: 'This is initialValue.',
+        editorOptions: {
+          minHeight: '200px',
+          language: 'en_US',
+          useCommandShortcut: true,
+          useDefaultHTMLSanitizer: true,
+          usageStatistics: true,
+          hideModeSwitch: false,
+          toolbarItems: [
+            'heading',
+            'bold',
+            'italic',
+            'strike',
+            'divider',
+            'hr',
+            'quote',
+            'divider',
+            'ul',
+            'ol',
+            'task',
+            'indent',
+            'outdent',
+            'divider',
+            'table',
+            'image',
+            'link',
+            'divider',
+            'code',
+            'codeblock'
+          ]
+        },
+        editorHtml: '',
+        editorVisible: true,
+        viewerText: '# This 535 is Viewer.\n Hello World.',
+        html: '',
+        id: this.$route.params.id,
+      }
     },
-    methods: {},
-    mounted() {}
-};
+    async mounted () {
+      await this.getLesson(this.id)
+      console.log(this.lesson)
+      this.html = this.lesson.content
+    },
+    computed: {
+      ...mapGetters(['lesson'])
+    },
+    methods: {
+      ...mapActions(['getLesson']),
+      onEditorChange () {
+        // this.html = this.lesson.content
+        // this.getHtml()
+      },
+      getHtml () {
+        this.html = this.$refs.content.invoke('getHtml')
+      },
+      onEditorLoad () {
+        this.viewerText = '# This 535 is Viewer.\n Hello World.'
+        // implement your code
+      },
+      onEditorFocus () {
+        // implement your code
+      },
+      onEditorBlur () {
+        // implement your code
+      },
+      onEditorStateChange () {
+        // implement your code
+      },
+
+    }
+  }
 </script>

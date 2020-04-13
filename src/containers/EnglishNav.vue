@@ -35,7 +35,7 @@
       </div>
     </div>
     <router-link class="" style="min-width: 200px" to='/english'>
-      <h2 style="color: #145388"><big>Crazy English</big></h2>
+      <h2 style="color: #145388"><big>Classes</big></h2>
       <!--      <span class="logo d-none d-xs-block"></span>-->
       <!--      <span class="logo-mobile d-block d-xs-none"></span>-->
     </router-link>
