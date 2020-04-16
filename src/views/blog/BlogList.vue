@@ -48,7 +48,7 @@
 <script>
 import {
     blogData
-} from "../../../../data/blog";
+} from "../../data/blog";
 
 export default {
     data() {

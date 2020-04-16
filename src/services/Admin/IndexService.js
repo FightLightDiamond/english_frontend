@@ -7,6 +7,7 @@ import CourseService from './CourseService'
 import CrazyService from './CrazyService'
 import DashboardService from './DashboardService'
 import UserService from './UserService'
+import HeroService from './HeroService'
 
 export default {
   AdminService,
@@ -16,5 +17,6 @@ export default {
   CourseService,
   CrazyService,
   DashboardService,
-  UserService
+  HeroService,
+  UserService,
 }

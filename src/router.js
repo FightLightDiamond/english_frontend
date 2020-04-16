@@ -83,6 +83,8 @@ const routes = [
     path: '/blog',
     component: () => import(/* webpackChunkName: "english" */ './views/messages'),
     children: [
+      { path: 'list', component: () => import(/* webpackChunkName: "english" */ './views/blog/BlogList') },
+      { path: 'wc', component: () => import(/* webpackChunkName: "english" */ './views/blog/wc') },
       { path: 'detail/:id', component: () => import(/* webpackChunkName: "english" */ './views/blog/BlogDetail') },
       { path: 'create', component: () => import(/* webpackChunkName: "english" */ './views/blog/create') },
       { path: 'update/:id', component: () => import(/* webpackChunkName: "english" */ './views/blog/update') },

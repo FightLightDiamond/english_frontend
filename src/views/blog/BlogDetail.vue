@@ -8,62 +8,63 @@
     </b-row>
 
     <b-row>
-      <b-colxx md="12" xl="12" class="col-left">
+      <b-colxx md="12" xl="8" class="col-left">
         <b-card class="mb-4" no-body>
           <b-card-body>
             <div class="mb-5">
               <h2 class="card-title">{{lesson.title}}</h2>
-              <viewer v-if="lesson.intro"
-                      :initialValue="lesson.intro"
-                      :value="lesson.intro"
-              />
-              <viewer v-if="lesson.content"
-                      :initialValue="lesson.content"
-                      :value="lesson.content"
-              />
+              <viewer ref="intro"/>
+              <viewer ref="content"/>
 
               <p>Lượt xem: {{lesson.views}}</p>
               <p>Viết ngày: {{lesson.created_at}}</p>
+            </div>
+          </b-card-body>
+        </b-card>
+      </b-colxx>
 
-              <hr>
-              <div class="form-group">
-                <lable>Title</lable>
-                <input class="form-control">
+      <b-colxx xxs="12" md="12" xl="4" class="col-left">
+<!--        <b-card class="mb-4" no-body>-->
+<!--          <b-card-body class="p-0">-->
+<!--&lt;!&ndash;            <video-player class-name="video-js side-bar-video card-img-top"&ndash;&gt;-->
+<!--&lt;!&ndash;                          :autoplay="false" :controls="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                          :controlBar="{pictureInPictureToggle: false}"&ndash;&gt;-->
+<!--&lt;!&ndash;                          poster="/assets/img/detail-1.jpg"&ndash;&gt;-->
+<!--&lt;!&ndash;                          :sources="[{ src: 'http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4', type: 'video/mp4'}]" />&ndash;&gt;-->
+<!--          </b-card-body>-->
+<!--          <b-card-body>-->
+<!--            <p class="list-item-heading mb-4">Homemade Cheesecake with Fresh Berries and Mint</p>-->
+<!--            <footer>-->
+<!--              <p class="text-muted text-small mb-0 font-weight-light">09.04.2018</p>-->
+<!--            </footer>-->
+<!--          </b-card-body>-->
+<!--        </b-card>-->
+
+        <b-card class="mb-4" no-body>
+          <b-card-body>
+            <b-card-title>{{$t('Lessons')}} </b-card-title>
+            <div class="remove-last-border remove-last-margin remove-last-padding">
+              <div class="pl-3 pt-2 pr-2 pb-2" v-for="lessonList in lessonLists" >
+                <router-link :to="`/blog/detail/${lessonList.id}`" >
+                  {{lessonList.title}}
+                </router-link>
               </div>
-              <b-row>
-                <b-colxx class="form-group" md="6">
-                  <lable>Tutorial</lable>
-                  <select class="form-control"></select>
-                </b-colxx>
+            </div>
+          </b-card-body>
+        </b-card>
 
-                <b-colxx class="form-group" md="6">
-                  <lable>Section</lable>
-                  <select class="form-control"></select>
-                </b-colxx>
-              </b-row>
-              <div class="form-group">
-                <label>Intro</label>
-                <editor
-                  ref="intro"
-                />
+        <b-card class="mb-4" no-body>
+          <b-card-body>
+            <b-card-title>{{$t('Sections')}} </b-card-title>
+            <div v-for="(sectionList, cIndex) in sectionLists" :key="`category_${cIndex}`" class="d-flex flex-row align-items-center mb-3">
+<!--              <router-link :to="sectionList. link">-->
+<!--                <i :class="`large-icon initial-height ${sectionList. icon}`"></i>-->
+<!--              </router-link>-->
+              <div class="pl-3 pt-2 pr-2 pb-2">
+                <router-link :to="`/section/${sectionList.id}`">
+                  {{sectionList.name}}
+                </router-link>
               </div>
-
-              <div class="form-group">
-                <label>Content</label>
-                <editor
-                  ref="content"
-                  @change="onEditorChange"
-                  :value="editorText"
-                  :options="editorOptions"
-                  :html="editorHtml"
-                  :visible="editorVisible"
-                  previewStyle="vertical"
-                  height="500px"
-                  mode="wysiwyg"
-                />
-              </div>
-
-              <button class="btn btn-primary">Save</button>
             </div>
           </b-card-body>
         </b-card>
@@ -103,77 +104,33 @@
     },
     data () {
       return {
-        recentPosts: blogData.slice(5),
-        blogCategories,
-        editorText: 'This is initialValue.',
-        editorOptions: {
-          minHeight: '200px',
-          language: 'en_US',
-          useCommandShortcut: true,
-          useDefaultHTMLSanitizer: true,
-          usageStatistics: true,
-          hideModeSwitch: false,
-          toolbarItems: [
-            'heading',
-            'bold',
-            'italic',
-            'strike',
-            'divider',
-            'hr',
-            'quote',
-            'divider',
-            'ul',
-            'ol',
-            'task',
-            'indent',
-            'outdent',
-            'divider',
-            'table',
-            'image',
-            'link',
-            'divider',
-            'code',
-            'codeblock'
-          ]
-        },
-        editorHtml: '',
-        editorVisible: true,
-        viewerText: '# This 535 is Viewer.\n Hello World.',
-        html: '',
         id: this.$route.params.id,
+        lessonLists: [],
+        section: {},
+        sectionLists: {}
       }
     },
     async mounted () {
       await this.getLesson(this.id)
-      console.log(this.lesson)
-      this.html = this.lesson.content
+      this.section = this.lesson.section;
+      this.lessonLists = this.section.lessons;
+      this.sectionLists = this.section.tutorial.sections;
+
+      this.$refs.intro.invoke('setMarkdown', this.lesson.intro)
+      this.$refs.content.invoke('setMarkdown', this.lesson.content)
     },
     computed: {
       ...mapGetters(['lesson'])
     },
+     watch: {
+      '$route.params.id': async function (id) {
+        await this.getLesson(id)
+        this.$refs.intro.invoke('setMarkdown', this.lesson.intro)
+        this.$refs.content.invoke('setMarkdown', this.lesson.content)
+      }
+    },
     methods: {
       ...mapActions(['getLesson']),
-      onEditorChange () {
-        // this.html = this.lesson.content
-        // this.getHtml()
-      },
-      getHtml () {
-        this.html = this.$refs.content.invoke('getHtml')
-      },
-      onEditorLoad () {
-        this.viewerText = '# This 535 is Viewer.\n Hello World.'
-        // implement your code
-      },
-      onEditorFocus () {
-        // implement your code
-      },
-      onEditorBlur () {
-        // implement your code
-      },
-      onEditorStateChange () {
-        // implement your code
-      },
-
     }
   }
 </script>
