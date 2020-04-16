@@ -15,8 +15,13 @@
     async mounted () {
       const data = await this.getProducts();
       console.log(data)
+      const orders = await this.getOrders();
+      console.log(orders)
     },
     methods: {
+      getOrders()  {
+        return this.makeRequest("/wc/v3/orders");
+      },
       getProducts()  {
         return this.makeRequest("/wc/v3/products");
       },
