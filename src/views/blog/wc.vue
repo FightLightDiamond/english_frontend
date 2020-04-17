@@ -13,19 +13,67 @@
   export default {
     name: 'wc',
     async mounted () {
-      const data = await this.getProducts();
+      const data = await this.createOrders();
       console.log(data)
-      const orders = await this.getOrders();
-      console.log(orders)
+      // const orders = await this.getOrders();
+      // console.log(orders)
     },
     methods: {
+      createOrders()  {
+        const data = {
+          payment_method: "bacs",
+          payment_method_title: "Direct Bank Transfer",
+          set_paid: true,
+          billing: {
+            first_name: "John",
+            last_name: "Doe",
+            address_1: "969 Market",
+            address_2: "",
+            city: "San Francisco",
+            state: "CA",
+            postcode: "94103",
+            country: "US",
+            email: "john.doe@example.com",
+            phone: "(555) 555-5555"
+          },
+          shipping: {
+            first_name: "John",
+            last_name: "Doe",
+            address_1: "969 Market",
+            address_2: "",
+            city: "San Francisco",
+            state: "CA",
+            postcode: "94103",
+            country: "US"
+          },
+          line_items: [
+            {
+              product_id: 93,
+              quantity: 2
+            },
+            {
+              product_id: 22,
+              variation_id: 23,
+              quantity: 1
+            }
+          ],
+          shipping_lines: [
+            {
+              method_id: "flat_rate",
+              method_title: "Flat Rate",
+              total: 10
+            }
+          ]
+        };
+        return this.makeRequest("/wc/v3/orders", "POST", data);
+      },
       getOrders()  {
         return this.makeRequest("/wc/v3/orders");
       },
       getProducts()  {
         return this.makeRequest("/wc/v3/products");
       },
-      makeRequest (endpoint, method = 'GET') {
+      makeRequest (endpoint, method = 'GET', data = {}) {
         const oauth = this.getOauth()
         const url = 'http://cuongpm.tk:8002/wp-json'
 
@@ -37,7 +85,14 @@
         const requestHTTP =
           requestData.url + '?' + jQuery.param(oauth.authorize(requestData))
 
-        return axios.get(requestHTTP)
+        switch(method) {
+          case 'POST':
+            return axios.post(requestHTTP)
+          case 'DELETE':
+            return axios.delete(requestHTTP)
+          default:
+            return axios.get(requestHTTP)
+        }
       },
 
       getOauth () {
