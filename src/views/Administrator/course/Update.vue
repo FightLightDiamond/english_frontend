@@ -61,8 +61,8 @@ export default {
   },
   async mounted () {
     const res = await FactoryService.request('CourseService', 'admin').show(this.id)
-    this.form.name = res.name
-    this.form.description = res.description
+    this.form.name = res.data.name
+    this.form.description = res.data.description
   },
   data () {
     return {

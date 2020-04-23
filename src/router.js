@@ -41,7 +41,10 @@ const routes = [
       { path: '/administrator/lessons', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/lesson/Index') },
       { path: '/administrator/lessons/create', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/lesson/Create') },
       { path: '/administrator/lessons/:id/update', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/lesson/Update') },
-      { path: '/administrator/contacts', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/contact/Index') }
+      { path: '/administrator/contacts', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/contact/Index') },
+      { path: '/administrator/gcrads/create', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/gcard/create') },
+      { path: '/administrator/gcrads/:id', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/gcard/update') },
+      { path: '/administrator/gcrads', component: () => import(/* webpackChunkName: "user" */ './views/Administrator/gcard/index') },
     ]
   },
   {

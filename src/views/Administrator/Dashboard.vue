@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>Dashboard</h1>
-
     <b-row v-show="data">
       <b-colxx lg="4" class="mb-4">
         <gradient-with-radial-progress-card

@@ -41,7 +41,7 @@ export default {
   data () {
     return {
       email: 'vincent@admin.vn',
-      password: 'PMC1704bn',
+      password: '123456',
       processing: false
     }
   },

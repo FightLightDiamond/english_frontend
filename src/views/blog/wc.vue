@@ -6,17 +6,11 @@
 
 <script>
   import axios from 'axios'
-  import OAuth from 'oauth-1.0a'
-  import CryptoJS from 'crypto-js'
-  import jQuery from 'jquery'
 
   export default {
     name: 'wc',
     async mounted () {
-      const data = await this.createOrders();
-      console.log(data)
-      // const orders = await this.getOrders();
-      // console.log(orders)
+      api.post("products", data)
     },
     methods: {
       createOrders()  {

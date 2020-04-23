@@ -121,8 +121,8 @@ export default {
   },
   async mounted () {
     this.courses = await FactoryService.request('CourseService', 'admin').index()
-    this.form = await FactoryService.request('CrazyService', 'admin').show(this.id)
-    console.log(this.lesson)
+    const res = await FactoryService.request('CrazyService', 'admin').show(this.id)
+    this.form = res.data;
   },
   data () {
     return {
