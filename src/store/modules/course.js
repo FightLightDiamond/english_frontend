@@ -1,4 +1,3 @@
-import axios from 'axios'
 import FactoryService from '../../services/FactoryService'
 
 const state = {
@@ -35,8 +34,8 @@ const actions = {
   getCourses ({ commit }, payload) {
     FactoryService.request('CourseService').index().then((res) => {
       console.log('RES', res)
-      commit('getCoursesSuccess', { contacts: res })
-      commit('getCourses', res)
+      commit('getCoursesSuccess', { contacts: res.data })
+      commit('getCourses', res.data)
     }).catch((e) => {
       commit('getCoursesError', 'error:getCourses')
     })

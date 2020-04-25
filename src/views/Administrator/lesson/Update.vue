@@ -112,6 +112,7 @@
 import draggable from 'vuedraggable'
 import { validationMixin } from 'vuelidate'
 import FactoryService from '../../../services/FactoryService'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 const { required, minLength } = require('vuelidate/lib/validators')
 
@@ -120,14 +121,16 @@ export default {
     draggable
   },
   async mounted () {
-    this.courses = await FactoryService.request('CourseService', 'admin').index()
+    this.getCourses();
     const res = await FactoryService.request('CrazyService', 'admin').show(this.id)
     this.form = res.data;
+  },
+  computed: {
+    ...mapGetters(['courses'])
   },
   data () {
     return {
       id: this.$route.params.id,
-      courses: [],
       baseSentence: { sentence: '', meaning: '', time: '' },
       items: [
         {
@@ -193,6 +196,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['getCourses']),
     addSentence () {
       this.form.details.push(Object.assign({}, this.baseSentence))
     },

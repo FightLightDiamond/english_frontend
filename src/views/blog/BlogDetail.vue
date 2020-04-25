@@ -11,13 +11,17 @@
       <b-colxx md="12" xl="8" class="col-left">
         <b-card class="mb-4" no-body>
           <b-card-body>
-            <div class="mb-5">
+            <div class="mb-5" id="export">
               <h2 class="card-title">{{lesson.title}}</h2>
               <viewer ref="intro"/>
               <viewer ref="content"/>
 
               <p>Lượt xem: {{lesson.views}}</p>
               <p>Viết ngày: {{lesson.created_at}}</p>
+            </div>
+            <div class="text-right">
+              <button class="btn btn-primary btn-sm" @click="Export2Doc('export')"><i class="iconsminds-data-download"></i> Download word</button>
+              <button class="btn btn-danger btn-sm" ><i class="iconsminds-like"></i> 123</button>
             </div>
           </b-card-body>
         </b-card>
@@ -79,11 +83,6 @@
   import RecentPost from '../../components/Common/RecentPost'
   import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-  import {
-    blogData,
-    blogCategories
-  } from '../../data/blog'
-
   import 'codemirror/lib/codemirror.css'
   import '@toast-ui/editor/dist/toastui-editor.css'
   import 'tui-editor/dist/tui-editor.css'
@@ -131,6 +130,43 @@
     },
     methods: {
       ...mapActions(['getLesson']),
+
+      Export2Doc(element, filename = 'test') {
+        var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+        var postHtml = "</body></html>";
+        var html = preHtml+ document.getElementById(element).innerHTML +postHtml;
+
+        var blob = new Blob(['\ufeff', html], {
+          type: 'application/msword'
+        });
+
+        // Specify link url
+        var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+
+        // Specify file name
+        filename = filename?filename+'.doc':'document.doc';
+
+        // Create download link element
+        var downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if(navigator.msSaveOrOpenBlob ){
+          navigator.msSaveOrOpenBlob(blob, filename);
+        }else{
+          // Create a link to the file
+          downloadLink.href = url;
+
+          // Setting the file name
+          downloadLink.download = filename;
+
+          //triggering the function
+          downloadLink.click();
+        }
+
+        document.body.removeChild(downloadLink);
+      }
+
     }
   }
 </script>

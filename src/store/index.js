@@ -6,6 +6,7 @@ import course from './modules/course'
 import english from './modules/english'
 import lesson from './modules/lesson'
 import menu from './modules/menu'
+import question from './modules/question'
 import user from './modules/user'
 import chat from './modules/chat'
 import todo from './modules/todo'
@@ -36,6 +37,7 @@ export const store = new Vuex.Store({
     course,
     english,
     lesson,
+    question,
     menu,
     user,
     chat,

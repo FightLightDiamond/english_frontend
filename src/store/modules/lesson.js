@@ -34,6 +34,7 @@ const mutations = {
 const actions = {
   async getLessons ({ commit }, payload) {
     const res = await FactoryService.request('LessonService').index(payload)
+    console.log(res)
     if(res.status >= 200 && res.status < 300)
     commit('getLessons', res.data)
   },
